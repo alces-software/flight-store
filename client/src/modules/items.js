@@ -5,10 +5,9 @@ const { makeLink } = ContextLink;
 
 const currentSite = process.env.REACT_APP_SITE;
 
-function overviewItem() {
-  return makeItem('Overview', 'home', makeLink(currentSite, '/'));
-}
-
 export default function() {
-  return [overviewItem()];
+  return [
+    makeItem('Overview', 'home', makeLink(currentSite, '/')),
+    makeItem('Store', 'briefcase', makeLink(currentSite, '/store')),
+  ];
 }

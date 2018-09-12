@@ -6,7 +6,7 @@ import App from './components/App';
 import Home from './pages/Home';
 import Page from './components/Page';
 import licenseData from './data/licenses.json';
-// import {} from './modules';
+import { store } from './modules';
 
 const metaPages = makeMetaPages(Page, {
   softwareLicenses: licenseData,
@@ -41,6 +41,12 @@ const routes = [
     component: App,
     routes: [
       ...metaPageRouteConfigs,
+      {
+        path: '/store',
+        exact: true,
+        component: store.pages.Store,
+        title: 'Store',
+      },
       {
         path: '/',
         exact: true,
