@@ -7,15 +7,21 @@ import {
   // CardImgOverlay,
   // CardLink,
   CardSubtitle,
-  CardText,
+  // CardText,
   CardTitle,
 } from 'reactstrap';
 import styled from 'styled-components';
+import FontAwesome from 'react-fontawesome';
+import { Theme } from 'flight-reactware';
+
+const PackCard = styled(Card)`
+  border-radius: 1rem;
+`;
 
 const packHeadHeight = '140px';
 
 const PackHead = styled(CardBody)`
-  background-color: #304051;
+  background-color: ${Theme.dark};
   border-radius: 1rem 1rem 0 0;
   color: white;
   height: ${packHeadHeight};
@@ -29,7 +35,7 @@ const PackBody = styled(CardBody)`
 const costIconSize = '90px';
 
 const CostIcon = styled.div`
-  background-color: #d86b27;
+  background-color: ${Theme.orange};
   border-radius: 50%;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
   color: white;
@@ -62,49 +68,48 @@ const Cost = ({ monthlyCost }) => (
   </CostWrapper>
 );
 
-// eslint-disable-next-line react/prop-types
-const Centered = ({ children }) => (
-  <div className="d-flex flex-column justify-content-center">{children}</div>
+const LearnMoreLink = () => (
+  <Button
+    block
+    color="link"
+  >
+    Learn more about this cluster pack.
+  </Button>
+);
+
+const PurchaseButton = () => (
+  <Button
+    block
+    color="primary"
+    outline
+    size="lg"
+  >
+    Purchase{' '}
+    <FontAwesome
+      fixedWidth
+      name="credit-card"
+    />
+  </Button>
 );
 
 // eslint-disable-next-line react/prop-types
-const ClusterPack = ({ monthlyCost, subtitle, title }) => (
-  <Card
-    style={{
-      borderRadius: '1rem',
-    }}
-  >
+const ClusterPack = ({ children, monthlyCost, subtitle, title }) => (
+  <PackCard>
     <PackHead>
-      <Centered>
-        <CardTitle tag="h3">
-          {title}
-        </CardTitle>
-        <CardSubtitle>
-          {subtitle}
-        </CardSubtitle>
-      </Centered>
+      <CardTitle tag="h3">
+        {title}
+      </CardTitle>
+      <CardSubtitle>
+        {subtitle}
+      </CardSubtitle>
       <Cost monthlyCost={monthlyCost} />
     </PackHead>
     <PackBody>
-      <CardText>
-        Perhaps a detailed description of the cluster here?  Or maybe we
-        should stick with bullet points and provide a link to show more
-        details.
-      </CardText>
-      <ul>
-        <li>List of primary features of the cluster</li>
-        <li>How many support credits are made available each month</li>
-        <li>Perhaps a link to show a detailed description?</li>
-      </ul>
-      <Button
-        block
-        color="primary"
-        outline
-      >
-        Purchase
-      </Button>
+      {children}
+      <LearnMoreLink />
+      <PurchaseButton />
     </PackBody>
-  </Card>
+  </PackCard>
 );
 
 export default ClusterPack;
