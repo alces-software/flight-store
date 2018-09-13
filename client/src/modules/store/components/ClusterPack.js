@@ -6,6 +6,7 @@ import { Button, Card, CardBody, CardSubtitle, CardTitle, } from 'reactstrap';
 import { Theme } from 'flight-reactware';
 
 import CostCircle from './CostCircle';
+import FeatureList from './PackFeatureList';
 
 const PackCard = styled(Card)`
   border-radius: 1rem;
@@ -49,7 +50,13 @@ const PurchaseButton = () => (
   </Button>
 );
 
-const ClusterPack = ({ children, monthlyCost, subtitle, title }) => (
+const ClusterPack = ({
+  monthlyCost,
+  monthlyFlightCenterCredits,
+  overviewItems,
+  subtitle,
+  title,
+}) => (
   <PackCard>
     <PackHead>
       <CardTitle tag="h3">
@@ -64,7 +71,10 @@ const ClusterPack = ({ children, monthlyCost, subtitle, title }) => (
       />
     </PackHead>
     <PackBody>
-      {children}
+      <FeatureList
+        items={overviewItems}
+        monthlyFlightCenterCredits={monthlyFlightCenterCredits}
+      />
       <LearnMoreLink />
       <PurchaseButton />
     </PackBody>
@@ -72,8 +82,9 @@ const ClusterPack = ({ children, monthlyCost, subtitle, title }) => (
 );
 
 ClusterPack.propTypes = {
-  children: PropTypes.node.isRequired,
   monthlyCost: PropTypes.node.isRequired,
+  monthlyFlightCenterCredits: PropTypes.node.isRequired,
+  overviewItems: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   subtitle: PropTypes.node.isRequired,
   title: PropTypes.node.isRequired,
 };
