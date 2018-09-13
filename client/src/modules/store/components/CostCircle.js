@@ -4,17 +4,20 @@ import styled from 'styled-components';
 import { Theme } from 'flight-reactware';
 
 const costSize = '90px';
+const padding = '6px';
+const fontSize = '17px';
 
 const CostInner = styled.div`
   background-color: ${Theme.orange};
   border-radius: 50%;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
   color: white;
-  font-size: 110%;
+  font-size: ${fontSize};
   font-weight: 700;
   height: ${costSize};
+  line-height: calc( ${costSize} - ( ${padding} * 2 ) - ( ${fontSize} / 2 ) );
   margin: 0 auto;
-  padding: 6px 12px;
+  padding: ${padding} 0;
   position: relative;
   white-space: initial;
   width: ${costSize};
@@ -32,7 +35,7 @@ const CostCircle = ({ containerHeight, monthlyCost }) => (
   <CostWrapper containerHeight={containerHeight}>
     <CostInner>
       <span>
-        <small>£</small><big>{monthlyCost}</big> <small>/mo</small>
+        <small>£</small><big>{monthlyCost}</big><small>/mo</small>
       </span>
     </CostInner>
   </CostWrapper>
