@@ -20,10 +20,10 @@ const FlightCenterLink = () => (
   </ContextLink>
 );
 
-const PackFeatureList = ({ items, monthlyFlightCenterCredits }) => (
+const PackFeatureList = ({ features, monthlyFlightCenterCredits }) => (
   <ul className="fa-ul">
     {
-      items.map((item, idx) => (
+      features.map((item, idx) => (
         <li key={idx}>
           <Tick />
           {item}
@@ -39,7 +39,7 @@ const PackFeatureList = ({ items, monthlyFlightCenterCredits }) => (
 );
 
 PackFeatureList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  features: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   monthlyFlightCenterCredits: PropTypes.node.isRequired,
 };
 

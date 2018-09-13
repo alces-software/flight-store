@@ -51,9 +51,9 @@ const PurchaseButton = () => (
 );
 
 const ClusterPack = ({
+  features,
   monthlyCost,
   monthlyFlightCenterCredits,
-  overviewItems,
   subtitle,
   title,
 }) => (
@@ -72,7 +72,7 @@ const ClusterPack = ({
     </PackHead>
     <PackBody>
       <FeatureList
-        items={overviewItems}
+        features={features}
         monthlyFlightCenterCredits={monthlyFlightCenterCredits}
       />
       <LearnMoreLink />
@@ -82,9 +82,9 @@ const ClusterPack = ({
 );
 
 ClusterPack.propTypes = {
+  features: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   monthlyCost: PropTypes.node.isRequired,
   monthlyFlightCenterCredits: PropTypes.node.isRequired,
-  overviewItems: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   subtitle: PropTypes.node.isRequired,
   title: PropTypes.node.isRequired,
 };
