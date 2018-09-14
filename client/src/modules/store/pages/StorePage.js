@@ -17,7 +17,7 @@ import { compose } from 'recompose';
 // import { createStructuredSelector } from 'reselect';
 import { Section, makeSection } from 'flight-reactware';
 
-import ClusterPack from '../components/ClusterPack';
+import PackFeatureCard from '../components/PackFeatureCard';
 import PackDetailModal from '../components/PackDetailModal';
 import clusterPacks from '../data/packs';
 
@@ -40,7 +40,7 @@ const StorePage = () => {
           {
             clusterPacks.map((pack, idx) => (
               <Col key={pack.title}>
-                <ClusterPack
+                <PackFeatureCard
                   {...pack}
                   id={idx}
                 />

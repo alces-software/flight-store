@@ -8,7 +8,7 @@ import LearnMoreLink from './LearnMoreLink';
 import PurchaseButton from './PurchaseButton';
 import { PackCard, PackHead, PackBody, packHeadHeight } from './PackCard';
 
-const ClusterPack = ({
+const PackFeatureCard = ({
   features,
   id,
   monthlyCost,
@@ -40,7 +40,7 @@ const ClusterPack = ({
   </PackCard>
 );
 
-ClusterPack.propTypes = {
+PackFeatureCard.propTypes = {
   features: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   id: PropTypes.number.isRequired,
   monthlyCost: PropTypes.node.isRequired,
@@ -49,4 +49,4 @@ ClusterPack.propTypes = {
   title: PropTypes.node.isRequired,
 };
 
-export default ClusterPack;
+export default PackFeatureCard;

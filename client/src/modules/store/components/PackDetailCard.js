@@ -6,7 +6,7 @@ import { PackCard, PackHead, PackBody, packHeadHeight } from './PackCard';
 import CostCircle from './CostCircle';
 import PurchaseButton from './PurchaseButton';
 
-const PackDetail = ({
+const PackDetailCard = ({
   details,
   head,
   monthlyCost,
@@ -37,7 +37,7 @@ const PackDetail = ({
   </PackCard>
 );
 
-PackDetail.propTypes = {
+PackDetailCard.propTypes = {
   details: PropTypes.string.isRequired,
   head: PropTypes.node,
   monthlyCost: PropTypes.node.isRequired,
@@ -46,4 +46,4 @@ PackDetail.propTypes = {
   title: PropTypes.node.isRequired,
 };
 
-export default PackDetail;
+export default PackDetailCard;

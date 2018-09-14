@@ -7,7 +7,7 @@ import { createStructuredSelector } from 'reselect';
 
 import * as actions from '../actions';
 import * as selectors from '../selectors';
-import PackDetail from './PackDetail';
+import PackDetailCard from './PackDetailCard';
 
 const Modal = styled(BaseModal)`
   .modal-content {
@@ -46,7 +46,7 @@ const PackDetailModal = ({
   >
     {
       clusterPack == null ? null : (
-        <PackDetail
+        <PackDetailCard
           {...clusterPack}
           head={
             <CloseButton onClick={closeModal} >
