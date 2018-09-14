@@ -9,8 +9,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Container, Row, Col } from 'reactstrap';
 import { compose } from 'recompose';
-
-import PageHeading from '../../../components/PageHeading';
+import { PageHeading } from 'flight-reactware';
 
 import PackFeatureCard from '../components/PackFeatureCard';
 import PackDetailModal from '../components/PackDetailModal';
@@ -27,6 +26,7 @@ const StorePage = () => {
       <PageHeading
         overview="Ready to get going? Choose a cluster pack, enter your credit
         card details and request your fully managed Alces Flight HPC cluster."
+        sections={[]}
         title="Choose a cluster pack."
       />
       <Row>
