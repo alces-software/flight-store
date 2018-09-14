@@ -3,6 +3,8 @@ import React from 'react';
 import { CardSubtitle, CardText, CardTitle } from 'reactstrap';
 import { PackCard, PackHead, PackBody, packHeadHeight } from './PackCard';
 
+import RenderMarkdown from '../../../components/RenderMarkdown';
+
 import CostCircle from './CostCircle';
 import PurchaseButton from './PurchaseButton';
 
@@ -30,7 +32,7 @@ const PackDetailCard = ({
     </PackHead>
     <PackBody>
       <CardText>
-        {details}
+        <RenderMarkdown value={details} />
       </CardText>
       <PurchaseButton />
     </PackBody>

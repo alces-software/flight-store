@@ -4,6 +4,13 @@ import styled from 'styled-components';
 import { Theme } from 'flight-reactware';
 
 import ContextLink from '../../../elements/ContextLink';
+import RenderMarkdown from '../../../components/RenderMarkdown';
+
+const UL = styled.ul`
+  & > li > div > p {
+    margin-bottom: 0;
+  }
+`;
 
 const Tick = styled.i.attrs({
   className: 'fa-li fa fa-check',
@@ -21,12 +28,12 @@ const FlightCenterLink = () => (
 );
 
 const PackFeatureList = ({ features, monthlyFlightCenterCredits }) => (
-  <ul className="fa-ul">
+  <UL className="fa-ul">
     {
       features.map((item, idx) => (
         <li key={idx}>
           <Tick />
-          {item}
+          <RenderMarkdown value={item} />
         </li>
       ))
     }
@@ -35,7 +42,7 @@ const PackFeatureList = ({ features, monthlyFlightCenterCredits }) => (
       {monthlyFlightCenterCredits} <FlightCenterLink /> support credits per
       month.
     </li>
-  </ul>
+  </UL>
 );
 
 PackFeatureList.propTypes = {
