@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Theme } from 'flight-reactware';
 
-const costSize = '90px';
+export const size = '90px';
 const padding = '6px';
 const fontSize = '17px';
 
@@ -14,19 +14,19 @@ const CostInner = styled.div`
   color: white;
   font-size: ${fontSize};
   font-weight: 700;
-  height: ${costSize};
-  line-height: calc( ${costSize} - ( ${padding} * 2 ) - ( ${fontSize} / 2 ) );
+  height: ${size};
+  line-height: calc( ${size} - ( ${padding} * 2 ) - ( ${fontSize} / 2 ) );
   margin: 0 auto;
   padding: ${padding} 0;
   position: relative;
   white-space: initial;
-  width: ${costSize};
+  width: ${size};
   word-wrap: break-word;
 `;
 
 const CostWrapper = styled.div`
   position: absolute;
-  top: calc( ${(props) => props.containerHeight} - ( ${costSize} / 2 ) );
+  top: calc( ${(props) => props.containerHeight} - ( ${size} / 2 ) );
   left: 0;
   width: 100%;
 `;
