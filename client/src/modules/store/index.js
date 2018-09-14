@@ -10,8 +10,10 @@
 
 import * as constants from './constants';
 import * as pages from './pages';
+import reducer from './reducer';
 
 export default {
   constants,
   pages,
+  reducer,
 };

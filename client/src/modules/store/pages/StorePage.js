@@ -18,6 +18,7 @@ import { compose } from 'recompose';
 import { Section, makeSection } from 'flight-reactware';
 
 import ClusterPack from '../components/ClusterPack';
+import PackDetailModal from '../components/PackDetailModal';
 import clusterPacks from '../data/packs';
 
 const sections = {
@@ -28,6 +29,7 @@ const sections = {
 const StorePage = () => {
   return (
     <Container fluid >
+      <PackDetailModal />
       <Section
         overview="Ready to get going? Choose a cluster pack, enter your credit
         card details and request your fully managed Alces Flight HPC cluster."
@@ -36,9 +38,12 @@ const StorePage = () => {
       >
         <Row>
           {
-            clusterPacks.map((pack) => (
+            clusterPacks.map((pack, idx) => (
               <Col key={pack.title}>
-                <ClusterPack {...pack} />
+                <ClusterPack
+                  {...pack}
+                  id={idx}
+                />
               </Col>
             ))
           }

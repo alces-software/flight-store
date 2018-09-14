@@ -1,16 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { CardTitle, CardSubtitle } from 'reactstrap';
-
-import CostCircle from './CostCircle';
-import FeatureList from './PackFeatureList';
-import LearnMoreLink from './LearnMoreLink';
-import PurchaseButton from './PurchaseButton';
+import { CardSubtitle, CardText, CardTitle } from 'reactstrap';
 import { PackCard, PackHead, PackBody, packHeadHeight } from './PackCard';
 
-const ClusterPack = ({
-  features,
-  id,
+import CostCircle from './CostCircle';
+import PurchaseButton from './PurchaseButton';
+
+const PackDetail = ({
+  details,
+  head,
   monthlyCost,
   monthlyFlightCenterCredits,
   subtitle,
@@ -18,6 +16,7 @@ const ClusterPack = ({
 }) => (
   <PackCard>
     <PackHead>
+      { head == null ? null : head }
       <CardTitle tag="h3">
         {title}
       </CardTitle>
@@ -30,23 +29,21 @@ const ClusterPack = ({
       />
     </PackHead>
     <PackBody>
-      <FeatureList
-        features={features}
-        monthlyFlightCenterCredits={monthlyFlightCenterCredits}
-      />
-      <LearnMoreLink id={id} />
+      <CardText>
+        {details}
+      </CardText>
       <PurchaseButton />
     </PackBody>
   </PackCard>
 );
 
-ClusterPack.propTypes = {
-  features: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  id: PropTypes.number.isRequired,
+PackDetail.propTypes = {
+  details: PropTypes.string.isRequired,
+  head: PropTypes.node,
   monthlyCost: PropTypes.node.isRequired,
   monthlyFlightCenterCredits: PropTypes.node.isRequired,
   subtitle: PropTypes.node.isRequired,
   title: PropTypes.node.isRequired,
 };
 
-export default ClusterPack;
+export default PackDetail;
