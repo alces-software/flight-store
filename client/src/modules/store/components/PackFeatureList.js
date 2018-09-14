@@ -5,7 +5,7 @@ import { Theme } from 'flight-reactware';
 
 import ContextLink from '../../../elements/ContextLink';
 
-const Tick = styled.li.attrs({
+const Tick = styled.i.attrs({
   className: 'fa-li fa fa-check',
 })`
   color: ${Theme.orange};
