@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { CardElement, injectStripe } from 'react-stripe-elements';
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import {
   Form,
   FormGroup,
@@ -8,9 +11,13 @@ import {
   Input,
   Label,
 } from 'reactstrap';
+import { auth } from 'flight-reactware';
+
+const url = "http://localhost:4008/subscriptions";
 
 class CheckoutForm extends Component {
   static propTypes = {
+    clusterPack: PropTypes.object.isRequired,
     stripe: PropTypes.object.isRequired,
   };
 
@@ -20,9 +27,9 @@ class CheckoutForm extends Component {
   }
 
   async handleSubmit(ev) {
-    // User clicked submit
+    const { authToken, clusterPack, stripe } = this.props;
 
-    const { token } = await this.props.stripe.createToken({
+    const { token } = await stripe.createToken({
       name: this.name.value,
       /* eslint-disable camelcase */
       address_city: this.addressCity.value,
@@ -34,13 +41,27 @@ class CheckoutForm extends Component {
       /* eslint-enable camelcase */
     });
     console.log('token:', token);  // eslint-disable-line no-console
-    // const response = await fetch("/charge", {
-    //   method: "POST",
-    //   headers: {"Content-Type": "text/plain"},
-    //   body: token.id
-    // });
+    // XXX token might be invalid.  Need to check success or otherwise of
+    // createToken.
+    const response = await fetch(url, {
+      credentials: 'include',
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({
+        token: token.id,
+        // eslint-disable-next-line camelcase
+        cluster_pack: clusterPack,
+      }),
+    });
 
-    // if (response.ok) console.log("Purchase Complete!")
+    if (response.ok) {
+      console.log("Purchase Complete!");
+    } else {
+      console.log("Purchase failed!");
+    }
   }
 
   render() {
@@ -135,4 +156,12 @@ class CheckoutForm extends Component {
   }
 }
 
-export default injectStripe(CheckoutForm, { withRef: true });
+const enhance = compose(
+  (component) => injectStripe(component, { withRef: true }),
+
+  connect(createStructuredSelector({
+    authToken: auth.selectors.ssoToken,
+  }), null, null, { withRef: true }),
+);
+
+export default enhance(CheckoutForm);
