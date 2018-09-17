@@ -13,7 +13,7 @@ import { PageHeading } from 'flight-reactware';
 
 import PackFeatureCard from '../components/PackFeatureCard';
 import PackDetailModal from '../components/PackDetailModal';
-import FormModal from '../components/FormModal';
+import CheckoutModal from '../components/CheckoutModal';
 import clusterPacks from '../data/packs';
 
 const PackContainer = styled(Container)`
@@ -24,7 +24,7 @@ const StorePage = () => {
   return (
     <PackContainer fluid >
       <PackDetailModal />
-      <FormModal />
+      <CheckoutModal />
       <PageHeading
         overview="Ready to get going? Choose a cluster pack, enter your credit
         card details and request your fully managed Alces Flight HPC cluster."

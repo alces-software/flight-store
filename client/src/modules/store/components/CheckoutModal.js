@@ -11,7 +11,7 @@ import * as selectors from '../selectors';
 import Form from './CheckoutForm';
 import PurchaseButton from './PurchaseButton';
 
-const FormModal = ({
+const CheckoutModal = ({
   closeModal,
   clusterPack,
   isOpen,
@@ -39,7 +39,7 @@ const FormModal = ({
   </StandardModal>
 );
 
-FormModal.propTypes = {
+CheckoutModal.propTypes = {
   closeModal: PropTypes.func,
   clusterPack: PropTypes.object,
   isOpen: PropTypes.bool.isRequired,
@@ -57,4 +57,4 @@ const enhance = compose(
   ),
 );
 
-export default enhance(FormModal);
+export default enhance(CheckoutModal);
