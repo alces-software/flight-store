@@ -5,7 +5,7 @@ import { CardTitle, CardSubtitle } from 'reactstrap';
 import CostCircle from './CostCircle';
 import FeatureList from './PackFeatureList';
 import LearnMoreLink from './LearnMoreLink';
-import PurchaseButton from './PurchaseButton';
+import ShowCheckoutFormButton from './ShowCheckoutFormButton';
 import { PackCard, PackHead, PackBody, packHeadHeight } from './PackCard';
 
 const PackFeatureCard = ({
@@ -35,7 +35,7 @@ const PackFeatureCard = ({
         monthlyFlightCenterCredits={monthlyFlightCenterCredits}
       />
       <LearnMoreLink id={id} />
-      <PurchaseButton id={id} />
+      <ShowCheckoutFormButton id={id} />
     </PackBody>
   </PackCard>
 );

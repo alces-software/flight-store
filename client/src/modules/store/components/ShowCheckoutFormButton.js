@@ -6,11 +6,11 @@ import { connect } from 'react-redux';
 
 import * as actions from '../actions';
 
-const PurchaseButton = ({ showPurchaseForm }) => (
+const ShowCheckoutFormButton = ({ showCheckoutForm }) => (
   <Button
     block
     color="primary"
-    onClick={showPurchaseForm}
+    onClick={showCheckoutForm}
     outline
     size="lg"
   >
@@ -22,12 +22,12 @@ const PurchaseButton = ({ showPurchaseForm }) => (
   </Button>
 );
 
-PurchaseButton.propTypes = {
-  showPurchaseForm: PropTypes.func.isRequired,
+ShowCheckoutFormButton.propTypes = {
+  showCheckoutForm: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch, props) => ({
-  showPurchaseForm: () => dispatch(actions.formModal.show(props.id)),
+  showCheckoutForm: () => dispatch(actions.formModal.show(props.id)),
 });
 
-export default connect(null, mapDispatchToProps)(PurchaseButton);
+export default connect(null, mapDispatchToProps)(ShowCheckoutFormButton);

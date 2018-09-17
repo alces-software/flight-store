@@ -6,7 +6,7 @@ import { PackCard, PackHead, PackBody, packHeadHeight } from './PackCard';
 import RenderMarkdown from '../../../components/RenderMarkdown';
 
 import CostCircle from './CostCircle';
-import PurchaseButton from './PurchaseButton';
+import ShowCheckoutFormButton from './ShowCheckoutFormButton';
 
 const PackDetailCard = ({
   details,
@@ -35,7 +35,7 @@ const PackDetailCard = ({
       <CardText>
         <RenderMarkdown value={details} />
       </CardText>
-      <PurchaseButton id={id} />
+      <ShowCheckoutFormButton id={id} />
     </PackBody>
   </PackCard>
 );
