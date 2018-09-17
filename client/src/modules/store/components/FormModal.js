@@ -1,13 +1,15 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { Elements } from 'react-stripe-elements';
+import { StandardModal } from 'flight-reactware';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { ReduxFormSubmitButton as SubmitButton, StandardModal } from 'flight-reactware';
-
-import * as selectors from '../selectors';
 import * as actions from '../actions';
+import * as selectors from '../selectors';
+import Form from './CheckoutForm';
+import PurchaseButton from './PurchaseButton';
 
 const FormModal = ({
   closeModal,
@@ -16,19 +18,24 @@ const FormModal = ({
 }) => (
   <StandardModal
     buttons={(
-      <SubmitButton
-        color="success"
-        form="purchase"
-      >
-        Purchase
-      </SubmitButton>
+      <PurchaseButton
+        onClick={(...args) => {
+          const wrapped = this.form.getWrappedInstance();
+          wrapped.handleSubmit(...args);
+        }}
+      />
     )}
     isOpen={isOpen}
     size="lg"
     title={`Purchase pack ${clusterPack == null ? null : clusterPack.title}`}
     toggle={closeModal}
   >
-    XXX Add form for {clusterPack == null ? null : clusterPack.title}
+    <Elements>
+      <Form
+        clusterPack={clusterPack}
+        ref={(el) => { this.form = el; }}
+      />
+    </Elements>
   </StandardModal>
 );
 
@@ -51,4 +58,3 @@ const enhance = compose(
 );
 
 export default enhance(FormModal);
-
