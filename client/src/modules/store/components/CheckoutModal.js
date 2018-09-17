@@ -19,7 +19,12 @@ const CheckoutModal = ({
   <StandardModal
     buttons={(
       <PurchaseButton
-        onClick={(...args) => { this.form.handleSubmit(...args); }}
+        onClick={(...args) => {
+          const form = this.formWrapper
+            .getWrappedInstance()
+            .getWrappedInstance();
+          form.handleSubmit(...args);
+        }}
       />
     )}
     isOpen={isOpen}
@@ -30,9 +35,7 @@ const CheckoutModal = ({
     <Elements>
       <Form
         clusterPack={clusterPack}
-        ref={(el) => {
-          this.form = el.getWrappedInstance().getWrappedInstance();
-        }}
+        ref={(el) => { this.formWrapper = el; }}
       />
     </Elements>
   </StandardModal>
