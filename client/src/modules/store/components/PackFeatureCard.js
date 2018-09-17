@@ -35,7 +35,7 @@ const PackFeatureCard = ({
         monthlyFlightCenterCredits={monthlyFlightCenterCredits}
       />
       <LearnMoreLink id={id} />
-      <PurchaseButton />
+      <PurchaseButton id={id} />
     </PackBody>
   </PackCard>
 );

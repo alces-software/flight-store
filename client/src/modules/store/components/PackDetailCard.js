@@ -11,6 +11,7 @@ import PurchaseButton from './PurchaseButton';
 const PackDetailCard = ({
   details,
   head,
+  id,
   monthlyCost,
   monthlyFlightCenterCredits,
   subtitle,
@@ -34,7 +35,7 @@ const PackDetailCard = ({
       <CardText>
         <RenderMarkdown value={details} />
       </CardText>
-      <PurchaseButton />
+      <PurchaseButton id={id} />
     </PackBody>
   </PackCard>
 );
@@ -42,6 +43,7 @@ const PackDetailCard = ({
 PackDetailCard.propTypes = {
   details: PropTypes.string.isRequired,
   head: PropTypes.node,
+  id: PropTypes.number.isRequired,
   monthlyCost: PropTypes.node.isRequired,
   monthlyFlightCenterCredits: PropTypes.node.isRequired,
   subtitle: PropTypes.node.isRequired,

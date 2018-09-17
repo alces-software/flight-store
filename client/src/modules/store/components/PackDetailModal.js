@@ -37,6 +37,7 @@ const CloseButton = styled(Button).attrs({
 const PackDetailModal = ({
   closeModal,
   clusterPack,
+  id,
   isOpen,
 }) => (
   <Modal
@@ -53,6 +54,7 @@ const PackDetailModal = ({
               {String.fromCharCode(215)}
             </CloseButton>
           }
+          id={id}
         />
       )
     }
@@ -62,12 +64,14 @@ const PackDetailModal = ({
 PackDetailModal.propTypes = {
   closeModal: PropTypes.func,
   clusterPack: PropTypes.object,
+  id: PropTypes.number,
   isOpen: PropTypes.bool.isRequired,
 };
 
 export default connect(
   createStructuredSelector({
     clusterPack: selectors.detailModal.clusterPack,
+    id: selectors.detailModal.clusterPackId,
     isOpen: selectors.detailModal.isModalOpen,
   }),
   {

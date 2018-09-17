@@ -4,20 +4,27 @@ import { modals } from 'flight-reactware';
 import clusterPacks from './data/packs';
 import { NAME } from './constants';
 
-const detailModalData = modals.createModalDataSelector(NAME, 'detail', 'modal');
+function buildModalSelectors(namespace) {
+  const dataSelector = modals.createModalDataSelector(NAME, namespace, 'modal');
 
-const clusterPackIdx = createSelector(
-  detailModalData,
-  (data) => data.payload == null ? undefined : data.payload.clusterPackIdx,
-);
+  const selectedPackId = createSelector(
+    dataSelector,
+    (data) => data.payload == null ? undefined : data.payload.clusterPackId,
+  );
 
-export const detailModal = {
-  modalData: detailModalData,
+  return {
+    modalData: dataSelector,
 
-  isModalOpen: modals.createModalSelector(NAME, 'detail', 'modal'),
+    isModalOpen: modals.createModalSelector(NAME, namespace, 'modal'),
 
-  clusterPack: createSelector(
-    clusterPackIdx,
-    (idx) => idx == null ? undefined : clusterPacks[idx]
-  ),
-};
+    clusterPack: createSelector(
+      selectedPackId,
+      (idx) => idx == null ? undefined : clusterPacks[idx]
+    ),
+
+    clusterPackId: selectedPackId,
+  };
+}
+
+export const detailModal = buildModalSelectors('detail');
+export const formModal = buildModalSelectors('form');
