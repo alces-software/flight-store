@@ -1,0 +1,26 @@
+version: '2'
+services:
+  store-api:
+    container_name: store-api
+    network_mode: "bridge"
+    image: store-api
+    build:
+      context: .
+      args:
+        - USER_ID=${USER_ID}
+        - GROUP_ID=${GROUP_ID}
+    command: bundle exec foreman start --env config/foreman/local.dev.env
+    env_file: ./config/foreman/local.dev.env
+    volumes:
+      - ./:/app
+    ports:
+      - "4008:4008"
+    links:
+      - db
+    extra_hosts:
+      gems.alces-software.com: 10.101.0.34 
+
+  db:
+    container_name: db
+    network_mode: "bridge"
+    image: postgres:9.5
