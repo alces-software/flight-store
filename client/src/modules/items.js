@@ -9,5 +9,6 @@ export default function() {
   return [
     makeItem('Overview', 'home', makeLink(currentSite, '/')),
     makeItem('Store', 'briefcase', makeLink(currentSite, '/store')),
+    makeItem('Products', 'briefcase', makeLink(currentSite, '/products/clusterPack')),
   ];
 }

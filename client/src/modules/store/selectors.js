@@ -2,9 +2,10 @@ import { createSelector } from 'reselect';
 import { modals } from 'flight-reactware';
 
 import clusterPacks from './data/packs';
+import productTypeDefs from './data/productTypeDefinitions';
 import { NAME } from './constants';
 
-const products = {
+const productsByType = {
   clusterPack: clusterPacks,
 };
 
@@ -29,7 +30,7 @@ function buildModalSelectors(namespace) {
     product: createSelector(
       selectedProductId,
       selectedProductType,
-      (id, type) => (id == null || type == null) ? undefined : products[type][id]
+      (id, type) => (id == null || type == null) ? undefined : productsByType[type][id]
     ),
 
     productId: selectedProductId,
@@ -39,3 +40,19 @@ function buildModalSelectors(namespace) {
 
 export const detailModal = buildModalSelectors('detail');
 export const formModal = buildModalSelectors('form');
+
+function productType(state, params) {
+  return params.match && params.match.params.productType;
+}
+
+export function productTypeDef(state, params) {
+  const type = productType(state, params);
+  if (type == null) { return null; }
+  return productTypeDefs.find(t => t.type === type);
+}
+
+export function products(state, params) {
+  const type = productType(state, params);
+  if (type == null) { return null; }
+  return productsByType[type];
+}

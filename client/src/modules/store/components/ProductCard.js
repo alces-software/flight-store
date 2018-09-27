@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Card, CardBody } from 'reactstrap';
 import { Theme } from 'flight-reactware';
 
-import { size as costSize } from './CostCircle';
+import { size as costCircleSize } from './CardHeaderCircle';
 
 export const ProductCard = styled(Card)`
   border-radius: 1rem;
@@ -19,5 +19,5 @@ export const ProductHead = styled(CardBody)`
 `;
 
 export const ProductBody = styled(CardBody)`
-  padding-top: calc( ( ${costSize} / 2 ) + 12px );
+  padding-top: calc( ( ${costCircleSize} / 2 ) + 12px );
 `;
