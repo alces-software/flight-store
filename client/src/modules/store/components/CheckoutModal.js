@@ -13,8 +13,8 @@ import PurchaseButton from './PurchaseButton';
 
 const CheckoutModal = ({
   closeModal,
-  clusterPack,
   isOpen,
+  product,
 }) => (
   <StandardModal
     buttons={(
@@ -29,12 +29,12 @@ const CheckoutModal = ({
     )}
     isOpen={isOpen}
     size="lg"
-    title={`Purchase pack ${clusterPack == null ? null : clusterPack.title}`}
+    title={`Purchase ${product == null ? null : product.title}`}
     toggle={closeModal}
   >
     <Elements>
       <Form
-        clusterPack={clusterPack}
+        product={product}
         ref={(el) => { this.formWrapper = el; }}
       />
     </Elements>
@@ -43,14 +43,14 @@ const CheckoutModal = ({
 
 CheckoutModal.propTypes = {
   closeModal: PropTypes.func,
-  clusterPack: PropTypes.object,
   isOpen: PropTypes.bool.isRequired,
+  product: PropTypes.object,
 };
 
 const enhance = compose(
   connect(
     createStructuredSelector({
-      clusterPack: selectors.formModal.clusterPack,
+      product: selectors.formModal.product,
       isOpen: selectors.formModal.isModalOpen,
     }),
     {

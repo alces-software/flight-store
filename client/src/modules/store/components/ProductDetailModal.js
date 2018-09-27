@@ -7,7 +7,7 @@ import { createStructuredSelector } from 'reselect';
 
 import * as actions from '../actions';
 import * as selectors from '../selectors';
-import PackDetailCard from './PackDetailCard';
+import ProductDetailCard from './ProductDetailCard';
 
 const Modal = styled(BaseModal)`
   .modal-content {
@@ -34,11 +34,12 @@ const CloseButton = styled(Button).attrs({
   }
 `;
 
-const PackDetailModal = ({
+const ProductDetailModal = ({
   closeModal,
-  clusterPack,
   id,
   isOpen,
+  product,
+  type,
 }) => (
   <Modal
     isOpen={isOpen}
@@ -46,35 +47,38 @@ const PackDetailModal = ({
     toggle={closeModal}
   >
     {
-      clusterPack == null ? null : (
-        <PackDetailCard
-          {...clusterPack}
+      product == null ? null : (
+        <ProductDetailCard
+          {...product}
           head={
             <CloseButton onClick={closeModal} >
               {String.fromCharCode(215)}
             </CloseButton>
           }
           id={id}
+          type={type}
         />
       )
     }
   </Modal>
 );
 
-PackDetailModal.propTypes = {
+ProductDetailModal.propTypes = {
   closeModal: PropTypes.func,
-  clusterPack: PropTypes.object,
   id: PropTypes.number,
   isOpen: PropTypes.bool.isRequired,
+  product: PropTypes.object,
+  type: PropTypes.string,
 };
 
 export default connect(
   createStructuredSelector({
-    clusterPack: selectors.detailModal.clusterPack,
-    id: selectors.detailModal.clusterPackId,
+    id: selectors.detailModal.productId,
     isOpen: selectors.detailModal.isModalOpen,
+    product: selectors.detailModal.product,
+    type: selectors.detailModal.productType,
   }),
   {
     closeModal: actions.detailModal.hide,
   }
-)(PackDetailModal);
+)(ProductDetailModal);

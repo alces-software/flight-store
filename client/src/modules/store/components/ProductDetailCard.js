@@ -1,24 +1,24 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { CardSubtitle, CardText, CardTitle } from 'reactstrap';
-import { PackCard, PackHead, PackBody, packHeadHeight } from './PackCard';
+import { ProductCard, ProductHead, ProductBody, productHeadHeight } from './ProductCard';
 
 import RenderMarkdown from '../../../components/RenderMarkdown';
 
 import CostCircle from './CostCircle';
 import ShowCheckoutFormButton from './ShowCheckoutFormButton';
 
-const PackDetailCard = ({
+const ProductDetailCard = ({
   details,
   head,
   id,
-  monthlyCost,
-  monthlyFlightCenterCredits,
+  cost,
   subtitle,
   title,
+  type,
 }) => (
-  <PackCard>
-    <PackHead>
+  <ProductCard>
+    <ProductHead>
       { head == null ? null : head }
       <CardTitle tag="h3">
         {title}
@@ -27,27 +27,34 @@ const PackDetailCard = ({
         {subtitle}
       </CardSubtitle>
       <CostCircle
-        containerHeight={packHeadHeight}
-        monthlyCost={monthlyCost}
+        containerHeight={productHeadHeight}
+        cost={cost}
       />
-    </PackHead>
-    <PackBody>
+    </ProductHead>
+    <ProductBody>
       <CardText>
         <RenderMarkdown value={details} />
       </CardText>
-      <ShowCheckoutFormButton id={id} />
-    </PackBody>
-  </PackCard>
+      <ShowCheckoutFormButton
+        id={id}
+        type={type}
+      />
+    </ProductBody>
+  </ProductCard>
 );
 
-PackDetailCard.propTypes = {
+ProductDetailCard.propTypes = {
+  cost: PropTypes.shape({
+    unit: PropTypes.string.isRequired,
+    amount: PropTypes.number.isRequired,
+    per: PropTypes.string,
+  }).isRequired,
   details: PropTypes.string.isRequired,
   head: PropTypes.node,
   id: PropTypes.number.isRequired,
-  monthlyCost: PropTypes.node.isRequired,
-  monthlyFlightCenterCredits: PropTypes.node.isRequired,
   subtitle: PropTypes.node.isRequired,
   title: PropTypes.node.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
-export default PackDetailCard;
+export default ProductDetailCard;

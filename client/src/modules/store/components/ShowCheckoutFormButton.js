@@ -27,7 +27,7 @@ ShowCheckoutFormButton.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch, props) => ({
-  showCheckoutForm: () => dispatch(actions.formModal.show(props.id)),
+  showCheckoutForm: () => dispatch(actions.formModal.show(props.id, props.type)),
 });
 
 export default connect(null, mapDispatchToProps)(ShowCheckoutFormButton);

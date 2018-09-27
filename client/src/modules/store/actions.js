@@ -3,10 +3,11 @@ import * as actionTypes from './actionTypes';
 
 function buildModalActions(selector, showType, hideType) {
   return {
-    show: (clusterPackId) => ({
+    show: (productId, productType) => ({
       type: showType,
       payload: {
-        clusterPackId,
+        productId,
+        productType,
       },
     }),
 

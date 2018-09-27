@@ -31,19 +31,29 @@ const CostWrapper = styled.div`
   width: 100%;
 `;
 
-const CostCircle = ({ containerHeight, monthlyCost }) => (
-  <CostWrapper containerHeight={containerHeight}>
-    <CostInner>
-      <span>
-        <small>£</small><big>{monthlyCost}</big><small>/mo</small>
-      </span>
-    </CostInner>
-  </CostWrapper>
-);
+const CostCircle = ({ containerHeight, cost }) => {
+  const per = cost.per ? <small>{cost.per}</small> : null;
+
+  return (
+    <CostWrapper containerHeight={containerHeight}>
+      <CostInner>
+        <span>
+          <span>
+            <small>{cost.unit}</small><big>{cost.amount}</big>{per}
+          </span>
+        </span>
+      </CostInner>
+    </CostWrapper>
+  );
+};
 
 CostCircle.propTypes = {
   containerHeight: PropTypes.string.isRequired,
-  monthlyCost: PropTypes.node.isRequired,
+  cost: PropTypes.shape({
+    unit: PropTypes.string.isRequired,
+    amount: PropTypes.number.isRequired,
+    per: PropTypes.string,
+  }).isRequired,
 };
 
 export default CostCircle;

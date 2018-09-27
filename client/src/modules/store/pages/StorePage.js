@@ -11,19 +11,19 @@ import { Container, Row, Col } from 'reactstrap';
 import { compose } from 'recompose';
 import { PageHeading } from 'flight-reactware';
 
-import PackFeatureCard from '../components/PackFeatureCard';
-import PackDetailModal from '../components/PackDetailModal';
+import ProductFeatureCard from '../components/ProductFeatureCard';
+import ProductDetailModal from '../components/ProductDetailModal';
 import CheckoutModal from '../components/CheckoutModal';
 import clusterPacks from '../data/packs';
 
-const PackContainer = styled(Container)`
+const ProductContainer = styled(Container)`
   padding: 0 30px 15px 30px;
 `;
 
 const StorePage = () => {
   return (
-    <PackContainer fluid >
-      <PackDetailModal />
+    <ProductContainer fluid >
+      <ProductDetailModal />
       <CheckoutModal />
       <PageHeading
         overview="Ready to get going? Choose a cluster pack, enter your credit
@@ -35,7 +35,7 @@ const StorePage = () => {
         {
           clusterPacks.map((pack, idx) => (
             <Col key={pack.title}>
-              <PackFeatureCard
+              <ProductFeatureCard
                 {...pack}
                 id={idx}
               />
@@ -43,7 +43,7 @@ const StorePage = () => {
           ))
         }
       </Row>
-    </PackContainer>
+    </ProductContainer>
   );
 };
 

@@ -4,12 +4,21 @@ import { modals } from 'flight-reactware';
 import clusterPacks from './data/packs';
 import { NAME } from './constants';
 
+const products = {
+  clusterPack: clusterPacks,
+};
+
 function buildModalSelectors(namespace) {
   const dataSelector = modals.createModalDataSelector(NAME, namespace, 'modal');
 
-  const selectedPackId = createSelector(
+  const selectedProductId = createSelector(
     dataSelector,
-    (data) => data.payload == null ? undefined : data.payload.clusterPackId,
+    (data) => data.payload == null ? undefined : data.payload.productId,
+  );
+
+  const selectedProductType = createSelector(
+    dataSelector,
+    (data) => data.payload == null ? undefined : data.payload.productType,
   );
 
   return {
@@ -17,12 +26,14 @@ function buildModalSelectors(namespace) {
 
     isModalOpen: modals.createModalSelector(NAME, namespace, 'modal'),
 
-    clusterPack: createSelector(
-      selectedPackId,
-      (idx) => idx == null ? undefined : clusterPacks[idx]
+    product: createSelector(
+      selectedProductId,
+      selectedProductType,
+      (id, type) => (id == null || type == null) ? undefined : products[type][id]
     ),
 
-    clusterPackId: selectedPackId,
+    productId: selectedProductId,
+    productType: selectedProductType,
   };
 }
 

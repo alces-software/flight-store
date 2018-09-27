@@ -17,7 +17,7 @@ const url = "http://localhost:4008/subscriptions";
 
 class CheckoutForm extends Component {
   static propTypes = {
-    clusterPack: PropTypes.object.isRequired,
+    product: PropTypes.object.isRequired,
     stripe: PropTypes.object.isRequired,
   };
 
@@ -27,7 +27,7 @@ class CheckoutForm extends Component {
   }
 
   async handleSubmit(ev) {
-    const { authToken, clusterPack, stripe } = this.props;
+    const { authToken, product, stripe } = this.props;
 
     const { token } = await stripe.createToken({
       name: this.name.value,
@@ -52,8 +52,7 @@ class CheckoutForm extends Component {
       },
       body: JSON.stringify({
         token: token.id,
-        // eslint-disable-next-line camelcase
-        cluster_pack: clusterPack,
+        product: product,
       }),
     });
 
