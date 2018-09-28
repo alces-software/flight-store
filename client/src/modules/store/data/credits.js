@@ -15,8 +15,10 @@ const creditPacks = [
     ],
     details: "The Bronze Alces Flight credit pack allows you to...\n\n",
     stripe: {
-      type: 'product',
-      productId: "prod_DcfKpn34wXiEdo",
+      amount: 25000,
+      currency: "gbp",
+      description: "Alces Flight credit pack (Bronze)",
+      type: 'charge',
     }
   },
   {
