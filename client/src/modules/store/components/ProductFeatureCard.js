@@ -49,7 +49,7 @@ ProductFeatureCard.propTypes = {
     amount: PropTypes.number.isRequired,
     per: PropTypes.string,
   }).isRequired,
-  features: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  features: PropTypes.array.isRequired,
   id: PropTypes.number.isRequired,
   subtitle: PropTypes.node.isRequired,
   title: PropTypes.node.isRequired,

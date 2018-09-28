@@ -49,13 +49,15 @@ const FeatureList = ({ features }) => {
 };
 
 FeatureList.propTypes = {
-  features: PropTypes.oneOfType([
-    PropTypes.string.isRequired,
-    PropTypes.shape({
-      tick: PropTypes.bool.isRequired,
-      text: PropTypes.string.isRequired,
-    }).isRequired,
-  ]).isRequired,
+  features: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.string.isRequired,
+      PropTypes.shape({
+        tick: PropTypes.bool.isRequired,
+        text: PropTypes.string.isRequired,
+      }).isRequired,
+    ]).isRequired,
+  ).isRequired,
 };
 
 export default FeatureList;
