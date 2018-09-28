@@ -2,11 +2,13 @@ import { createSelector } from 'reselect';
 import { modals } from 'flight-reactware';
 
 import clusterPacks from './data/packs';
+import creditPacks from './data/credits';
 import productTypeDefs from './data/productTypeDefinitions';
 import { NAME } from './constants';
 
 const productsByType = {
   clusterPack: clusterPacks,
+  creditPack: creditPacks,
 };
 
 function buildModalSelectors(namespace) {

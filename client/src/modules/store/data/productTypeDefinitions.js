@@ -11,6 +11,18 @@ const productTypeDefinitions = [
       overview: 'Ready to get going? Choose a cluster pack, enter your credit card details and request your fully managed Alces Flight HPC cluster.',
     },
   },
+  {
+    type: 'creditPack',
+    name: 'Support credits',
+    title: 'Flight Center support credits',
+    subtitle: 'Support credits for use with Alces Flight Center',
+    description: "The support credits can be allocated to any of your HPC clusters managed through [Alces Flight Center](https://center.alces-flight.com).  You will be able to view the dozens of daily checks our engineering team will perform to ensure the health of your cluster request support and advice and access the comprehensive support logs for your cluster.\n\nThe support credits can be used to request additional support for your HPC cluster.",
+    icon: 'ticket',
+    productsPage: {
+      title: 'Choose a credit pack.',
+      overview: 'Ready to get going? Choose a Flight Center credit pack and enter your credit card details.',
+    },
+  },
 ];
 
 export default productTypeDefinitions;

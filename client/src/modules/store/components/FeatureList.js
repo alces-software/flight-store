@@ -17,21 +17,45 @@ const Tick = styled.i.attrs({
   color: ${Theme.orange};
 `;
 
-const FeatureList = ({ features }) => (
-  <UL className="fa-ul">
-    {
-      features.map((item, idx) => (
-        <li key={idx}>
-          <Tick />
-          <RenderMarkdown value={item} />
-        </li>
-      ))
+const Cross = styled.i.attrs({
+  className: 'fa-li fa fa-times',
+})`
+  color: ${Theme.textMutedColour};
+`;
+
+function massageFeatures(features) {
+  return features.map((f) => {
+    if (f.tick != null) {
+      return f;
+    } else {
+      return { tick: true, text: f };
     }
-  </UL>
-);
+  });
+}
+
+const FeatureList = ({ features }) => {
+  return (
+    <UL className="fa-ul">
+      {
+        massageFeatures(features).map((feature, idx) => (
+          <li key={idx}>
+            { feature.tick ? <Tick /> : <Cross /> }
+            <RenderMarkdown value={feature.text} />
+          </li>
+        ))
+      }
+    </UL>
+  );
+};
 
 FeatureList.propTypes = {
-  features: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  features: PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.shape({
+      tick: PropTypes.bool.isRequired,
+      text: PropTypes.string.isRequired,
+    }).isRequired,
+  ]).isRequired,
 };
 
 export default FeatureList;
