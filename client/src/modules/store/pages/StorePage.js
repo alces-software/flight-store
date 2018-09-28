@@ -7,43 +7,40 @@
  *===========================================================================*/
 import React from 'react';
 import styled from 'styled-components';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Col } from 'reactstrap';
 import { compose } from 'recompose';
 import { PageHeading } from 'flight-reactware';
 
-import PackFeatureCard from '../components/PackFeatureCard';
-import PackDetailModal from '../components/PackDetailModal';
-import CheckoutModal from '../components/CheckoutModal';
-import clusterPacks from '../data/packs';
+import EqualHeightRow from '../../../components/EqualHeightRow';
 
-const PackContainer = styled(Container)`
+import ProductTypeCard from '../components/ProductTypeCard';
+import productTypeDefs from '../data/productTypeDefinitions';
+
+const ProductContainer = styled(Container)`
   padding: 0 30px 15px 30px;
 `;
 
 const StorePage = () => {
   return (
-    <PackContainer fluid >
-      <PackDetailModal />
-      <CheckoutModal />
+    <ProductContainer fluid >
       <PageHeading
-        overview="Ready to get going? Choose a cluster pack, enter your credit
-        card details and request your fully managed Alces Flight HPC cluster."
+        overview=""
         sections={[]}
-        title="Choose a cluster pack."
+        title="Choose a product category."
       />
-      <Row>
+      <EqualHeightRow>
         {
-          clusterPacks.map((pack, idx) => (
-            <Col key={pack.title}>
-              <PackFeatureCard
-                {...pack}
+          productTypeDefs.map((productTypeDef, idx) => (
+            <Col key={productTypeDef.title}>
+              <ProductTypeCard
+                {...productTypeDef}
                 id={idx}
               />
             </Col>
           ))
         }
-      </Row>
-    </PackContainer>
+      </EqualHeightRow>
+    </ProductContainer>
   );
 };
 

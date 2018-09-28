@@ -37,8 +37,11 @@ export default class RenderMarkdown extends React.Component {
       `<a target="_blank" rel="noopener noreferrer" href="${href}" title="${title || ''}">${text}</a>`
     );
     const html = DOMPurify.sanitize(
-      marked(value || '', { renderer }),
-      { ADD_ATTR: ['target'] }
+      marked(value || '', { renderer, sanitize: false }),
+      {
+        ADD_ATTR: ['target'],
+        ADD_TAGS: [],
+      }
     );
 
     return (

@@ -11,7 +11,7 @@ const LearnMoreLink = ({ showDetails }) => (
     color="link"
     onClick={showDetails}
   >
-    Learn more about this cluster pack.
+    Learn more about this product.
   </Button>
 );
 
@@ -20,7 +20,7 @@ LearnMoreLink.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch, props) => ({
-  showDetails: () => dispatch(actions.detailModal.show(props.id)),
+  showDetails: () => dispatch(actions.detailModal.show(props.id, props.type)),
 });
 
 export default connect(null, mapDispatchToProps)(LearnMoreLink);

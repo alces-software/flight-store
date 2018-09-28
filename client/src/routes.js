@@ -48,6 +48,15 @@ const routes = [
         title: 'Store',
       },
       {
+        path: '/products/:productType',
+        exact: true,
+        component: store.pages.Products,
+        title: 'Products',
+        pageKey: productTypeDef => (
+          productTypeDef == null ? null : `/products/${productTypeDef.type}`
+        ),
+      },
+      {
         path: '/',
         exact: true,
         component: Home,
