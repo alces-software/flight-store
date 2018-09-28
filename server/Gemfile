@@ -1,0 +1,112 @@
+#==============================================================================
+# Copyright (C) 2017 Stephen F. Norledge and Alces Flight Ltd.
+#
+# This file is part of Alces Launch.
+#
+# All rights reserved, see LICENSE.txt.
+#==============================================================================
+
+source 'http://rubygems.org'
+ruby ENV['ALCES_RUBY_VERSION'] || '2.5.1'
+
+rails_version                  = '~>  5.2.1'
+
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  "https://github.com/#{repo_name}.git"
+end
+
+##################################
+# The bits of Ruby-on-Rails we use
+##################################
+gem                  'activemodel', rails_version
+gem                 'activerecord', rails_version
+gem                'activesupport', rails_version
+gem                 'actionmailer', rails_version
+gem                   'actionpack', rails_version
+gem                     'railties', rails_version
+
+##################################
+# Authentication / Authorization
+##################################
+gem 'jwt'
+gem                       'pundit', '~> 2.0.0'
+# gem             'pundit-resources', '~> 1.1.0',
+#   github: 'alces-software/pundit-resources',
+#   branch: 'master'
+
+##################################
+# Database access
+##################################
+gem 'pg'
+
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+
+##################################
+# AWS access
+##################################
+# gem 'aws-sdk', '~> 2'
+# gem 'shoryuken', '~> 3.0.6'
+
+##################################
+# Application server
+##################################
+gem 'puma', '~> 3.0'
+
+##################################
+# Rendering
+##################################
+# gem            'jsonapi-resources', '= 0.9.0'
+
+##################################
+# Utility
+##################################
+gem                      'lograge', '~> 0.10.0'
+# alces version to depend on railties rather than rails
+# gem                 'roadie-rails', '>=  1.0.5', source: 'http://rubygems.org'
+# gem              'email_validator'
+
+##################################
+# Alces utility gems
+##################################
+source 'http://gems.alces-software.com' do
+  gem                  'alces-tools', '~> 0.12.0.a' #, local: 'master'
+end
+
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+# gem 'jbuilder', '~> 2.5'
+# Use ActiveModel has_secure_password
+# gem 'bcrypt', '~> 3.1.7'
+
+# Use Capistrano for deployment
+# gem 'capistrano-rails', group: :development
+
+# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making
+# cross-origin AJAX possible
+gem 'rack-cors'
+
+##################################
+# Rendering
+##################################
+# gem                         'sass', '>=  3.4.23'
+
+##################################
+# Testing
+##################################
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger
+  # console
+  gem 'byebug', platform: :mri
+end
+
+##################################
+# Development
+##################################
+group :development do
+  gem 'listen', '~> 3.0.5'
+  gem 'foreman'
+  # gem 'letter_opener', '~>  1.4.1'
+end
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

@@ -9,7 +9,10 @@ const clusterPacks = [
       "Autoscales from two general economy nodes (7.5 GiB, 4 CPUs) down to a single node."  ,
       "Operates the [Slurm Workload Manager](https://slurm.schedmd.com/) job scheduler."  ,
     ],
-    details: "A cluster comprising an entry-level login node and general-level compute nodes (3.75 GiB, 2 CPUs) provided for familiarization and experimentation with Alces Flight Compute. By default, the compute estate runs on two general economy nodes (7.5 GiB, 4 CPUs), with an option to select durable nodes instead. Autoscaling is enabled to shut down idle nodes (a minimum of one compute node will be retained at all times). The cluster operates the Slurm Workload Manager job scheduler.\n\nThis paragraph is only *here* to test **markdown** `rendering`.  Including code blocks\n\n```\nThis is some code\nin a code block\n```\n\nand sanitizing of <script>alert('hacked')</script> script tags."
+    details: "A cluster comprising an entry-level login node and general-level compute nodes (3.75 GiB, 2 CPUs) provided for familiarization and experimentation with Alces Flight Compute. By default, the compute estate runs on two general economy nodes (7.5 GiB, 4 CPUs), with an option to select durable nodes instead. Autoscaling is enabled to shut down idle nodes (a minimum of one compute node will be retained at all times). The cluster operates the Slurm Workload Manager job scheduler.\n\nThis paragraph is only *here* to test **markdown** `rendering`.  Including code blocks\n\n```\nThis is some code\nin a code block\n```\n\nand sanitizing of <script>alert('hacked')</script> script tags.",
+    stripe: {
+      productId: "prod_DcfKpn34wXiEdo",
+    }
   },
   {
     monthlyCost: 500,

@@ -1,0 +1,83 @@
+#!/bin/bash
+
+#==============================================================================
+# Copyright (C) 2016 Stephen F. Norledge and Alces Flight Ltd.
+#
+# This file is part of Alces Store.
+#
+# All rights reserved, see LICENSE.txt.
+#==============================================================================
+set -e
+
+ALLOW_REMOTE_GEMS=false
+
+main() {
+    parse_arguments "$@"
+    check_dependencies
+    install_gems
+}
+
+install_gems() {
+    header "Installing gems"
+    local bundle_install_args
+    bundle_install_args=()
+    if $ALLOW_REMOTE_GEMS ; then
+        subheader "Remote gems allowed"
+    else
+        subheader "Remote gems disallowed"
+        bundle_install_args+=" --local"
+    fi
+    docker-compose run --rm store-api bundle install ${bundle_install_args[@]} 2> >(indent 1>&2) | indent
+}
+
+usage() {
+    echo "Usage: $(basename $0) [--remote-gems]"
+    echo
+    echo "Install gems in the web docker container."
+    echo
+    echo "If --remote-gems is given gems will be downloaded from the internet where needed."
+    echo "Otherwise they will have to be cached."
+}
+
+check_dependencies() {
+    type -p docker > /dev/null || { echo "Please install docker and docker-compose" ; exit 1; }
+    type -p docker-compose > /dev/null || { echo "Please install docker-compose" ; exit 1; }
+}
+
+parse_arguments() {
+    while [[ $# > 0 ]] ; do
+        key="$1"
+
+        case $key in
+            --remote-gems)
+                ALLOW_REMOTE_GEMS=true
+                shift
+                ;;
+
+            --help)
+                usage
+                exit 0
+                ;;
+
+            *)
+                echo "$(basename $0): unrecognized option ${key}"
+                usage
+                exit 1
+                ;;
+        esac
+    done
+}
+
+header() {
+    echo -e "\n>>> $@ <<<"
+}
+
+subheader() {
+    echo -e " ---> $@"
+}
+
+indent() {
+    sed 's/^/  /'
+}
+
+main "$@"
