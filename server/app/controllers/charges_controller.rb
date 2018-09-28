@@ -24,7 +24,8 @@ class ChargesController < ApplicationController
       description: alces_product[:description],
       metadata: {
         flight_id: current_user.flight_id,
-      }
+      },
+      receipt_email: current_user.email,
     )
   end
 end
