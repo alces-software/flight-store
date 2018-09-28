@@ -2,23 +2,24 @@ class SubscriptionsController < ApplicationController
   def create
     authorize nil, policy_class: SubscriptionPolicy
 
-    # XXX Do Strip API things here.
-    # create_customer if needed?
-    # add_token_to_customer
-    # retrieve_subscription_for_cluster_pack
-    # retrieve_plan_subscription
-    # add_customer_to_subscription_plan
     # XXX Handle errors.
-
-    product = find_stripe_product(params[:cluster_pack])
+    #
+    # A list of card numbers producing errors can be found at
+    # https://stripe.com/docs/testing#cards-responses
+    #
+    # Docs on errors https://stripe.com/docs/api#errors
+    #
+    # Docs on error handling https://stripe.com/docs/api#error_handling
+    #
+    product = find_stripe_product(params[:product])
     plan = find_stripe_plan(product)
     subscribe(stripe_customer, plan)
   end
 
   private
 
-  def find_stripe_product(cluster_pack)
-    product_id = cluster_pack[:stripe][:productId]
+  def find_stripe_product(alces_product)
+    product_id = alces_product[:stripe][:productId]
     Stripe::Product.retrieve(product_id)
   end
 
@@ -54,9 +55,19 @@ class SubscriptionsController < ApplicationController
         current_user.save!
       end
     else
-      # XXX If we already have a customer, the UI should not ask for the
-      # credit card to be entered again.  There should be a slightly different
-      # path through this.
+      # XXX The following is not consistent:
+      #
+      # - We already have a customer.
+      # - We have already added a payment method (card) to the customer.
+      # - The UI has asked for their card details (again).
+      # - We ignore them here and use the card details we already have.
+      #
+      # Solution:
+      #
+      # Have the UI check if the flight account is associated with a stripe
+      # customer and if that customer has any cards.  If so, ask user to
+      # select one of their existing cards.  If not, use the current UI.
+      #
       Stripe::Customer.retrieve(current_user.stripe_id)
     end
   end
