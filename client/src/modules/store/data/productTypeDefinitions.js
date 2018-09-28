@@ -1,5 +1,6 @@
 const productTypeDefinitions = [
   {
+    name: 'Cluster packs',
     type: 'clusterPack',
     title: 'HPC cluster pack',
     subtitle: 'Fully managed Alces Flight HPC cluster with Flight Center support',

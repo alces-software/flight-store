@@ -8,13 +8,17 @@ import { compose } from 'recompose';
 import { matchRoutes } from 'react-router-config';
 import { withRouter } from 'react-router';
 import isFunction from 'lodash.isfunction';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { withProps } from 'recompose';
 
 import { Page } from 'flight-reactware';
 
 import ScrollToTop from './ScrollToTop';
 import SitePage from './Page';
-import routes from '../routes';
 import appVersion from '../version';
+import routes from '../routes';
+import { store } from '../modules';
 
 
 // Use our own version of `renderRoutes` which incorporates currently
@@ -66,19 +70,36 @@ const productName = process.env.REACT_APP_PRODUCT_NAME;
 
 const propTypes = {
   location: PropTypes.object,
+  matchedRouteConfig: PropTypes.object.isRequired,
+  productTypeDef: PropTypes.object,
   route: PropTypes.object,
 };
 
-const App = ({ location, route }) => {
-  const branch = matchRoutes(routes, location.pathname);
-  const lastRouteComponent = branch[branch.length - 1].route;
+const withBranches = withProps(({ location }) => {
+  const branches = matchRoutes(routes, location.pathname);
+  const branch = branches[branches.length - 1];
+  return {
+    branches: branches,
+    branch: branch,
+    matchedRouteConfig: branch.route,
+  };
+});
 
-  const pageKey = isFunction(lastRouteComponent.pageKey) ?
-    lastRouteComponent.pageKey() :
-    lastRouteComponent.pageKey;
-  const title = isFunction(lastRouteComponent.title) ?
-    lastRouteComponent.title() :
-    lastRouteComponent.title;
+const withMatchFix = withProps(({ branch }) => {
+  const correctMatch = branch.match;
+  return ({
+    match: correctMatch,
+  });
+});
+
+
+const App = ({ location, matchedRouteConfig, productTypeDef, route }) => {
+  const pageKey = isFunction(matchedRouteConfig.pageKey) ?
+    matchedRouteConfig.pageKey(productTypeDef) :
+    matchedRouteConfig.pageKey;
+  const title = isFunction(matchedRouteConfig.title) ?
+    matchedRouteConfig.title(productTypeDef) :
+    matchedRouteConfig.title;
 
   return (
     <ScrollToTop>
@@ -97,6 +118,7 @@ const App = ({ location, route }) => {
         </Helmet>
         <SitePage
           pageKey={pageKey}
+          productTypeDef={productTypeDef}
           title={title}
         >
           <CSSTransitionGroup
@@ -104,7 +126,7 @@ const App = ({ location, route }) => {
             transitionLeave={false}
             transitionName="fade"
           >
-            <div key={lastRouteComponent.key || location.pathname}>
+            <div key={matchedRouteConfig.key || location.pathname}>
               {renderRoutes(route.routes, {}, { location: location })}
             </div>
           </CSSTransitionGroup>
@@ -118,6 +140,12 @@ App.propTypes = propTypes;
 
 const enhance = compose(
   withRouter,
+  withBranches,
+  withMatchFix,
+
+  connect(createStructuredSelector({
+    productTypeDef: store.selectors.productTypeDef,
+  })),
 );
 
 export default enhance(App);

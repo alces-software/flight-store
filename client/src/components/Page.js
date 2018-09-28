@@ -10,9 +10,10 @@ import getItems from '../modules/items';
 const Page = ({
   children,
   pageKey,
+  productTypeDef,
   title,
 }) => {
-  const items = getItems();
+  const items = getItems(productTypeDef);
   return (
     <div>
       <Helmet>
@@ -33,6 +34,7 @@ const Page = ({
 Page.propTypes = {
   children: PropTypes.node.isRequired,
   pageKey: PropTypes.string,
+  productTypeDef: PropTypes.object,
   title: PropTypes.string.isRequired,
 };
 
