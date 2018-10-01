@@ -13,7 +13,10 @@ import {
 } from 'reactstrap';
 import { auth } from 'flight-reactware';
 
-const url = "http://localhost:4008/subscriptions";
+const urls = {
+  charge: "http://localhost:4008/charges",
+  subscription: "http://localhost:4008/subscriptions",
+};
 
 class CheckoutForm extends Component {
   static propTypes = {
@@ -43,6 +46,7 @@ class CheckoutForm extends Component {
     console.log('token:', token);  // eslint-disable-line no-console
     // XXX token might be invalid.  Need to check success or otherwise of
     // createToken.
+    const url = urls[product.stripe.type];
     const response = await fetch(url, {
       credentials: 'include',
       method: "POST",
