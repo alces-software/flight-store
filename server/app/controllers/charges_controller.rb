@@ -1,17 +1,9 @@
 class ChargesController < ApplicationController
   def create
     authorize nil, policy_class: ChargePolicy
-
-    # XXX Handle errors.
-    #
-    # A list of card numbers producing errors can be found at
-    # https://stripe.com/docs/testing#cards-responses
-    #
-    # Docs on errors https://stripe.com/docs/api#errors
-    #
-    # Docs on error handling https://stripe.com/docs/api#error_handling
-    #
-    charge(params[:product][:stripe], params[:token])
+    with_stripe_error_handling do
+      charge(params[:product][:stripe], params[:token])
+    end
   end
 
   private
@@ -27,5 +19,58 @@ class ChargesController < ApplicationController
       },
       receipt_email: current_user.email,
     )
+  end
+
+  def with_stripe_error_handling
+    # XXX Handle all errors.
+    #
+    # A list of card numbers producing errors can be found at
+    # https://stripe.com/docs/testing#cards-responses
+    #
+    # Docs on errors https://stripe.com/docs/api#errors
+    #
+    # Docs on error handling https://stripe.com/docs/api#error_handling
+    #
+    begin
+      yield
+    rescue Stripe::CardError => e
+      body = e.json_body
+      err  = body[:error]
+      Rails.logger.info(
+        "Charging card failed. Charge ID=#{err[:charge]}. Code=#{err[:code]}. \
+        Decline code=#{err[:decline_code]}. Message=#{err[:message]}."
+      )
+
+      render(
+        status: e.http_status,
+        json: {
+          type: err[:type],
+          code: err[:code],
+          decline_code: err[:decline_code],
+          message: err[:message],
+        }
+      )
+
+    rescue Stripe::RateLimitError => e
+      # Too many requests made to the API too quickly
+      raise e
+    rescue Stripe::InvalidRequestError => e
+      # Invalid parameters were supplied to Stripe's API
+      raise e
+    rescue Stripe::AuthenticationError => e
+      # Authentication with Stripe's API failed
+      # (maybe you changed API keys recently)
+      raise e
+    rescue Stripe::APIConnectionError => e
+      # Network communication with Stripe failed
+      raise e
+    rescue Stripe::StripeError => e
+      # Display a very generic error to the user, and maybe send
+      # yourself an email
+      raise e
+    rescue => e
+      # Something else happened, completely unrelated to Stripe
+      raise e
+    end
   end
 end

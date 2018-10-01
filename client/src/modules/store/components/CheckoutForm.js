@@ -17,9 +17,20 @@ import {
 } from 'redux-form';
 
 import * as actions from '../actions';
+import CheckoutErrorMessage from './CheckoutErrorMessage';
 
-const CheckoutForm = ({ handleSubmit }) => (
+const CheckoutForm = ({ error, handleSubmit, submitFailed }) => (
   <Form onSubmit={handleSubmit}>
+    { 
+      error ? <CheckoutErrorMessage error={error} /> : null
+    }
+    { 
+      submitFailed && !error ? (
+        <p className='text-warning'>
+          Please correct the errors below and try again.
+        </p>
+      ) : null
+    }
     <FormText>
       You will be charged £xxx now and each month until you cancel your
       subscription.
