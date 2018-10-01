@@ -64,10 +64,8 @@ class CheckoutForm extends Component {
     });
 
     if (response.ok) {
-      console.log("Purchase Complete!");
       dispatch(actions.submissionSucceeded());
     } else {
-      console.log("Purchase failed!");
       dispatch(actions.submissionFailed());
     }
   }
