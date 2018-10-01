@@ -13,6 +13,8 @@ import {
 } from 'reactstrap';
 import { auth } from 'flight-reactware';
 
+import * as actions from '../actions';
+
 const urls = {
   charge: "http://localhost:4008/charges",
   subscription: "http://localhost:4008/subscriptions",
@@ -30,7 +32,8 @@ class CheckoutForm extends Component {
   }
 
   async handleSubmit(ev) {
-    const { authToken, product, stripe } = this.props;
+    const { authToken, dispatch, product, stripe } = this.props;
+    dispatch(actions.submissionStarted());
 
     const { token } = await stripe.createToken({
       name: this.name.value,
@@ -62,8 +65,10 @@ class CheckoutForm extends Component {
 
     if (response.ok) {
       console.log("Purchase Complete!");
+      dispatch(actions.submissionSucceeded());
     } else {
       console.log("Purchase failed!");
+      dispatch(actions.submissionFailed());
     }
   }
 
@@ -142,18 +147,6 @@ class CheckoutForm extends Component {
             type="text"
           />
         </FormGroup>
-
-        {/*
-        <FormGroup>
-          <Label for="addressZip">Zip</Label>
-          <Input
-            id="addressZip"
-            innerRef={el => this.addressZip = el}
-            name="addressZip"
-            type="text"
-          />
-        </FormGroup>
-        */}
       </Form>
     );
   }

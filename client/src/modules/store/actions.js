@@ -33,3 +33,21 @@ export const formModal = buildModalActions(
   actionTypes.FORM_MODAL_SHOWN,
   actionTypes.FORM_MODAL_HIDDEN
 );
+
+export function submissionStarted() {
+  return {
+    type: actionTypes.SUBMIT_STARTED,
+  };
+}
+
+export function submissionSucceeded() {
+  return {
+    type: actionTypes.SUBMIT_SUCCEEDED,
+  };
+}
+
+export function submissionFailed() {
+  return {
+    type: actionTypes.SUBMIT_FAILED,
+  };
+}

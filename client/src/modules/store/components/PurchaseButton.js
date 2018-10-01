@@ -1,24 +1,36 @@
 import FontAwesome from 'react-fontawesome';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Button } from 'reactstrap';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { StatefulButton } from 'flight-reactware';
 
-const PurchaseButton = ({ onClick }) => (
-  <Button
+import * as selectors from '../selectors';
+
+const PurchaseButton = ({ isSubmitting, onClick }) => (
+  <StatefulButton
     color="primary"
+    disabled={isSubmitting}
     onClick={onClick}
-    outline
+    submitting={isSubmitting}
   >
     Purchase{' '}
     <FontAwesome
       fixedWidth
       name="credit-card"
     />
-  </Button>
+  </StatefulButton>
 );
 
 PurchaseButton.propTypes = {
+  isSubmitting: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 
-export default PurchaseButton;
+const enhance = (
+  connect(createStructuredSelector({
+    isSubmitting: selectors.isSubmitting,
+  }))
+);
+
+export default enhance(PurchaseButton);
