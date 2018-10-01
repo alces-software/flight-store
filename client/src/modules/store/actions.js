@@ -45,7 +45,7 @@ export function purchase(values, props) {
   return async (dispatch) => {
     try {
       const { authToken, product, stripe } = props;
-      const { token } = await stripe.createToken({
+      const { token, error } = await stripe.createToken({
         name: values.nameOnCard,
         /* eslint-disable camelcase */
         address_city: values.addressCity,
@@ -55,8 +55,9 @@ export function purchase(values, props) {
         address_state: values.addressState,
         /* eslint-enable camelcase */
       });
-      // XXX token might be invalid.  Need to check success or otherwise of
-      // createToken.
+      if (error) {
+        throw new SubmissionError({ _error: error });
+      }
       const url = urls[product.stripe.type];
       const response = await fetch(url, {
         credentials: 'include',
@@ -78,8 +79,13 @@ export function purchase(values, props) {
         throw new SubmissionError({ _error: errors });
       }
     } catch (e) {
-      throw new Error(e);
-      // throw new SubmissionError({ _error: e });
+      if (e.constructor === SubmissionError) {
+        throw e;
+      } else if (e.constructor === Error) {
+        throw e;
+      } else {
+        throw new Error(e);
+      }
     }
   };
 }
