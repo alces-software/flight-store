@@ -6,34 +6,20 @@ import {
   DETAIL_MODAL_SHOWN,
   FORM_MODAL_HIDDEN,
   FORM_MODAL_SHOWN,
-  SUBMIT_STARTED,
-  SUBMIT_SUCCEEDED,
-  SUBMIT_FAILED,
 } from './actionTypes';
 
-function formReducer(state={}, { type }) {
-  switch (type) {
-    case SUBMIT_STARTED:
-      return {
-        ...state,
-        submitting: true,
-      };
+const initialFormState = {};
 
-    case SUBMIT_SUCCEEDED:
+function formReducer(state=initialFormState, { type }) {
+  switch (type) {
+    case '@@redux-form/SET_SUBMIT_SUCCEEDED':
       return {
         ...state,
-        submitting: false,
-        submitFailed: false,
         submitSucceeded: true,
       };
 
-    case SUBMIT_FAILED:
-      return {
-        ...state,
-        submitting: false,
-        submitFailed: true,
-        submitSucceeded: false,
-      };
+    case FORM_MODAL_SHOWN:
+      return initialFormState;
 
     default:
       return state;

@@ -59,10 +59,6 @@ export function products(state, params) {
   return productsByType[type];
 }
 
-export function isSubmitting(state) {
-  return !!state[NAME].form.state.submitting;
-}
-
 export function submitSucceeded(state) {
   return !!state[NAME].form.state.submitSucceeded;
 }

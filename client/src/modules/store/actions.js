@@ -34,20 +34,45 @@ export const formModal = buildModalActions(
   actionTypes.FORM_MODAL_HIDDEN
 );
 
-export function submissionStarted() {
-  return {
-    type: actionTypes.SUBMIT_STARTED,
-  };
-}
+const urls = {
+  charge: "http://localhost:4008/charges",
+  subscription: "http://localhost:4008/subscriptions",
+};
 
-export function submissionSucceeded() {
-  return {
-    type: actionTypes.SUBMIT_SUCCEEDED,
-  };
-}
+export function purchase(values, props) {
+  return async (dispatch) => {
+    const { authToken, product, stripe } = props;
+    // XXX Add try/catch here too.
+    const { token } = await stripe.createToken({
+      name: values.nameOnCard,
+      /* eslint-disable camelcase */
+      address_city: values.addressCity,
+      address_country: values.addressCountry,
+      address_line1: values.addressLine1,
+      address_line2: values.addressLine2,
+      address_state: values.addressState,
+      // address_zip: values.addressZip,
+      /* eslint-enable camelcase */
+    });
+    // XXX token might be invalid.  Need to check success or otherwise of
+    // createToken.
+    const url = urls[product.stripe.type];
+    const response = await fetch(url, {
+      credentials: 'include',
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({
+        token: token.id,
+        product: product,
+      }),
+    });
 
-export function submissionFailed() {
-  return {
-    type: actionTypes.SUBMIT_FAILED,
+    if (response.ok) {
+    } else {
+    }
+    return response;
   };
 }
