@@ -7,6 +7,7 @@ const clusterPacks = [
     },
     subtitle: "For small-scale workloads.",
     title: "Standard cluster",
+    name: "Standard cluster",
     type: 'clusterPack',
     features: [
       "Entry-level login node and general-level compute nodes (3.75 GiB, 2 CPUs)."  ,
@@ -28,6 +29,7 @@ const clusterPacks = [
     },
     subtitle: "For workloads that require enhanced processing.",
     title: "Performance cluster",
+    name: "Performance cluster",
     type: 'clusterPack',
     features: [
       "Medium-sized login node and balanced compute nodes (60 GiB, 36 CPUs)."  ,
@@ -45,6 +47,7 @@ const clusterPacks = [
     },
     subtitle: "For workloads that scale best on GPU architectures.",
     title: "GPU cluster",
+    name: "GPU cluster",
     type: 'clusterPack',
     features: [
       "Medium-sized login node and GPU compute nodes (488 GiB, 32 CPUS, 8 GPUs)."  ,

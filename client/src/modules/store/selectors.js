@@ -58,3 +58,7 @@ export function products(state, params) {
   if (type == null) { return null; }
   return productsByType[type];
 }
+
+export function submitSucceeded(state) {
+  return !!state[NAME].form.state.submitSucceeded;
+}

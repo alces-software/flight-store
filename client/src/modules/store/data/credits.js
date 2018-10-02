@@ -6,6 +6,7 @@ const creditPacks = [
     },
     subtitle: "Entry-level Alces Flight credit pack",
     title: "Bronze",
+    name: "Bronze entry-level Alces Flight credit pack",
     type: 'creditPack',
     features: [
       { tick: true, text: "10 Alces Flight credits" },
@@ -28,6 +29,7 @@ const creditPacks = [
     },
     subtitle: "Standard Alces Flight credit pack",
     title: "Silver",
+    name: "Silver Standard-level Alces Flight credit pack",
     type: 'creditPack',
     features: [
       { tick: true, text: "25 Alces Flight credits" },
@@ -36,6 +38,12 @@ const creditPacks = [
       { tick: false, text: "~Launch new HPC clusters through [Alces Flight Launch](https://launch.alces-flight.com)~" },
     ],
     details: "The Silver Alces Flight credit pack allows you to...\n\n",
+    stripe: {
+      amount: 50000,
+      currency: "gbp",
+      description: "Alces Flight credit pack (Silver)",
+      type: 'charge',
+    }
   },
   {
     cost: {
@@ -44,6 +52,7 @@ const creditPacks = [
     },
     subtitle: "Professional Alces Flight credit pack",
     title: "Gold",
+    name: "Gold professional Alces Flight credit pack",
     type: 'creditPack',
     features: [
       { tick: true, text: "50 Alces Flight credits" },
@@ -52,6 +61,12 @@ const creditPacks = [
       { tick: true, text: "Launch new HPC clusters through [Alces Flight Launch](https://launch.alces-flight.com)" },
     ],
     details: "The Gold Alces Flight credit pack allows you to...\n\n",
+    stripe: {
+      amount: 100000,
+      currency: "gbp",
+      description: "Alces Flight credit pack (Gold)",
+      type: 'charge',
+    }
   },
 ];
 

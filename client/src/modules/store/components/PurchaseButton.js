@@ -1,24 +1,18 @@
 import FontAwesome from 'react-fontawesome';
-import PropTypes from 'prop-types';
 import React from 'react';
-import { Button } from 'reactstrap';
+import { ReduxFormSubmitButton as SubmitButton } from 'flight-reactware';
 
-const PurchaseButton = ({ onClick }) => (
-  <Button
+const PurchaseButton = () => (
+  <SubmitButton
     color="primary"
-    onClick={onClick}
-    outline
+    form="checkout"
   >
     Purchase{' '}
     <FontAwesome
       fixedWidth
       name="credit-card"
     />
-  </Button>
+  </SubmitButton>
 );
-
-PurchaseButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
-};
 
 export default PurchaseButton;

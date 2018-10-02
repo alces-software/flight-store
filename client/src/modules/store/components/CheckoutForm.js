@@ -1,6 +1,5 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { CardElement, injectStripe } from 'react-stripe-elements';
+import React from 'react';
+import { injectStripe } from 'react-stripe-elements';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -8,163 +7,115 @@ import {
   Form,
   FormGroup,
   FormText,
-  Input,
-  Label,
+  Table,
 } from 'reactstrap';
-import { auth } from 'flight-reactware';
+import { auth, FormInput, HiddenButton } from 'flight-reactware';
+import {
+  Field,
+  propTypes as formPropTypes,
+  reduxForm,
+} from 'redux-form';
+import styled from 'styled-components';
 
-const urls = {
-  charge: "http://localhost:4008/charges",
-  subscription: "http://localhost:4008/subscriptions",
+import * as actions from '../actions';
+import CheckoutErrorMessage from './CheckoutErrorMessage';
+import CardElement from './CardElement';
+import { checkoutValidator } from '../validations';
+
+// Our current versions of bootstrap and reactstrap don't support borderless
+// tables.  Let's add support here.
+const BorderlessTable = styled(Table)`
+  th,
+  td,
+  thead th,
+  tbody + tbody {
+    border: 0;
+  }
+`;
+
+const CheckoutForm = ({
+  error,
+  handleSubmit,
+  invalid,
+  pristine,
+  product,
+  submitFailed,
+  submitting,
+}) => (
+  <Form onSubmit={handleSubmit}>
+    { 
+      error ? <CheckoutErrorMessage error={error} /> : null
+    }
+    { 
+      submitFailed && !error ? (
+        <p className='text-warning'>
+          Please correct the errors below and try again.
+        </p>
+      ) : null
+    }
+
+    <FormText>
+      Enter your credit card details below and click <em>Purchase</em> to
+      continue.
+    </FormText>
+
+    <BorderlessTable size="sm">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{product.name}</td>
+          <td>1</td>
+          <td>{product.cost.unit}{product.cost.amount}</td>
+        </tr>
+      </tbody>
+    </BorderlessTable>
+
+    <CardElement />
+
+    <FormGroup>
+      <Field
+        component={FormInput}
+        id="nameOnCard"
+        label="Name on card"
+        name="nameOnCard"
+        type="text"
+      />
+    </FormGroup>
+
+    <HiddenButton
+      disabled={submitting || invalid || pristine}
+      type='submit'
+    >
+      Purchase
+    </HiddenButton>
+  </Form>
+);
+
+CheckoutForm.propTypes = {
+  ...formPropTypes,
 };
 
-class CheckoutForm extends Component {
-  static propTypes = {
-    product: PropTypes.object.isRequired,
-    stripe: PropTypes.object.isRequired,
-  };
-
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  async handleSubmit(ev) {
-    const { authToken, product, stripe } = this.props;
-
-    const { token } = await stripe.createToken({
-      name: this.name.value,
-      /* eslint-disable camelcase */
-      address_city: this.addressCity.value,
-      address_country: this.addressCountry.value,
-      address_line1: this.addressLine1.value,
-      address_line2: this.addressLine2.value,
-      address_state: this.addressState.value,
-      // address_zip: this.addressZip.value,
-      /* eslint-enable camelcase */
-    });
-    console.log('token:', token);  // eslint-disable-line no-console
-    // XXX token might be invalid.  Need to check success or otherwise of
-    // createToken.
-    const url = urls[product.stripe.type];
-    const response = await fetch(url, {
-      credentials: 'include',
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${authToken}`,
-      },
-      body: JSON.stringify({
-        token: token.id,
-        product: product,
-      }),
-    });
-
-    if (response.ok) {
-      console.log("Purchase Complete!");
-    } else {
-      console.log("Purchase failed!");
-    }
-  }
-
-  render() {
-    return (
-      <Form>
-        <FormText>
-          You will be charged £xxx now and each month until you cancel your
-          subscription.
-        </FormText>
-
-        <FormGroup>
-          <Label>Card details</Label>
-          <CardElement className="form-control" />
-        </FormGroup>
-
-        <FormGroup>
-          <Label for="nameOnCard">Name on card</Label>
-          <Input
-            id="nameOnCard"
-            innerRef={el => this.name = el}
-            name="nameOnCard"
-            type="text"
-          />
-        </FormGroup>
-
-        <FormText>
-          Billing address
-        </FormText>
-        <FormGroup>
-          <Label for="addressLine1">Line 1</Label>
-          <Input
-            id="addressLine1"
-            innerRef={el => this.addressLine1 = el}
-            name="addressLine1"
-            type="text"
-          />
-        </FormGroup>
-
-        <FormGroup>
-          <Label for="addressLine2">Line 2</Label>
-          <Input
-            id="addressLine2"
-            innerRef={el => this.addressLine2 = el}
-            name="addressLine2"
-            type="text"
-          />
-        </FormGroup>
-
-        <FormGroup>
-          <Label for="addressCity">Town/City</Label>
-          <Input
-            id="addressCity"
-            innerRef={el => this.addressCity = el}
-            name="addressCity"
-            type="text"
-          />
-        </FormGroup>
-
-        <FormGroup>
-          <Label for="addressState">County</Label>
-          <Input
-            id="addressState"
-            innerRef={el => this.addressState = el}
-            name="addressState"
-            type="text"
-          />
-        </FormGroup>
-
-        <FormGroup>
-          <Label for="addressCountry">Country</Label>
-          <Input
-            id="addressCountry"
-            innerRef={el => this.addressCountry = el}
-            name="addressCountry"
-            type="text"
-          />
-        </FormGroup>
-
-        {/*
-        <FormGroup>
-          <Label for="addressZip">Zip</Label>
-          <Input
-            id="addressZip"
-            innerRef={el => this.addressZip = el}
-            name="addressZip"
-            type="text"
-          />
-        </FormGroup>
-        */}
-      </Form>
-    );
-  }
-}
-
 const enhance = compose(
-  (component) => injectStripe(component, { withRef: true }),
+  (component) => injectStripe(component),
 
   connect(createStructuredSelector({
     authToken: auth.selectors.ssoToken,
-  }), null, null, { withRef: true }),
+  })),
+
+  reduxForm({
+    destroyOnUnmount: false,
+    form: 'checkout',
+    onSubmit: (values, dispatch, props) => {
+      return dispatch(actions.purchase(values, props));
+    },
+    validate: checkoutValidator,
+  }),
 );
 
 export default enhance(CheckoutForm);
