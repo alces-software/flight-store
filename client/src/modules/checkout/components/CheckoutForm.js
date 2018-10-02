@@ -34,6 +34,7 @@ const BorderlessTable = styled(Table)`
 `;
 
 const CheckoutForm = ({
+  change,
   error,
   handleSubmit,
   invalid,
@@ -76,7 +77,7 @@ const CheckoutForm = ({
       </tbody>
     </BorderlessTable>
 
-    <CardElement />
+    <CardElement reduxFormChangeHandler={change} />
 
     <FormGroup>
       <Field

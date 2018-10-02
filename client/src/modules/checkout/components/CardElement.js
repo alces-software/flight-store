@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { CardElement as StripeCardElement } from 'react-stripe-elements';
-import { Field, reduxForm } from 'redux-form';
+import { Field } from 'redux-form';
 import { FormGroup, Label } from 'reactstrap';
 import { FormInput } from 'flight-reactware';
 import { compose, withStateHandlers } from 'recompose';
@@ -31,7 +31,7 @@ let tick = 0;
 const CardElement = ({
   cardErrorHandler,
   cardErrors,
-  change: reduxFormChangeHandler,
+  reduxFormChangeHandler,
 }) => (
   <FormGroup>
     <Label>Card details</Label>
@@ -58,7 +58,7 @@ const CardElement = ({
 CardElement.propTypes = {
   cardErrorHandler: PropTypes.func.isRequired,
   cardErrors: PropTypes.object,
-  change: PropTypes.func.isRequired,
+  reduxFormChangeHandler: PropTypes.func.isRequired,
 };
 
 const enhance = compose(
@@ -72,8 +72,6 @@ const enhance = compose(
       },
     },
   ),
-
-  reduxForm({ form: 'checkout' }),
 );
 
 export default enhance(CardElement);
