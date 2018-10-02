@@ -4,9 +4,9 @@ import { CardSubtitle, CardText, CardTitle } from 'reactstrap';
 import { ProductCard, ProductHead, ProductBody, productHeadHeight } from './ProductCard';
 
 import RenderMarkdown from '../../../components/RenderMarkdown';
+import checkout from '../../checkout';
 
 import CostCircle from './CostCircle';
-import ShowCheckoutFormButton from './ShowCheckoutFormButton';
 
 const ProductDetailCard = ({
   details,
@@ -35,7 +35,7 @@ const ProductDetailCard = ({
       <CardText>
         <RenderMarkdown value={details} />
       </CardText>
-      <ShowCheckoutFormButton
+      <checkout.ShowCheckoutFormButton
         id={id}
         type={type}
       />

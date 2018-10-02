@@ -2,10 +2,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { CardTitle, CardSubtitle } from 'reactstrap';
 
+import checkout from '../../checkout';
+
 import CostCircle from './CostCircle';
 import FeatureList from './FeatureList';
 import LearnMoreLink from './LearnMoreLink';
-import ShowCheckoutFormButton from './ShowCheckoutFormButton';
 import { ProductCard, ProductHead, ProductBody, productHeadHeight } from './ProductCard';
 
 const ProductFeatureCard = ({
@@ -35,7 +36,7 @@ const ProductFeatureCard = ({
         id={id}
         type={type}
       />
-      <ShowCheckoutFormButton
+      <checkout.ShowCheckoutFormButton
         id={id}
         type={type}
       />

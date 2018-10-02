@@ -14,8 +14,9 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import checkout from '../../checkout';
+
 import * as selectors from '../selectors';
-import CheckoutModal from '../components/CheckoutModal';
 import ProductDetailModal from '../components/ProductDetailModal';
 import ProductFeatureCard from '../components/ProductFeatureCard';
 
@@ -27,7 +28,7 @@ const ProductsPage = ({ productTypeDef, products }) => {
   return (
     <ProductContainer fluid >
       <ProductDetailModal />
-      <CheckoutModal />
+      <checkout.CheckoutModal />
       <PageHeading
         overview={productTypeDef.productsPage.overview}
         sections={[]}
