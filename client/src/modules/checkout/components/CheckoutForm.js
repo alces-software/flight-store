@@ -7,7 +7,6 @@ import {
   Form,
   FormGroup,
   FormText,
-  Table,
 } from 'reactstrap';
 import { auth, FormInput, HiddenButton } from 'flight-reactware';
 import {
@@ -15,23 +14,12 @@ import {
   propTypes as formPropTypes,
   reduxForm,
 } from 'redux-form';
-import styled from 'styled-components';
 
 import * as actions from '../actions';
 import ErrorMessage from './ErrorMessage';
 import CardElement from './CardElement';
 import { checkoutValidator } from '../validations';
-
-// Our current versions of bootstrap and reactstrap don't support borderless
-// tables.  Let's add support here.
-const BorderlessTable = styled(Table)`
-  th,
-  td,
-  thead th,
-  tbody + tbody {
-    border: 0;
-  }
-`;
+import Table from './Table';
 
 const CheckoutForm = ({
   change,
@@ -60,7 +48,10 @@ const CheckoutForm = ({
       continue.
     </FormText>
 
-    <BorderlessTable size="sm">
+    <Table
+      borderless
+      size="sm"
+    >
       <thead>
         <tr>
           <th>Product</th>
@@ -75,7 +66,7 @@ const CheckoutForm = ({
           <td>{product.cost.unit}{product.cost.amount}</td>
         </tr>
       </tbody>
-    </BorderlessTable>
+    </Table>
 
     <CardElement reduxFormChangeHandler={change} />
 
