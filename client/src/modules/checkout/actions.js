@@ -1,12 +1,12 @@
 import { SubmissionError } from 'redux-form';
 
-import { buildModalActions } from '../../utils/actions';
+import { buildModalActions } from '../../utils/modals';
 
 import * as selectors from './selectors';
 import * as actionTypes from './actionTypes';
 
-export const formModal = buildModalActions(
-  selectors.formModal,
+export const modal = buildModalActions(
+  selectors.modal,
   actionTypes.MODAL_SHOWN,
   actionTypes.MODAL_HIDDEN
 );

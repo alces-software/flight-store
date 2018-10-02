@@ -1,4 +1,4 @@
-import { buildModalActions } from '../../utils/actions';
+import { buildModalActions } from '../../utils/modals';
 
 import * as selectors from './selectors';
 import * as actionTypes from './actionTypes';

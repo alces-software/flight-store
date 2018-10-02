@@ -68,12 +68,12 @@ CheckoutModal.propTypes = {
 const enhance = compose(
   connect(
     createStructuredSelector({
-      product: selectors.formModal.product,
-      isOpen: selectors.formModal.isModalOpen,
+      product: selectors.modal.product,
+      isOpen: selectors.modal.isModalOpen,
       submitSucceeded: selectors.submitSucceeded,
     }),
     {
-      closeModal: actions.formModal.hide,
+      closeModal: actions.modal.hide,
     }
   ),
 );

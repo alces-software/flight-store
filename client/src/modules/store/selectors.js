@@ -1,4 +1,4 @@
-import { buildModalSelectors } from '../../utils/selectors';
+import { buildModalSelectors } from '../../utils/modals';
 
 import clusterPacks from './data/packs';
 import creditPacks from './data/credits';
