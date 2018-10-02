@@ -21,9 +21,11 @@ class ChargesController < ApplicationController
     )
   end
 
+  # For `CardError`s such as a card being declined and produce a sensible JSON
+  # error response to the client.  All other errors are raised by this
+  # function with the expectation that they will result in a 500 response by
+  # the server and the client displaying an unexpected error message.
   def with_stripe_error_handling
-    # XXX Handle all errors.
-    #
     # A list of card numbers producing errors can be found at
     # https://stripe.com/docs/testing#cards-responses
     #
@@ -53,23 +55,29 @@ class ChargesController < ApplicationController
 
     rescue Stripe::RateLimitError => e
       # Too many requests made to the API too quickly
+      Rails.logger.error(e)
       raise e
     rescue Stripe::InvalidRequestError => e
       # Invalid parameters were supplied to Stripe's API
+      Rails.logger.error(e)
       raise e
     rescue Stripe::AuthenticationError => e
       # Authentication with Stripe's API failed
       # (maybe you changed API keys recently)
+      Rails.logger.error(e)
       raise e
     rescue Stripe::APIConnectionError => e
       # Network communication with Stripe failed
+      Rails.logger.error(e)
       raise e
     rescue Stripe::StripeError => e
       # Display a very generic error to the user, and maybe send
       # yourself an email
+      Rails.logger.error(e)
       raise e
     rescue => e
       # Something else happened, completely unrelated to Stripe
+      Rails.logger.error(e)
       raise e
     end
   end
