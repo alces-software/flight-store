@@ -6,6 +6,7 @@ class ApplicationController < ActionController::API
 
   # Make sure that we create a new User record if required.
   before_action :current_user
+  rescue_from Pundit::NotAuthorizedError, with: :reject_forbidden_request
 
   def current_user
     return @current_user if @current_user.present?
@@ -27,4 +28,30 @@ class ApplicationController < ActionController::API
     token = auth_header.present? ? auth_header.split(' ').last : auth_cookie
     return token
   end
+
+  def reject_forbidden_request(error)
+    record = error.record
+    model_name =
+      if record.respond_to? :model_name
+        record.model_name
+      elsif record.class.respond_to? :model_name
+        record.class.model_name
+      elsif record.is_a?(Class)
+        record.name
+      else
+        record.class.name
+      end
+    query = error.query.to_s.sub(/\?$/, '')
+
+    render status: :forbidden, json: {
+      status: 403,
+      error: 'Forbidden',
+      details: {
+        model_name.to_s.downcase => [
+          "You don't have permission to #{query} this #{model_name}."
+        ]
+      }
+    }
+  end
+
 end
