@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardElement, injectStripe } from 'react-stripe-elements';
+import { injectStripe } from 'react-stripe-elements';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -7,7 +7,6 @@ import {
   Form,
   FormGroup,
   FormText,
-  Label,
   Table,
 } from 'reactstrap';
 import { auth, FormInput } from 'flight-reactware';
@@ -20,6 +19,8 @@ import styled from 'styled-components';
 
 import * as actions from '../actions';
 import CheckoutErrorMessage from './CheckoutErrorMessage';
+import CardElement from './CardElement';
+import { checkoutValidator } from '../validations';
 
 // Our current versions of bootstrap and reactstrap don't support borderless
 // tables.  Let's add support here.
@@ -67,10 +68,7 @@ const CheckoutForm = ({ error, handleSubmit, product, submitFailed }) => (
       </tbody>
     </BorderlessTable>
 
-    <FormGroup>
-      <Label>Card details</Label>
-      <CardElement className="form-control" />
-    </FormGroup>
+    <CardElement />
 
     <FormGroup>
       <Field
@@ -101,8 +99,8 @@ const enhance = compose(
     onSubmit: (values, dispatch, props) => {
       return dispatch(actions.purchase(values, props));
     },
-    // validate: confirmPasswordValidator,
-  })
+    validate: checkoutValidator,
+  }),
 );
 
 export default enhance(CheckoutForm);
