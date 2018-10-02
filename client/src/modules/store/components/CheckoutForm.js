@@ -9,7 +9,7 @@ import {
   FormText,
   Table,
 } from 'reactstrap';
-import { auth, FormInput } from 'flight-reactware';
+import { auth, FormInput, HiddenButton } from 'flight-reactware';
 import {
   Field,
   propTypes as formPropTypes,
@@ -33,7 +33,15 @@ const BorderlessTable = styled(Table)`
   }
 `;
 
-const CheckoutForm = ({ error, handleSubmit, product, submitFailed }) => (
+const CheckoutForm = ({
+  error,
+  handleSubmit,
+  invalid,
+  pristine,
+  product,
+  submitFailed,
+  submitting,
+}) => (
   <Form onSubmit={handleSubmit}>
     { 
       error ? <CheckoutErrorMessage error={error} /> : null
@@ -79,6 +87,13 @@ const CheckoutForm = ({ error, handleSubmit, product, submitFailed }) => (
         type="text"
       />
     </FormGroup>
+
+    <HiddenButton
+      disabled={submitting || invalid || pristine}
+      type='submit'
+    >
+      Purchase
+    </HiddenButton>
   </Form>
 );
 
