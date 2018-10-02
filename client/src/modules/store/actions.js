@@ -47,13 +47,6 @@ export function purchase(values, props) {
       const { authToken, product, stripe } = props;
       const { token, error } = await stripe.createToken({
         name: values.nameOnCard,
-        /* eslint-disable camelcase */
-        address_city: values.addressCity,
-        address_country: values.addressCountry,
-        address_line1: values.addressLine1,
-        address_line2: values.addressLine2,
-        address_state: values.addressState,
-        /* eslint-enable camelcase */
       });
       if (error) {
         throw new SubmissionError({ _error: error });

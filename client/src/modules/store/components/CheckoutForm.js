@@ -50,59 +50,6 @@ const CheckoutForm = ({ error, handleSubmit, submitFailed }) => (
         type="text"
       />
     </FormGroup>
-
-    <FormText>
-      Billing address
-    </FormText>
-    <FormGroup>
-      <Field
-        component={FormInput}
-        id="addressLine1"
-        label="Line 1"
-        name="addressLine1"
-        type="text"
-      />
-    </FormGroup>
-
-    <FormGroup>
-      <Field
-        component={FormInput}
-        id="addressLine2"
-        label="Line 2"
-        name="addressLine2"
-        type="text"
-      />
-    </FormGroup>
-
-    <FormGroup>
-      <Field
-        component={FormInput}
-        id="addressCity"
-        label="Town/City"
-        name="addressCity"
-        type="text"
-      />
-    </FormGroup>
-
-    <FormGroup>
-      <Field
-        component={FormInput}
-        id="addressState"
-        label="County"
-        name="addressState"
-        type="text"
-      />
-    </FormGroup>
-
-    <FormGroup>
-      <Field
-        component={FormInput}
-        id="addressCountry"
-        label="Country"
-        name="addressCountry"
-        type="text"
-      />
-    </FormGroup>
   </Form>
 );
 
