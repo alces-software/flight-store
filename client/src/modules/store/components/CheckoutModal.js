@@ -13,8 +13,7 @@ import PurchaseButton from './PurchaseButton';
 
 const SuccessMessage = ({ product }) => (
   <div>
-    Your purchase of <em>{product.title} &mdash; {product.subtitle}</em> has
-    been successful.
+    Your purchase of <em>{product.name}</em> has been successful.
   </div>
 );
 SuccessMessage.propTypes = {
