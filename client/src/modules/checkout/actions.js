@@ -17,7 +17,7 @@ const urls = {
 };
 
 export function purchase(values, props) {
-  return async (dispatch) => {
+  return async () => {
     try {
       const { authToken, product, stripe } = props;
       const { token, error } = await stripe.createToken({

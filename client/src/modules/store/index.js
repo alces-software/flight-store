@@ -6,7 +6,7 @@
  * All rights reserved, see LICENSE.txt.
  *===========================================================================*/
 
-// Import and export the public facing API for the session module.
+// Import and export the public facing API for this module.
 
 import * as constants from './constants';
 import * as pages from './pages';
