@@ -43,7 +43,7 @@ const CheckoutModal = ({
       )}
     isOpen={isOpen}
     size="lg"
-    title={`Purchase ${product == null ? null : product.title}`}
+    title={`Purchase ${product == null ? null : product.name}`}
     toggle={closeModal}
   >
     {

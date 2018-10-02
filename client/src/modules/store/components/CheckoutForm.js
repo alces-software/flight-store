@@ -8,6 +8,7 @@ import {
   FormGroup,
   FormText,
   Label,
+  Table,
 } from 'reactstrap';
 import { auth, FormInput } from 'flight-reactware';
 import {
@@ -15,11 +16,23 @@ import {
   propTypes as formPropTypes,
   reduxForm,
 } from 'redux-form';
+import styled from 'styled-components';
 
 import * as actions from '../actions';
 import CheckoutErrorMessage from './CheckoutErrorMessage';
 
-const CheckoutForm = ({ error, handleSubmit, submitFailed }) => (
+// Our current versions of bootstrap and reactstrap don't support borderless
+// tables.  Let's add support here.
+const BorderlessTable = styled(Table)`
+  th,
+  td,
+  thead th,
+  tbody + tbody {
+    border: 0;
+  }
+`;
+
+const CheckoutForm = ({ error, handleSubmit, product, submitFailed }) => (
   <Form onSubmit={handleSubmit}>
     { 
       error ? <CheckoutErrorMessage error={error} /> : null
@@ -31,10 +44,28 @@ const CheckoutForm = ({ error, handleSubmit, submitFailed }) => (
         </p>
       ) : null
     }
+
     <FormText>
-      You will be charged £xxx now and each month until you cancel your
-      subscription.
+      Enter your credit card details below and click <em>Purchase</em> to
+      continue.
     </FormText>
+
+    <BorderlessTable size="sm">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{product.name}</td>
+          <td>1</td>
+          <td>{product.cost.unit}{product.cost.amount}</td>
+        </tr>
+      </tbody>
+    </BorderlessTable>
 
     <FormGroup>
       <Label>Card details</Label>
