@@ -35,6 +35,7 @@ const CloseButton = styled(Button).attrs({
 `;
 
 const ProductDetailModal = ({
+  ShowCheckoutFormButton,
   closeModal,
   id,
   isOpen,
@@ -50,6 +51,7 @@ const ProductDetailModal = ({
       product == null ? null : (
         <ProductDetailCard
           {...product}
+          ShowCheckoutFormButton={ShowCheckoutFormButton}
           head={
             <CloseButton onClick={closeModal} >
               {String.fromCharCode(215)}
@@ -64,6 +66,7 @@ const ProductDetailModal = ({
 );
 
 ProductDetailModal.propTypes = {
+  ShowCheckoutFormButton: PropTypes.func.isRequired,
   closeModal: PropTypes.func,
   id: PropTypes.number,
   isOpen: PropTypes.bool.isRequired,

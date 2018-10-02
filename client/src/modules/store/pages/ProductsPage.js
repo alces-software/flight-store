@@ -14,8 +14,6 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import checkout from '../../checkout';
-
 import * as selectors from '../selectors';
 import ProductDetailModal from '../components/ProductDetailModal';
 import ProductFeatureCard from '../components/ProductFeatureCard';
@@ -24,11 +22,16 @@ const ProductContainer = styled(Container)`
   padding: 0 30px 15px 30px;
 `;
 
-const ProductsPage = ({ productTypeDef, products }) => {
+const ProductsPage = ({
+  CheckoutModal,
+  ShowCheckoutFormButton,
+  productTypeDef,
+  products,
+}) => {
   return (
     <ProductContainer fluid >
-      <ProductDetailModal />
-      <checkout.CheckoutModal />
+      <ProductDetailModal ShowCheckoutFormButton={ShowCheckoutFormButton} />
+      <CheckoutModal />
       <PageHeading
         overview={productTypeDef.productsPage.overview}
         sections={[]}
@@ -40,6 +43,7 @@ const ProductsPage = ({ productTypeDef, products }) => {
             <Col key={product.title}>
               <ProductFeatureCard
                 {...product}
+                ShowCheckoutFormButton={ShowCheckoutFormButton}
                 id={idx}
               />
             </Col>
@@ -51,6 +55,8 @@ const ProductsPage = ({ productTypeDef, products }) => {
 };
 
 ProductsPage.propTypes = {
+  CheckoutModal: PropTypes.func.isRequired,
+  ShowCheckoutFormButton: PropTypes.func.isRequired,
   productTypeDef: PropTypes.shape({
     productsPage: PropTypes.shape({
       overview: PropTypes.string.isRequired,

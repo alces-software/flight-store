@@ -4,11 +4,11 @@ import { CardSubtitle, CardText, CardTitle } from 'reactstrap';
 import { ProductCard, ProductHead, ProductBody, productHeadHeight } from './ProductCard';
 
 import RenderMarkdown from '../../../components/RenderMarkdown';
-import checkout from '../../checkout';
 
 import CostCircle from './CostCircle';
 
 const ProductDetailCard = ({
+  ShowCheckoutFormButton,
   details,
   head,
   id,
@@ -35,7 +35,7 @@ const ProductDetailCard = ({
       <CardText>
         <RenderMarkdown value={details} />
       </CardText>
-      <checkout.ShowCheckoutFormButton
+      <ShowCheckoutFormButton
         id={id}
         type={type}
       />
@@ -44,6 +44,7 @@ const ProductDetailCard = ({
 );
 
 ProductDetailCard.propTypes = {
+  ShowCheckoutFormButton: PropTypes.func.isRequired,
   cost: PropTypes.shape({
     unit: PropTypes.string.isRequired,
     amount: PropTypes.number.isRequired,

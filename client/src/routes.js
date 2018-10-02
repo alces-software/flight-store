@@ -6,7 +6,7 @@ import App from './components/App';
 import Home from './pages/Home';
 import Page from './components/Page';
 import licenseData from './data/licenses.json';
-import { store } from './modules';
+import { checkout, store } from './modules';
 
 const metaPages = makeMetaPages(Page, {
   softwareLicenses: licenseData,
@@ -50,6 +50,10 @@ const routes = [
       {
         path: '/products/:productType',
         exact: true,
+        extraProps: {
+          CheckoutModal: checkout.CheckoutModal,
+          ShowCheckoutFormButton: checkout.ShowCheckoutFormButton,
+        },
         component: store.pages.Products,
         title: 'Products',
         pageKey: productTypeDef => (

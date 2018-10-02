@@ -2,14 +2,13 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { CardTitle, CardSubtitle } from 'reactstrap';
 
-import checkout from '../../checkout';
-
 import CostCircle from './CostCircle';
 import FeatureList from './FeatureList';
 import LearnMoreLink from './LearnMoreLink';
 import { ProductCard, ProductHead, ProductBody, productHeadHeight } from './ProductCard';
 
 const ProductFeatureCard = ({
+  ShowCheckoutFormButton,
   cost,
   features,
   id,
@@ -36,7 +35,7 @@ const ProductFeatureCard = ({
         id={id}
         type={type}
       />
-      <checkout.ShowCheckoutFormButton
+      <ShowCheckoutFormButton
         id={id}
         type={type}
       />
@@ -45,6 +44,7 @@ const ProductFeatureCard = ({
 );
 
 ProductFeatureCard.propTypes = {
+  ShowCheckoutFormButton: PropTypes.func.isRequired,
   cost: PropTypes.shape({
     unit: PropTypes.string.isRequired,
     amount: PropTypes.number.isRequired,

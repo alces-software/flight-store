@@ -100,6 +100,9 @@ const App = ({ location, matchedRouteConfig, productTypeDef, route }) => {
   const title = isFunction(matchedRouteConfig.title) ?
     matchedRouteConfig.title(productTypeDef) :
     matchedRouteConfig.title;
+  const extraProps = matchedRouteConfig.extraProps ?
+    matchedRouteConfig.extraProps :
+    {};
 
   return (
     <ScrollToTop>
@@ -127,7 +130,7 @@ const App = ({ location, matchedRouteConfig, productTypeDef, route }) => {
             transitionName="fade"
           >
             <div key={matchedRouteConfig.key || location.pathname}>
-              {renderRoutes(route.routes, {}, { location: location })}
+              {renderRoutes(route.routes, extraProps, { location: location })}
             </div>
           </CSSTransitionGroup>
         </SitePage>
