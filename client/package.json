@@ -16,6 +16,7 @@
     "ignore-styles": "^5.0.1",
     "marked": "^0.5.0",
     "morgan": "^1.8.2",
+    "object.values": "^1.0.4",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-fontawesome": "^1.6.1",
