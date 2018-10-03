@@ -4,10 +4,7 @@ import { renderRoutes } from 'react-router-config';
 
 import { loadProducts } from '../actions';
 
-const StoreContext = ({ route, ...rest }) => {
-  console.log('rest:', rest);  // eslint-disable-line no-console
-  return renderRoutes(route.routes, rest);
-};
+const StoreContext = ({ route, ...rest }) => renderRoutes(route.routes, rest);
 
 // Retrieve the specs file name from window.location.
 //

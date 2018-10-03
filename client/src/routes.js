@@ -18,16 +18,17 @@ const notFoundRouteConfig = {
 };
 
 const redirects = {
+  '/': '/store',
 };
 const redirectRoutes = Object.keys(redirects).map((k) => {
   const target = redirects[k];
   return {
     path: k,
-    exact: false,
+    exact: true,
     component: ({ location }) => ( // eslint-disable-line react/prop-types
       <Redirect
         to={{
-          pathname: target(location),
+          pathname: target,
           search: location.search,
         }}
       />
@@ -41,6 +42,12 @@ const routes = [
     component: App,
     routes: [
       ...metaPageRouteConfigs,
+      {
+        path: '/overview',
+        exact: true,
+        component: Home,
+        title: 'Overview',
+      },
       {
         component: store.Context,
         path: '/',
@@ -65,12 +72,6 @@ const routes = [
             ),
           },
         ],
-      },
-      {
-        path: '/',
-        exact: true,
-        component: Home,
-        title: 'Overview',
       },
       notFoundRouteConfig,
     ],
