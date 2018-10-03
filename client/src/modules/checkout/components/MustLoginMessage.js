@@ -1,15 +1,14 @@
 import React from 'react';
-
-import SignInLink from './SignInLink';
+import { auth } from 'flight-reactware';
 
 const MustLoginMessage = () => {
   return (
     <p>
       You must be signed in to your Alces Flight account in order to purchase
       any products from Alces Flight Store. Please{' '}
-      <SignInLink>
+      <auth.SignInLink>
         sign in
-      </SignInLink>
+      </auth.SignInLink>
       {' '}and try again.
     </p>
   );
