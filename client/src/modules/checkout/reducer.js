@@ -5,19 +5,16 @@ import { MODAL_HIDDEN, MODAL_SHOWN } from './actionTypes';
 
 const initialFormState = {};
 
-function formReducer(state=initialFormState, { type }) {
-  switch (type) {
-    case '@@redux-form/SET_SUBMIT_SUCCEEDED':
-      return {
-        ...state,
-        submitSucceeded: true,
-      };
-
-    case MODAL_SHOWN:
-      return initialFormState;
-
-    default:
-      return state;
+function formReducer(state=initialFormState, { type, meta }) {
+  if (type === '@@redux-form/SET_SUBMIT_SUCCEEDED' && meta.form === 'checkout') {
+    return {
+      ...state,
+      submitSucceeded: true,
+    };
+  } else if (type === MODAL_SHOWN) {
+    return initialFormState;
+  } else {
+    return state;
   }
 }
 
