@@ -18,7 +18,7 @@ import {
 import styled from 'styled-components';
 
 import * as actions from '../actions';
-import CheckoutErrorMessage from './CheckoutErrorMessage';
+import ErrorMessage from './ErrorMessage';
 import CardElement from './CardElement';
 import { checkoutValidator } from '../validations';
 
@@ -44,7 +44,7 @@ const CheckoutForm = ({
 }) => (
   <Form onSubmit={handleSubmit}>
     { 
-      error ? <CheckoutErrorMessage error={error} /> : null
+      error ? <ErrorMessage error={error} /> : null
     }
     { 
       submitFailed && !error ? (

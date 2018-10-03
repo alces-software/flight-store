@@ -5,10 +5,10 @@ import { CardTitle, CardSubtitle } from 'reactstrap';
 import CostCircle from './CostCircle';
 import FeatureList from './FeatureList';
 import LearnMoreLink from './LearnMoreLink';
-import ShowCheckoutFormButton from './ShowCheckoutFormButton';
 import { ProductCard, ProductHead, ProductBody, productHeadHeight } from './ProductCard';
 
 const ProductFeatureCard = ({
+  ShowCheckoutFormButton,
   cost,
   features,
   id,
@@ -44,6 +44,7 @@ const ProductFeatureCard = ({
 );
 
 ProductFeatureCard.propTypes = {
+  ShowCheckoutFormButton: PropTypes.func.isRequired,
   cost: PropTypes.shape({
     unit: PropTypes.string.isRequired,
     amount: PropTypes.number.isRequired,

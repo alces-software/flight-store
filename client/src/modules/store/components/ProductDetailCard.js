@@ -6,9 +6,9 @@ import { ProductCard, ProductHead, ProductBody, productHeadHeight } from './Prod
 import RenderMarkdown from '../../../components/RenderMarkdown';
 
 import CostCircle from './CostCircle';
-import ShowCheckoutFormButton from './ShowCheckoutFormButton';
 
 const ProductDetailCard = ({
+  ShowCheckoutFormButton,
   details,
   head,
   id,
@@ -44,6 +44,7 @@ const ProductDetailCard = ({
 );
 
 ProductDetailCard.propTypes = {
+  ShowCheckoutFormButton: PropTypes.func.isRequired,
   cost: PropTypes.shape({
     unit: PropTypes.string.isRequired,
     amount: PropTypes.number.isRequired,

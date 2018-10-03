@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const CheckoutErrorMessage = ({ error }) => {
+const ErrorMessage = ({ error }) => {
   switch (error.type) {
     case 'card_error':
       return (
@@ -21,11 +21,11 @@ const CheckoutErrorMessage = ({ error }) => {
   }
 };
 
-CheckoutErrorMessage.propTypes = {
+ErrorMessage.propTypes = {
   error: PropTypes.shape({
     message: PropTypes.string,
     type: PropTypes.string.isRequired,
   }).isRequired,
 };
 
-export default CheckoutErrorMessage;
+export default ErrorMessage;
