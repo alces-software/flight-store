@@ -5,16 +5,18 @@ function namedStore(state, storeName) {
   return stores[storeName];
 }
 
-function getStoreDataProp(state, storeName, prop) {
+function getStoreMetaProp(state, storeName, prop) {
   const store = namedStore(state, storeName);
   if (store == null) { return store; }
-  return store.data[prop];
+  return store.meta[prop];
 }
 
 export function filename(state, props) {
-  return getStoreDataProp(state, props.storeName, 'filename');
+  return getStoreMetaProp(state, props.storeName, 'filename');
 }
 
 export function content(state, props) {
-  return getStoreDataProp(state, props.storeName, 'content');
+  const store = namedStore(state, props.storeName);
+  if (store == null) { return store; }
+  return store.content;
 }

@@ -22,14 +22,14 @@ const initialState = {
 };
 
 
-function urlReducer(state, { payload, type }) {
+function filenameReducer(state=null, { payload, type }) {
   if (type !== actionTypes.LOADING) { return state; }
+  return payload.filename;
+}
 
-  return {
-    ...state,
-    filename: payload.filename,
-    url: payload.url,
-  };
+function urlReducer(state=null, { payload, type }) {
+  if (type !== actionTypes.LOADING) { return state; }
+  return payload.url;
 }
 
 function contentReducer(state = initialState, { payload, type }) {
@@ -52,21 +52,18 @@ function contentReducer(state = initialState, { payload, type }) {
   }
 }
 
-const dataReducer = reduceReducers(
-  urlReducer,
-  contentReducer,
-);
-
 const metaReducers = combineReducers({
   [loadingStates.constants.NAME]: loadingStates.reducer({
     pending: actionTypes.LOADING,
     resolved: actionTypes.LOADED,
     rejected: actionTypes.FAILED,
   }),
+  url: urlReducer,
+  filename: filenameReducer,
 });
 
 const storeReducer = combineReducers({
-  data: dataReducer,
+  content: contentReducer,
   meta: metaReducers,
 });
 
