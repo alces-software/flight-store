@@ -29,17 +29,7 @@ const CheckoutModal = ({
   submitSucceeded,
 }) => (
   <StandardModal
-    buttons={
-      submitSucceeded ? null : (
-        <PurchaseButton
-          onClick={(...args) => {
-            const form = this.formWrapper
-              .getWrappedInstance()
-              .getWrappedInstance();
-            form.handleSubmit(...args);
-          }}
-        />
-      )}
+    buttons={submitSucceeded ? null : <PurchaseButton />}
     isOpen={isOpen}
     size="lg"
     title={`Purchase ${product == null ? null : product.name}`}
@@ -48,10 +38,7 @@ const CheckoutModal = ({
     {
       submitSucceeded ? <SuccessMessage product={product} /> : (
         <Elements>
-          <Form
-            product={product}
-            ref={(el) => { this.formWrapper = el; }}
-          />
+          <Form product={product} />
         </Elements>
       )
     }
@@ -68,8 +55,8 @@ CheckoutModal.propTypes = {
 const enhance = compose(
   connect(
     createStructuredSelector({
-      product: selectors.modal.product,
       isOpen: selectors.modal.isModalOpen,
+      product: selectors.modal.product,
       submitSucceeded: selectors.submitSucceeded,
     }),
     {
