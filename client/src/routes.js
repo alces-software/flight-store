@@ -42,23 +42,29 @@ const routes = [
     routes: [
       ...metaPageRouteConfigs,
       {
-        path: '/store',
-        exact: true,
-        component: store.pages.Store,
-        title: 'Store',
-      },
-      {
-        path: '/products/:productType',
-        exact: true,
-        extraProps: {
-          CheckoutModal: checkout.CheckoutModal,
-          ShowCheckoutFormButton: checkout.ShowCheckoutFormButton,
-        },
-        component: store.pages.Products,
-        title: 'Products',
-        pageKey: productTypeDef => (
-          productTypeDef == null ? null : `/products/${productTypeDef.type}`
-        ),
+        component: store.Context,
+        path: '/',
+        routes: [
+          {
+            path: '/store',
+            exact: true,
+            component: store.pages.Store,
+            title: 'Store',
+          },
+          {
+            path: '/products/:productType',
+            exact: true,
+            extraProps: {
+              CheckoutModal: checkout.CheckoutModal,
+              ShowCheckoutFormButton: checkout.ShowCheckoutFormButton,
+            },
+            component: store.pages.Products,
+            title: 'Products',
+            pageKey: productTypeDef => (
+              productTypeDef == null ? null : `/products/${productTypeDef.type}`
+            ),
+          },
+        ],
       },
       {
         path: '/',
