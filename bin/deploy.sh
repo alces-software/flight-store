@@ -4,10 +4,23 @@ set -euo pipefail
 
 main() {
     parse_arguments "$@"
+    abort_if_monorepo_part_not_set
+    set_remote
     header "Checking repo is clean"
     abort_if_uncommitted_changes_present
     header "Deploying ${COMMIT_ISH} to ${REMOTE}"
     deploy
+}
+
+abort_if_monorepo_part_not_set() {
+    if [ -z "$MONOREPO_PART" ]; then
+        echo "$0: mandatory option --monorepo-part not provided"
+        exit 3
+    fi
+}
+
+set_remote() {
+    REMOTE="${MONOREPO_PART}${REMOTE_SUFFIX}"
 }
 
 abort_if_uncommitted_changes_present() {
@@ -44,8 +57,10 @@ usage() {
     echo -e "      --help\t\tShow this help message"
 }
 
-REMOTE=dokku-staging
+REMOTE=
 COMMIT_ISH=HEAD
+MONOREPO_PART=
+REMOTE_SUFFIX=-staging
 
 parse_arguments() {
     while [[ $# > 0 ]] ; do
@@ -53,12 +68,18 @@ parse_arguments() {
 
         case $key in
             --production)
-                REMOTE=dokku
+                REMOTE_SUFFIX=
                 shift
                 ;;
 
             --test)
-                REMOTE=dokku-test
+                REMOTE_SUFFIX=-test
+                shift
+                ;;
+
+            --monorepo-part)
+                MONOREPO_PART="$2"
+                shift
                 shift
                 ;;
 
