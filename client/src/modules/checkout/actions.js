@@ -2,8 +2,9 @@ import { SubmissionError } from 'redux-form';
 
 import { buildModalActions } from '../../utils/modals';
 
-import * as selectors from './selectors';
 import * as actionTypes from './actionTypes';
+import * as selectors from './selectors';
+import { API_BASE_URL } from './constants';
 
 export const modal = buildModalActions(
   selectors.modal,
@@ -12,8 +13,8 @@ export const modal = buildModalActions(
 );
 
 const urls = {
-  charge: "http://localhost:4008/charges",
-  subscription: "http://localhost:4008/subscriptions",
+  charge: `${API_BASE_URL}/charges`,
+  subscription: `${API_BASE_URL}/subscriptions`,
 };
 
 export function purchase(values, props) {
