@@ -55,12 +55,7 @@ const storeReducer = combineReducers({
 });
 
 export default function reducer(state={}, action) {
-  if (action.type === actionTypes.REGISTER_STORE_NAME) {
-    return {
-      ...state,
-      [action.meta.storeName]: storeReducer(undefined, action),
-    };
-  } else if (Object.values(actionTypes).includes(action.type)) {
+  if (Object.values(actionTypes).includes(action.type)) {
     const storeName = action.meta.storeName;
     return {
       ...state,
