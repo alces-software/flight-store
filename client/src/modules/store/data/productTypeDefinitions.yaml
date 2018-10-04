@@ -1,0 +1,42 @@
+- type: clusterPacks
+  name: Cluster packs
+  title: HPC cluster pack
+  subtitle: Fully managed Alces Flight HPC cluster with Flight Center support
+  description: |
+    An Alces Flight HPC cluster built by our experienced engineering team in
+    a Virtual Private Cluster (VPC) environment for security, with SSH and
+    graphical-desktop connectivity for users.  Data management tools for POSIX
+    and S3 object storage are also included to help users transfer files and
+    manage storage resources.
+    
+    The cluster will be fully managed by Alces using the [Alces Flight
+    Center](https://center.alces-flight.com) service.  Where you will be able
+    to view the dozens of daily checks our engineering team will perform to
+    ensure the health of your cluster request support and advice and access
+    the comprehensive support logs for your cluster.
+  icon: server
+  productsPage:
+    title: Choose a cluster pack.
+    overview: |
+      Ready to get going? Choose a cluster pack, enter your credit card
+      details and request your fully managed Alces Flight HPC cluster.
+
+- type: creditPacks
+  name: Support credits
+  title: Flight Center support credits
+  subtitle: Support credits for use with Alces Flight Center
+  description: |
+    The support credits can be allocated to any of your HPC clusters managed
+    through [Alces Flight Center](https://center.alces-flight.com).  You will
+    be able to view the dozens of daily checks our engineering team will
+    perform to ensure the health of your cluster request support and advice
+    and access the comprehensive support logs for your cluster.
+    
+    The support credits can be used to request additional support for your HPC
+    cluster.
+  icon: ticket
+  productsPage:
+    title: Choose a credit pack.
+    overview: |
+      Ready to get going? Choose a Flight Center credit pack and enter your
+      credit card details.
