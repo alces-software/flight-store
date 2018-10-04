@@ -7,6 +7,7 @@ import {
   DEFAULT_PRODUCTS_FILE,
   DEFAULT_PRODUCTS_URL,
   PRODUCTS_URL_PREFIX,
+  S3_STORE_NAME,
 } from './constants';
 
 export const detailModal = buildModalActions(
@@ -26,6 +27,24 @@ const defaults = {
   prefix: PRODUCTS_URL_PREFIX,
 };
 
-export function loadProducts(fileOverride) {
-  return s3Store.actions.loadFile('products', fileOverride, defaults, devProducts);
+export function loadProducts(filenameOverride) {
+  return (dispatch, getState) => {
+    const filename = s3Store.actions.determineFilenameOverride(
+      filenameOverride,
+      getState,
+      S3_STORE_NAME,
+    );
+    const { initiated, rejected } = selectors.retrieval(
+      getState(),
+      { filename }
+    );
+    if (!initiated || rejected) {
+      return dispatch(s3Store.actions.loadFile(
+        S3_STORE_NAME,
+        filenameOverride,
+        defaults,
+        devProducts
+      ));
+    }
+  };
 }

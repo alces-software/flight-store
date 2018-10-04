@@ -9,8 +9,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 import { Container, Row, Col } from 'reactstrap';
-import { PageHeading } from 'flight-reactware';
-import { compose } from 'recompose';
+import { DelaySpinner, PageHeading } from 'flight-reactware';
+import { branch, compose, renderComponent } from 'recompose';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -70,7 +70,13 @@ const enhance = compose(
   connect(createStructuredSelector({
     productTypeDef: selectors.productTypeDef,
     products: selectors.products,
+    retrieval: selectors.retrieval,
   })),
+
+  branch(
+    ({ retrieval }) => !retrieval.initiated || retrieval.pending,
+    renderComponent(() => <DelaySpinner size="large" />),
+  ),
 );
 
 export default enhance(ProductsPage);

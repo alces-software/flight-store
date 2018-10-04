@@ -1,29 +1,54 @@
+import { createSelector } from 'reselect';
+
 import { buildModalSelectors } from '../../utils/modals';
+import s3Store from '../s3Store';
 
-import clusterPacks from './data/packs';
-import creditPacks from './data/credits';
-import productTypeDefs from './data/productTypeDefinitions';
-import { NAME } from './constants';
-
-const productsByType = {
-  clusterPack: clusterPacks,
-  creditPack: creditPacks,
-};
+import { NAME, S3_STORE_NAME } from './constants';
 
 export const detailModal = buildModalSelectors(NAME, 'detail');
 
-function productType(state, params) {
-  return params.match && params.match.params.productType;
+function withStoreName(props) {
+  return { ...props, storeName: S3_STORE_NAME };
 }
 
-export function productTypeDef(state, params) {
-  const type = productType(state, params);
-  if (type == null) { return null; }
-  return productTypeDefs.find(t => t.type === type);
+function productType(state, props) {
+  return props.match && props.match.params.productType;
 }
 
-export function products(state, params) {
-  const type = productType(state, params);
-  if (type == null) { return null; }
-  return productsByType[type];
+function s3StoreContents(state, props) {
+  return s3Store.selectors.content(state, withStoreName(props));
+}
+
+export const productTypeDefs = createSelector(
+  s3StoreContents,
+
+  (contents) => contents == null ? contents : contents.productTypeDefinitions,
+);
+
+export const productTypeDef = createSelector(
+  s3StoreContents,
+  productType,
+
+  (contents, type) => {
+    if (contents == null || type == null) { return null; }
+    return contents.productTypeDefinitions.find(t => t.type === type);
+  }
+);
+
+export const products = createSelector(
+  s3StoreContents,
+  productType,
+
+  (contents, type) => {
+    if (contents == null || type == null) { return null; }
+    return contents[type];
+  },
+);
+
+export function retrieval(state, props) {
+  const filename = s3Store.selectors.filename(state, withStoreName(props));
+  return s3Store.selectors.retrieval(state, {
+    ...withStoreName(props),
+    filename,
+  });
 }

@@ -28,6 +28,9 @@ function useDevContent(devContent, storeName) {
         filename: 'dev',
       },
       meta: {
+        loadingState: {
+          key: 'dev',
+        },
         storeName,
       },
     });
@@ -36,6 +39,9 @@ function useDevContent(devContent, storeName) {
         type: actionTypes.LOADED,
         payload: devContent,
         meta: {
+          loadingState: {
+            key: 'dev',
+          },
           storeName,
         },
       }),
@@ -50,7 +56,7 @@ function loading(config, storeName) {
     payload: config,
     meta: {
       loadingState: {
-        key: config.url,
+        key: config.filename,
       },
       storeName,
     }
@@ -63,7 +69,7 @@ function loaded(contents, config, storeName) {
     payload: contents,
     meta: {
       loadingState: {
-        key: config.url,
+        key: config.filename,
       },
       storeName,
     }
@@ -79,7 +85,7 @@ function failedToLoad(error, config, storeName) {
     },
     meta: {
       loadingState: {
-        key: config.url,
+        key: config.filename,
       },
       storeName,
     }
@@ -97,7 +103,7 @@ function fetchFile(config) {
     });
 }
 
-function determineFilenameOverride(filenameOverride, getState, storeName) {
+export function determineFilenameOverride(filenameOverride, getState, storeName) {
   // If the redux store contains a filename override we continue to use
   // it.  Otherwise, we can end up showing inconsistent objects when
   // navigating between tabs.
