@@ -3081,9 +3081,9 @@ flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
 
-"flight-reactware@https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.1.56/flight-reactware.tgz":
-  version "0.1.56"
-  resolved "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.1.56/flight-reactware.tgz#a37f6096633ecf54ea561dfdc8308290966470d7"
+"flight-reactware@https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.1.58/flight-reactware.tgz":
+  version "0.1.58"
+  resolved "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.1.58/flight-reactware.tgz#52d8d0fe7c52e645e8d62a3a0618668510d1bf42"
   dependencies:
     array-includes "^3.0.3"
     axios "^0.16.2"
@@ -6248,7 +6248,7 @@ query-string@^4.1.0:
 
 query-string@^5.0.0:
   version "5.1.1"
-  resolved "https://registry.yarnpkg.com/query-string/-/query-string-5.1.1.tgz#a78c012b71c17e05f2e3fa2319dd330682efb3cb"
+  resolved "http://registry.npmjs.org/query-string/-/query-string-5.1.1.tgz#a78c012b71c17e05f2e3fa2319dd330682efb3cb"
   dependencies:
     decode-uri-component "^0.2.0"
     object-assign "^4.1.0"
@@ -6597,13 +6597,13 @@ react-transition-group@^2.2.0:
     react-lifecycles-compat "^3.0.4"
 
 react@>=0.13.0, "react@^15.6.2 || ^16.0":
-  version "16.5.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.5.0.tgz#f2c1e754bf9751a549d9c6d9aca41905beb56575"
+  version "16.5.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.5.2.tgz#19f6b444ed139baa45609eee6dc3d318b3895d42"
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
-    schedule "^0.3.0"
+    schedule "^0.5.0"
 
 react@^15.5.4:
   version "15.6.2"
@@ -7138,9 +7138,9 @@ sax@^1.2.1, sax@^1.2.4, sax@~1.2.1:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
-schedule@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/schedule/-/schedule-0.3.0.tgz#1be2ab2fc2e768536269ce7326efb478d6c045e8"
+schedule@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/schedule/-/schedule-0.5.0.tgz#c128fffa0b402488b08b55ae74bb9df55cc29cc8"
   dependencies:
     object-assign "^4.1.1"
 
