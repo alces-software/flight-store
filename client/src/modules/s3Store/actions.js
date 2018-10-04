@@ -20,7 +20,7 @@ function buildConfig(filenameOverride, { defaultFilename, defaultUrl, prefix }) 
   };
 }
 
-function setDevFile(devContent, storeName) {
+function useDevContent(devContent, storeName) {
   return (dispatch) => {
     dispatch({
       type: actionTypes.LOADING,
@@ -34,9 +34,7 @@ function setDevFile(devContent, storeName) {
     setTimeout(
       () => dispatch({
         type: actionTypes.LOADED,
-        payload: {
-          content: devContent,
-        },
+        payload: devContent,
         meta: {
           storeName,
         },
@@ -62,9 +60,7 @@ function loading(config, storeName) {
 function loaded(contents, config, storeName) {
   return {
     type: actionTypes.LOADED,
-    payload: {
-      contents,
-    },
+    payload: contents,
     meta: {
       loadingState: {
         key: config.url,
@@ -117,7 +113,7 @@ export function loadFile(storeName, filenameOverride, defaults, devContent) {
     dispatch(registerStoreName(storeName));
     filenameOverride = determineFilenameOverride(filenameOverride, getState, storeName);
     if (process.env.NODE_ENV === 'development' && filenameOverride === 'dev') {
-      return setDevFile(devContent, storeName);
+      dispatch(useDevContent(devContent, storeName));
     } else {
       const config = buildConfig(filenameOverride, defaults);
 

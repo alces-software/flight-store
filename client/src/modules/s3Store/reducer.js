@@ -15,13 +15,6 @@ export function reduceReducers(...reducers) {
   );
 }
 
-const initialState = {
-  filename: undefined,
-  content: undefined,
-  url: undefined,
-};
-
-
 function filenameReducer(state=null, { payload, type }) {
   if (type !== actionTypes.LOADING) { return state; }
   return payload.filename;
@@ -29,23 +22,17 @@ function filenameReducer(state=null, { payload, type }) {
 
 function urlReducer(state=null, { payload, type }) {
   if (type !== actionTypes.LOADING) { return state; }
-  return payload.url;
+  return payload.url === undefined ? null : payload.url;
 }
 
-function contentReducer(state = initialState, { payload, type }) {
+function contentReducer(state=null, { payload, type }) {
   switch (type) {
 
     case actionTypes.LOADED:
-      return {
-        ...state,
-        content: payload.content,
-      };
+      return payload;
 
     case actionTypes.FAILED:
-      return {
-        ...state,
-        content: undefined,
-      };
+      return null;
 
     default:
       return state;
