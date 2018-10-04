@@ -29,8 +29,9 @@ const defaults = {
 
 export function loadProducts(filenameOverride) {
   return (dispatch, getState) => {
-    const filename = s3Store.actions.determineFilenameOverride(
+    const { filename } = s3Store.actions.buildConfig(
       filenameOverride,
+      defaults,
       getState,
       S3_STORE_NAME,
     );

@@ -10,7 +10,9 @@ function registerStoreName(storeName) {
   };
 }
 
-function buildConfig(filenameOverride, { defaultFilename, defaultUrl, prefix }) {
+export function buildConfig(filenameOverride, defaults, getState, storeName) {
+  const { defaultFilename, defaultUrl, prefix } = defaults;
+  filenameOverride = determineFilenameOverride(filenameOverride, getState, storeName);
   if (filenameOverride != null && !filenameOverride.endsWith('.json')) {
     filenameOverride = `${filenameOverride}.json`;
   }
@@ -103,7 +105,7 @@ function fetchFile(config) {
     });
 }
 
-export function determineFilenameOverride(filenameOverride, getState, storeName) {
+function determineFilenameOverride(filenameOverride, getState, storeName) {
   // If the redux store contains a filename override we continue to use
   // it.  Otherwise, we can end up showing inconsistent objects when
   // navigating between tabs.
@@ -117,12 +119,10 @@ export function determineFilenameOverride(filenameOverride, getState, storeName)
 export function loadFile(storeName, filenameOverride, defaults, devContent) {
   return (dispatch, getState) => {
     dispatch(registerStoreName(storeName));
-    filenameOverride = determineFilenameOverride(filenameOverride, getState, storeName);
-    if (process.env.NODE_ENV === 'development' && filenameOverride === 'dev') {
+    const config = buildConfig(filenameOverride, defaults, getState, storeName);
+    if (process.env.NODE_ENV === 'development' && config.filename === 'dev') {
       dispatch(useDevContent(devContent, storeName));
     } else {
-      const config = buildConfig(filenameOverride, defaults);
-
       dispatch(loading(config, storeName));
       fetchFile(config)
         .then(contents => dispatch(loaded(contents, config, storeName)))
