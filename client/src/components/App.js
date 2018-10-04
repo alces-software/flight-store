@@ -70,6 +70,7 @@ const productName = process.env.REACT_APP_PRODUCT_NAME;
 
 const propTypes = {
   location: PropTypes.object,
+  match: PropTypes.object.isRequired,
   matchedRouteConfig: PropTypes.object.isRequired,
   productTypeDef: PropTypes.object,
   route: PropTypes.object,
@@ -93,7 +94,7 @@ const withMatchFix = withProps(({ branch }) => {
 });
 
 
-const App = ({ location, matchedRouteConfig, productTypeDef, route }) => {
+const App = ({ location, match, matchedRouteConfig, productTypeDef, route }) => {
   const pageKey = isFunction(matchedRouteConfig.pageKey) ?
     matchedRouteConfig.pageKey(productTypeDef) :
     matchedRouteConfig.pageKey;
@@ -101,8 +102,8 @@ const App = ({ location, matchedRouteConfig, productTypeDef, route }) => {
     matchedRouteConfig.title(productTypeDef) :
     matchedRouteConfig.title;
   const extraProps = matchedRouteConfig.extraProps ?
-    matchedRouteConfig.extraProps :
-    {};
+    { ...matchedRouteConfig.extraProps, match } :
+    { match };
 
   return (
     <ScrollToTop>

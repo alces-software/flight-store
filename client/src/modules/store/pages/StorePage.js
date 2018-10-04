@@ -5,22 +5,25 @@
  *
  * All rights reserved, see LICENSE.txt.
  *===========================================================================*/
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 import { Container, Col } from 'reactstrap';
-import { compose } from 'recompose';
-import { PageHeading } from 'flight-reactware';
+import { DelaySpinner, PageHeading } from 'flight-reactware';
+import { branch, compose, renderComponent } from 'recompose';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import EqualHeightRow from '../../../components/EqualHeightRow';
 
 import ProductTypeCard from '../components/ProductTypeCard';
-import productTypeDefs from '../data/productTypeDefinitions';
+import * as selectors from '../selectors';
 
 const ProductContainer = styled(Container)`
   padding: 0 30px 15px 30px;
 `;
 
-const StorePage = () => {
+const StorePage = ({ productTypeDefs }) => {
   return (
     <ProductContainer fluid >
       <PageHeading
@@ -45,9 +48,19 @@ const StorePage = () => {
 };
 
 StorePage.propTypes = {
+  productTypeDefs: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const enhance = compose(
+  connect(createStructuredSelector({
+    productTypeDefs: selectors.productTypeDefs,
+    retrieval: selectors.retrieval,
+  })),
+
+  branch(
+    ({ retrieval }) => !retrieval.initiated || retrieval.pending,
+    renderComponent(() => <DelaySpinner size="large" />),
+  ),
 );
 
 export default enhance(StorePage);

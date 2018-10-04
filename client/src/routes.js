@@ -18,16 +18,17 @@ const notFoundRouteConfig = {
 };
 
 const redirects = {
+  '/': '/store',
 };
 const redirectRoutes = Object.keys(redirects).map((k) => {
   const target = redirects[k];
   return {
     path: k,
-    exact: false,
+    exact: true,
     component: ({ location }) => ( // eslint-disable-line react/prop-types
       <Redirect
         to={{
-          pathname: target(location),
+          pathname: target,
           search: location.search,
         }}
       />
@@ -42,29 +43,35 @@ const routes = [
     routes: [
       ...metaPageRouteConfigs,
       {
-        path: '/store',
-        exact: true,
-        component: store.pages.Store,
-        title: 'Store',
-      },
-      {
-        path: '/products/:productType',
-        exact: true,
-        extraProps: {
-          CheckoutModal: checkout.CheckoutModal,
-          ShowCheckoutFormButton: checkout.ShowCheckoutFormButton,
-        },
-        component: store.pages.Products,
-        title: 'Products',
-        pageKey: productTypeDef => (
-          productTypeDef == null ? null : `/products/${productTypeDef.type}`
-        ),
-      },
-      {
-        path: '/',
+        path: '/overview',
         exact: true,
         component: Home,
         title: 'Overview',
+      },
+      {
+        component: store.Context,
+        path: '/',
+        routes: [
+          {
+            path: '/store',
+            exact: true,
+            component: store.pages.Store,
+            title: 'Store',
+          },
+          {
+            path: '/products/:productType',
+            exact: true,
+            extraProps: {
+              CheckoutModal: checkout.CheckoutModal,
+              ShowCheckoutFormButton: checkout.ShowCheckoutFormButton,
+            },
+            component: store.pages.Products,
+            title: 'Products',
+            pageKey: productTypeDef => (
+              productTypeDef == null ? null : `/products/${productTypeDef.type}`
+            ),
+          },
+        ],
       },
       notFoundRouteConfig,
     ],

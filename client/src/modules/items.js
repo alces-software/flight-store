@@ -7,7 +7,7 @@ const currentSite = process.env.REACT_APP_SITE;
 
 export default function(productTypeDef) {
   const items = [
-    makeItem('Overview', 'home', makeLink(currentSite, '/')),
+    makeItem('Overview', 'home', makeLink(currentSite, '/overview')),
     makeItem('Store', 'briefcase', makeLink(currentSite, '/store')),
   ];
   if (productTypeDef) {

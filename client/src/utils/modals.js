@@ -1,13 +1,7 @@
 import { createSelector } from 'reselect';
 import { modals } from 'flight-reactware';
 
-import clusterPacks from '../modules/store/data/packs';
-import creditPacks from '../modules/store/data/credits';
-
-const productsByType = {
-  clusterPack: clusterPacks,
-  creditPack: creditPacks,
-};
+import s3Store from '../modules/s3Store';
 
 export function buildModalSelectors(...namespace) {
   const dataSelector = modals.createModalDataSelector(...namespace, 'modal');
@@ -30,7 +24,14 @@ export function buildModalSelectors(...namespace) {
     product: createSelector(
       selectedProductId,
       selectedProductType,
-      (id, type) => (id == null || type == null) ? undefined : productsByType[type][id]
+      (state, params) => s3Store.selectors.content(
+        state,
+        { ...params, storeName: 'products' }
+      ),
+
+      (id, type, productsByType) => (
+        (id == null || type == null) ? undefined : productsByType[type][id]
+      ),
     ),
 
     productId: selectedProductId,
