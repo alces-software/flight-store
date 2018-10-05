@@ -53,8 +53,9 @@ usage() {
     echo
     echo -e "      If <commit-sh> is not given use HEAD"
     echo
-    echo -e "      --production\t\tDeploy to the production environment"
-    echo -e "      --help\t\tShow this help message"
+    echo -e "      --production\t\t\tDeploy to the production environment"
+    echo -e "      --monorepo-part [client|server]\tWhich app to deploy from this monorepo"
+    echo -e "      --help\t\t\t\tShow this help message"
 }
 
 REMOTE=
