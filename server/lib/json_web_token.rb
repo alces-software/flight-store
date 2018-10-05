@@ -17,7 +17,7 @@ class JsonWebToken
     payload['exp'] = expiration.to_i
     JWT.encode(
       payload,
-      Rails.application.credentials.json_web_token_secret,
+      ENV['JSON_WEB_TOKEN_SECRET'] || Rails.application.credentials.json_web_token_secret,
       'HS256'
     )
   end
@@ -25,7 +25,7 @@ class JsonWebToken
   def self.decode(token)
     JWT.decode(
       token,
-      Rails.application.credentials.json_web_token_secret,
+      ENV['JSON_WEB_TOKEN_SECRET'] || Rails.application.credentials.json_web_token_secret,
       true,
       { algorithm: 'HS256' }
     ).first
@@ -35,6 +35,7 @@ class JsonWebToken
     decode(token)
     true
   rescue JWT::DecodeError
+::STDERR.puts "=== $!: #{($!).inspect rescue $!.message}"
     false
   end
 end
