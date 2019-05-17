@@ -40,4 +40,6 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  config.sso_cookie_name = ENV.fetch('SSO_COOKIE_NAME', 'flight_sso_test')
 end
