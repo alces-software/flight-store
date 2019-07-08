@@ -38,8 +38,8 @@ export function purchase(values, props) {
         },
         body: JSON.stringify({
           token: token.id,
-          product_file: store.selectors.filename(getState()),
-          product_name: product.title,
+          product_file: store.selectors.filename(getState()), // eslint-disable-line camelcase
+          product_identifier: product.identifier, // eslint-disable-line camelcase
           product: product,
         }),
       });

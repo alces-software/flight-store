@@ -2,6 +2,7 @@
   subtitle: Entry-level Alces Flight Center credit pack
   name: Bronze entry-level Alces Flight Center credit pack
   type: creditPacks
+  identifier: bronze-credit-pack
   cost:
     unit: £
     amount: 1200
@@ -29,13 +30,15 @@
     currency: gbp
     description: Alces Flight credit pack (Bronze)
     type: charge
-  center:
-    credits: 5
+  action:
+    identifier: deposit_credits
+    amount: 5
 
 - title: Silver
   subtitle: Standard Alces Flight Center credit pack
   name: Silver standard-level Alces Flight Center credit pack
   type: creditPacks
+  identifier: silver-credit-pack
   cost:
     unit: £
     amount: 2300
@@ -63,13 +66,15 @@
     currency: gbp
     description: Alces Flight credit pack (Silver)
     type: charge
-  center:
-    credits: 10
+  action:
+    identifier: deposit_credits
+    amount: 10
 
 - title: Gold
   subtitle: Professional Alces Flight Center credit pack
   name: Gold professional Alces Flight Center credit pack
   type: creditPacks
+  identifier: gold-credit-pack
   cost:
     unit: £
     amount: 3400
@@ -97,6 +102,7 @@
     currency: gbp
     description: Alces Flight credit pack (Gold)
     type: charge
-  center:
-    credits: 15
+  action:
+    identifier: deposit_credits
+    amount: 15
 
