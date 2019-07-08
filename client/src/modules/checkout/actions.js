@@ -41,7 +41,9 @@ export function purchase(values, props) {
         }),
       });
 
-      if (response.ok) {
+      if (response.redirected) {
+        window.location = response.url;
+      } else if (response.ok) {
         return response;
       } else {
         const errors = await response.json();
