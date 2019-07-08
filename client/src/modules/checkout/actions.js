@@ -1,6 +1,7 @@
 import { SubmissionError } from 'redux-form';
 
 import { buildModalActions } from '../../utils/modals';
+import store from '../store';
 
 import * as actionTypes from './actionTypes';
 import * as selectors from './selectors';
@@ -18,7 +19,7 @@ const urls = {
 };
 
 export function purchase(values, props) {
-  return async () => {
+  return async (dispatch, getState) => {
     try {
       const { authToken, product, stripe } = props;
       const { token, error } = await stripe.createToken({
@@ -37,6 +38,8 @@ export function purchase(values, props) {
         },
         body: JSON.stringify({
           token: token.id,
+          product_file: store.selectors.filename(getState()),
+          product_name: product.title,
           product: product,
         }),
       });

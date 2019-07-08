@@ -19,6 +19,10 @@ function s3StoreContents(state, props) {
   return s3Store.selectors.content(state, withStoreName(props));
 }
 
+export function filename(state, props) {
+  return s3Store.selectors.filename(state, withStoreName(props));
+}
+
 export const productTypeDefs = createSelector(
   s3StoreContents,
 
@@ -46,9 +50,8 @@ export const products = createSelector(
 );
 
 export function retrieval(state, props) {
-  const filename = s3Store.selectors.filename(state, withStoreName(props));
   return s3Store.selectors.retrieval(state, {
     ...withStoreName(props),
-    filename,
+    filename: filename(state, props),
   });
 }
