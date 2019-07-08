@@ -54,7 +54,7 @@ usage() {
     echo -e "\t$(basename $0) --local-file ./my/products.json"
 }
 
-S3_PREFIX=s3://alces-flight/FlightStore/products/
+S3_PREFIX=s3://alces-flight/FlightStore/development-products/
 S3_FILE_NAME=default.json
 LOCAL_FILE="${REPO_ROOT}/client/src/modules/store/data/products.example.json"
 
@@ -72,6 +72,11 @@ parse_arguments() {
             --local-file)
                 LOCAL_FILE="$2"
                 shift
+                shift
+                ;;
+
+            --production)
+                S3_PREFIX=S3_PREFIX=s3://alces-flight/FlightStore/products/
                 shift
                 ;;
 
