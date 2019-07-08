@@ -1,84 +1,88 @@
 - title: Bronze
-  subtitle: Entry-level Alces Flight credit pack
-  name: Bronze entry-level Alces Flight credit pack
+  subtitle: Entry-level Alces Flight Center credit pack
+  name: Bronze entry-level Alces Flight Center credit pack
   type: creditPacks
   cost:
     unit: £
-    amount: 250
+    amount: 1200
   features:
     - tick: true
-      text: 10 Alces Flight credits
+      text: 5 Alces Flight Center credits
     - tick: true
       text: |
-        Allocate to any one of your clusters managed through
+        Allocate to your Flight Center site managed through
         [Alces Flight Center](https://center.alces-flight.com)
     - tick: false
       text: |
-        ~Split allocation between any of your clusters managed through
+        ~Split allocation between any of your organisations managed through
         [Alces Flight Center](https://center.alces-flight.com)~
     - tick: false
       text: |
         ~Launch new HPC clusters through
         [Alces Flight Launch](https://launch.alces-flight.com)~
   details: |
-    The Bronze Alces Flight credit pack allows you to...
+    The Bronze Alces Flight Center credit pack allows you to...
 
     Lorem ipsum...
   stripe:
-    amount: 25000
+    amount: 120000
     currency: gbp
     description: Alces Flight credit pack (Bronze)
     type: charge
+  center:
+    credits: 5
 
 - title: Silver
-  subtitle: Standard Alces Flight credit pack
-  name: Silver Standard-level Alces Flight credit pack
+  subtitle: Standard Alces Flight Center credit pack
+  name: Silver standard-level Alces Flight Center credit pack
   type: creditPacks
   cost:
     unit: £
-    amount: 500
+    amount: 2300
   features:
     - tick: true
       text: 10 Alces Flight credits
     - tick: true
       text: |
-        Allocate to any one of your clusters managed through
+        Allocate to your Flight Center site managed through
         [Alces Flight Center](https://center.alces-flight.com)
     - tick: true
       text: |
-        Split allocation between any of your clusters managed through
+        Split allocation between any of your organisations managed through
         [Alces Flight Center](https://center.alces-flight.com)
     - tick: false
       text: |
         ~Launch new HPC clusters through
         [Alces Flight Launch](https://launch.alces-flight.com)~
   details: |
-    The Silver Alces Flight credit pack allows you to...
+    The Silver Alces Flight Center credit pack allows you to...
 
     Lorem ipsum...
   stripe:
-    amount: 50000
+    amount: 230000
     currency: gbp
     description: Alces Flight credit pack (Silver)
     type: charge
+  center:
+    credits: 10
 
 - title: Gold
-  subtitle: Professional Alces Flight credit pack
-  name: Gold professional Alces Flight credit pack
+  subtitle: Professional Alces Flight Center credit pack
+  name: Gold professional Alces Flight Center credit pack
   type: creditPacks
   cost:
     unit: £
-    amount: 1000
+    amount: 3400
   features:
     - tick: true
-      text: 10 Alces Flight credits
+      text: 15 Alces Flight credits
     - tick: true
       text: |
-        Allocate to any one of your clusters managed through
+        Allocate to your Flight Center site managed through
         [Alces Flight Center](https://center.alces-flight.com)
     - tick: true
       text: |
-        Split allocation between any of your clusters managed through
+        Split allocation between any of your organisations managed through
         [Alces Flight Center](https://center.alces-flight.com)
     - tick: true
       text: |
@@ -89,8 +93,10 @@
 
     Lorem ipsum...
   stripe:
-    amount: 100000
+    amount: 340000
     currency: gbp
     description: Alces Flight credit pack (Gold)
     type: charge
+  center:
+    credits: 15
 
