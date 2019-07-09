@@ -3,7 +3,7 @@ import React from 'react';
 import { Button, CardSubtitle, CardText, CardTitle } from 'reactstrap';
 import { LinkContainer } from 'flight-reactware';
 
-import RenderMarkdown from '../../../components/RenderMarkdown';
+import utils from '../../../modules/utils';
 
 import IconCircle from './IconCircle';
 import { ProductCard, ProductHead, ProductBody, productHeadHeight } from './ProductCard';
@@ -30,7 +30,7 @@ const ProductTypeCard = ({
     </ProductHead>
     <ProductBody>
       <CardText>
-        <RenderMarkdown value={description} />
+        <utils.RenderMarkdown value={description} />
       </CardText>
       <LinkContainer
         to={`/products/${type}`}

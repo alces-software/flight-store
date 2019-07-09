@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Theme } from 'flight-reactware';
 
-import RenderMarkdown from '../../../components/RenderMarkdown';
+import utils from '../../../modules/utils';
 
 const UL = styled.ul`
   & > li > div > p {
@@ -40,7 +40,7 @@ const FeatureList = ({ features }) => {
         massageFeatures(features).map((feature, idx) => (
           <li key={idx}>
             { feature.tick ? <Tick /> : <Cross /> }
-            <RenderMarkdown value={feature.text} />
+            <utils.RenderMarkdown value={feature.text} />
           </li>
         ))
       }

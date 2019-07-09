@@ -3,7 +3,7 @@ import React from 'react';
 import { CardSubtitle, CardText, CardTitle } from 'reactstrap';
 import { ProductCard, ProductHead, ProductBody, productHeadHeight } from './ProductCard';
 
-import RenderMarkdown from '../../../components/RenderMarkdown';
+import utils from '../../../modules/utils';
 
 import CostCircle from './CostCircle';
 
@@ -33,7 +33,7 @@ const ProductDetailCard = ({
     </ProductHead>
     <ProductBody>
       <CardText>
-        <RenderMarkdown value={details} />
+        <utils.RenderMarkdown value={details} />
       </CardText>
       <ShowCheckoutFormButton
         id={id}

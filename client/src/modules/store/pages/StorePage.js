@@ -14,7 +14,7 @@ import { branch, compose, renderComponent } from 'recompose';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import EqualHeightRow from '../../../components/EqualHeightRow';
+import utils from '../../../modules/utils';
 
 import ProductTypeCard from '../components/ProductTypeCard';
 import * as selectors from '../selectors';
@@ -31,7 +31,7 @@ const StorePage = ({ productTypeDefs }) => {
         sections={[]}
         title="Choose a product category."
       />
-      <EqualHeightRow>
+      <utils.EqualHeightRow>
         {
           productTypeDefs.map((productTypeDef, idx) => (
             <Col key={productTypeDef.title}>
@@ -42,7 +42,7 @@ const StorePage = ({ productTypeDefs }) => {
             </Col>
           ))
         }
-      </EqualHeightRow>
+      </utils.EqualHeightRow>
     </ProductContainer>
   );
 };
