@@ -23,3 +23,28 @@ client/.env.production.local
 client/npm-debug.log*
 client/yarn-debug.log*
 client/yarn-error.log*
+
+
+# dependencies
+client-lib/node_modules
+
+# testing
+client-lib/coverage
+
+# production
+client-lib/build
+client-lib/bundle*.js
+
+# misc
+.DS_Store
+
+# Obsolete client library attempt
+client-lib/.env
+client-lib/.env.local
+client-lib/.env.development.local
+client-lib/.env.test.local
+client-lib/.env.production.local
+
+client-lib/npm-debug.log*
+client-lib/yarn-debug.log*
+client-lib/yarn-error.log*
