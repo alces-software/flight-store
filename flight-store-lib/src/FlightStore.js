@@ -8,7 +8,7 @@ import { StripeProvider } from 'react-stripe-elements';
 import createReducers from './reducers';
 import middleware from './middleware';
 import createLogics from './logics';
-import { checkout, store } from './modules';
+import { checkout, constants, store } from './modules';
 
 const cookies = new Cookies();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -27,20 +27,28 @@ createLogics(reduxStore);
 
 
 const FlightStore = ({
+  apiBaseUrl,
+  defaultProductsFile,
   productType,
+  productsUrlPrefix,
   stripeApiKey,
-}) => (
-  <Provider store={reduxStore}>
-    <StripeProvider apiKey={stripeApiKey || process.env.REACT_APP_STRIPE_API_KEY}>
-      <store.Context>
-        <store.pages.Products
-          CheckoutModal={checkout.CheckoutModal}
-          ShowCheckoutFormButton={checkout.ShowCheckoutFormButton}
-          productType={productType}
-        />
-      </store.Context>
-    </StripeProvider>
-  </Provider>
-);
+}) => {
+  reduxStore.dispatch(constants.actions.set('API_BASE_URL', apiBaseUrl));
+  reduxStore.dispatch(constants.actions.set('PRODUCTS_URL_PREFIX', productsUrlPrefix));
+  reduxStore.dispatch(constants.actions.set('DEFAULT_PRODUCTS_FILE', defaultProductsFile));
+  return (
+    <Provider store={reduxStore}>
+      <StripeProvider apiKey={stripeApiKey}>
+        <store.Context>
+          <store.pages.Products
+            CheckoutModal={checkout.CheckoutModal}
+            ShowCheckoutFormButton={checkout.ShowCheckoutFormButton}
+            productType={productType}
+          />
+        </store.Context>
+      </StripeProvider>
+    </Provider>
+  );
+};
 
 export default FlightStore;

@@ -1,11 +1,11 @@
 import { SubmissionError } from 'redux-form';
 
+import constants from '../constants';
 import store from '../store';
 import utils from '../utils';
 
 import * as actionTypes from './actionTypes';
 import * as selectors from './selectors';
-import { API_BASE_URL } from './constants';
 
 export const modal = utils.modals.buildModalActions(
   selectors.modal,
@@ -14,9 +14,14 @@ export const modal = utils.modals.buildModalActions(
 );
 
 const urls = {
-  charge: `${API_BASE_URL}/charges`,
-  subscription: `${API_BASE_URL}/subscriptions`,
+  charge: '/charges',
+  subscription: '/subscriptions',
 };
+
+function urlFor(type, getState) {
+  const apiBase = constants.selectors.get(getState(), { name: 'API_BASE_URL' });
+  return `${apiBase}${urls[type]}`;
+}
 
 export function purchase(values, props) {
   return async (dispatch, getState) => {
@@ -28,7 +33,7 @@ export function purchase(values, props) {
       if (error) {
         throw new SubmissionError({ _error: error });
       }
-      const url = urls[product.stripe.type];
+      const url = urlFor(product.stripe.type, getState);
       const response = await fetch(url, {
         credentials: 'include',
         method: "POST",

@@ -1,14 +1,10 @@
+import constants from '../constants';
 import s3Store from '../s3Store';
 import utils from '../utils';
 
 import * as actionTypes from './actionTypes';
 import * as selectors from './selectors';
-import {
-  DEFAULT_PRODUCTS_FILE,
-  DEFAULT_PRODUCTS_URL,
-  PRODUCTS_URL_PREFIX,
-  S3_STORE_NAME,
-} from './constants';
+import { S3_STORE_NAME, } from './constants';
 
 export const detailModal = utils.modals.buildModalActions(
   selectors.detailModal,
@@ -21,14 +17,27 @@ if (process.env.NODE_ENV === 'development') {
   devProducts = require('./data/products.example.json');
 }
 
-const defaults = {
-  defaultFilename: DEFAULT_PRODUCTS_FILE,
-  defaultUrl: DEFAULT_PRODUCTS_URL,
-  prefix: PRODUCTS_URL_PREFIX,
-};
+function buildDefaults(getState) {
+  const defaultFilename = constants.selectors.get(
+    getState(),
+    { name: 'DEFAULT_PRODUCTS_FILE' }
+  );
+  const prefix = constants.selectors.get(
+    getState(),
+    { name: 'PRODUCTS_URL_PREFIX' }
+  );
+  const defaultUrl = `${prefix}${defaultFilename}`;
+
+  return {
+    defaultFilename,
+    defaultUrl,
+    prefix,
+  };
+}
 
 export function loadProducts(filenameOverride) {
   return (dispatch, getState) => {
+    const defaults = buildDefaults(getState);
     const { filename } = s3Store.actions.buildConfig(
       filenameOverride,
       defaults,
