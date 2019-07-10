@@ -19,4 +19,7 @@ export default (store) => {
       logic(store.dispatch, store.getState);
     });
   });
+
+  // Dispatch an action to ensure that any logics are called on page load.
+  store.dispatch({ type: 'flight-store/INIT' });
 };
