@@ -27,7 +27,8 @@ module.exports = {
     umd: {
       global: 'FlightStore',
       externals: {
-        react: 'React'
+        react: 'React',
+        'react-dom': 'ReactDOM',
       }
     }
   },
