@@ -28,15 +28,29 @@ const ProductsPage = ({
   productTypeDef,
   products,
 }) => {
+  const pageHeading = productTypeDef.productsPage;
+  let showPageHeading = false;
+  if (
+    (pageHeading.title != null && pageHeading.title !== "") ||
+    (pageHeading.overview != null && pageHeading.overview !== "")
+  ) {
+    showPageHeading = true;
+  }
+
   return (
     <ProductContainer fluid >
       <ProductDetailModal ShowCheckoutFormButton={ShowCheckoutFormButton} />
       <CheckoutModal />
-      <PageHeading
-        overview={productTypeDef.productsPage.overview}
-        sections={[]}
-        title={productTypeDef.productsPage.title}
-      />
+      { showPageHeading ?
+          (
+            <PageHeading
+              overview={pageHeading.overview}
+              sections={[]}
+              title={pageHeading.title}
+            />
+          ) :
+          null
+      }
       <Row>
         {
           products.map((product, idx) => (

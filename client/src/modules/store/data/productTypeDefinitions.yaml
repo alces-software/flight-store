@@ -36,7 +36,5 @@
     cluster.
   icon: ticket
   productsPage:
-    title: Choose a credit pack.
-    overview: |
-      Ready to get going? Choose a Flight Center credit pack and enter your
-      credit card details.
+    title: ""
+    overview: ""
