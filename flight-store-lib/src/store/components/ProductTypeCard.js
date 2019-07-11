@@ -34,9 +34,7 @@ const ProductTypeCard = ({
       />
     </ProductHead>
     <ProductBody>
-      <CardText>
-        <utils.RenderMarkdown value={description} />
-      </CardText>
+      <utils.RenderMarkdown value={description} />
       <LinkContainer
         to={`/products/${type}`}
       >

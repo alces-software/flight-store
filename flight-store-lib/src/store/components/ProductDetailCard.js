@@ -32,9 +32,7 @@ const ProductDetailCard = ({
       />
     </ProductHead>
     <ProductBody>
-      <CardText>
-        <utils.RenderMarkdown value={details} />
-      </CardText>
+      <utils.RenderMarkdown value={details} />
       <ShowCheckoutFormButton
         id={id}
         type={type}
