@@ -1,12 +1,23 @@
-- title: Bronze
+-
+  # Used as the title on the product card.
+  title: Bronze
+  # Used as the subtitle on the product card.
   subtitle: Entry-level credit pack
+  # Used as the product name on the checkout form and email.  It should
+  # probably match the entry in `stripe.description`.
   name: Bronze entry-level Alces Flight Center credit pack
+  # The type of product.  This must match the filename.
   type: creditPacks
+  # An identifier that must be unique to all products of this type.
   identifier: bronze-credit-pack
+  # UI configuration for the "cost circle" and checkout form line entry.  Care
+  # should be taken to ensure that these values match there corresponding
+  # entries in `strip.*`.
   cost:
     unit: £
     amount: 1200
     includesVAT: false
+  # Optional feature list for the product card.
   features:
     - tick: true
       text: 5 Alces Flight Center credits
@@ -14,10 +25,13 @@
       text: |
         Allocate to your Flight Center site managed through
         [Alces Flight Center](https://center.alces-flight.com)
+  # Optional markdown for the product card.
   details: |
     The Bronze Alces Flight Center credit pack allows you to...
 
     Lorem ipsum...
+  # Optional. If learnMore is given, the product card will display a "Learn
+  # more" link.  Clicking it will display a modal containing this markdown.
   learnMore: |
     Even *more* details about this pack...
 
@@ -25,13 +39,26 @@
 
     Lorem ipsum...
 
+  # The configuration for stripe.
   stripe:
+    # The amount to charge in pence (or cents).  Care should be taken to
+    # ensure this and `cost.amount` match.
     amount: 120000
+    # The currency to use.  Care should be taken to ensure this and
+    # `cost.unit` match.
     currency: gbp
+    # Used as the description by Stripe.  It should probably match the entry
+    # in `name`.
     description: Alces Flight credit pack (Bronze)
+    # The type of Stripe payment to make.  Either `charge` or `subscription`.
     type: charge
+  # The action to take after a successful purchase.
   action:
+    # The identifier of the action.  Currently, only `deposit_credits` is
+    # supported.
     identifier: deposit_credits
+    # Additional data required by the action.  In this case the number of
+    # credits to deposit.
     amount: 5
 
 - title: Silver
