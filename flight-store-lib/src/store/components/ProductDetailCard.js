@@ -9,7 +9,7 @@ import CostCircle from './CostCircle';
 
 const ProductDetailCard = ({
   ShowCheckoutFormButton,
-  details,
+  learnMore,
   head,
   id,
   cost,
@@ -32,7 +32,7 @@ const ProductDetailCard = ({
       />
     </ProductHead>
     <ProductBody>
-      <utils.RenderMarkdown value={details} />
+      <utils.RenderMarkdown value={learnMore} />
       <ShowCheckoutFormButton
         id={id}
         type={type}
@@ -48,7 +48,7 @@ ProductDetailCard.propTypes = {
     amount: PropTypes.number.isRequired,
     per: PropTypes.string,
   }).isRequired,
-  details: PropTypes.string.isRequired,
+  learnMore: PropTypes.string.isRequired,
   head: PropTypes.node,
   id: PropTypes.number.isRequired,
   subtitle: PropTypes.node.isRequired,

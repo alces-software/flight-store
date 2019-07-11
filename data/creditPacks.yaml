@@ -14,18 +14,17 @@
       text: |
         Allocate to your Flight Center site managed through
         [Alces Flight Center](https://center.alces-flight.com)
-    - tick: false
-      text: |
-        ~Split allocation between any of your organisations managed through
-        [Alces Flight Center](https://center.alces-flight.com)~
-    - tick: false
-      text: |
-        ~Launch new HPC clusters through
-        [Alces Flight Launch](https://launch.alces-flight.com)~
   details: |
     The Bronze Alces Flight Center credit pack allows you to...
 
     Lorem ipsum...
+  learnMore: |
+    Even *more* details about this pack...
+
+    The Bronze Alces Flight Center credit pack allows you to...
+
+    Lorem ipsum...
+
   stripe:
     amount: 120000
     currency: gbp
@@ -51,14 +50,6 @@
       text: |
         Allocate to your Flight Center site managed through
         [Alces Flight Center](https://center.alces-flight.com)
-    - tick: true
-      text: |
-        Split allocation between any of your organisations managed through
-        [Alces Flight Center](https://center.alces-flight.com)
-    - tick: false
-      text: |
-        ~Launch new HPC clusters through
-        [Alces Flight Launch](https://launch.alces-flight.com)~
   details: |
     The Silver Alces Flight Center credit pack allows you to...
 
@@ -88,14 +79,6 @@
       text: |
         Allocate to your Flight Center site managed through
         [Alces Flight Center](https://center.alces-flight.com)
-    - tick: true
-      text: |
-        Split allocation between any of your organisations managed through
-        [Alces Flight Center](https://center.alces-flight.com)
-    - tick: true
-      text: |
-        Launch new HPC clusters through
-        [Alces Flight Launch](https://launch.alces-flight.com)
   details: |
     The Gold Alces Flight credit pack allows you to...
 

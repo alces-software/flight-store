@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { CardTitle, CardSubtitle } from 'reactstrap';
 
+import utils from '../../utils';
+
 import CostCircle from './CostCircle';
 import FeatureList from './FeatureList';
 import LearnMoreLink from './LearnMoreLink';
@@ -10,38 +12,56 @@ import { ProductCard, ProductHead, ProductBody, productHeadHeight } from './Prod
 const ProductFeatureCard = ({
   ShowCheckoutFormButton,
   cost,
+  details,
   features,
   id,
+  learnMore,
   subtitle,
   title,
   type,
-}) => (
-  <ProductCard>
-    <ProductHead>
-      <CardTitle tag="h3">
-        {title}
-      </CardTitle>
-      <CardSubtitle>
-        {subtitle}
-      </CardSubtitle>
-      <CostCircle
-        containerHeight={productHeadHeight}
-        cost={cost}
-      />
-    </ProductHead>
-    <ProductBody>
-      <FeatureList features={features} />
+}) => {
+
+  const featureList = features == null || features == "" ?
+    null :
+    <FeatureList features={features} />;
+  const renderedDetails = details == null || details == "" ?
+    null :
+    <utils.RenderMarkdown value={details} />;
+  const learnMoreLink = learnMore == null || learnMore == "" ?
+    null :
+    (
       <LearnMoreLink
         id={id}
         type={type}
       />
-      <ShowCheckoutFormButton
-        id={id}
-        type={type}
-      />
-    </ProductBody>
-  </ProductCard>
-);
+    );
+
+  return (
+    <ProductCard>
+      <ProductHead>
+        <CardTitle tag="h3">
+          {title}
+        </CardTitle>
+        <CardSubtitle>
+          {subtitle}
+        </CardSubtitle>
+        <CostCircle
+          containerHeight={productHeadHeight}
+          cost={cost}
+        />
+      </ProductHead>
+      <ProductBody>
+        {featureList}
+        {renderedDetails}
+        {learnMoreLink}
+        <ShowCheckoutFormButton
+          id={id}
+          type={type}
+        />
+      </ProductBody>
+    </ProductCard>
+  );
+};
 
 ProductFeatureCard.propTypes = {
   ShowCheckoutFormButton: PropTypes.func.isRequired,
@@ -50,8 +70,10 @@ ProductFeatureCard.propTypes = {
     amount: PropTypes.number.isRequired,
     per: PropTypes.string,
   }).isRequired,
-  features: PropTypes.array.isRequired,
+  details: PropTypes.string,
+  features: PropTypes.array,
   id: PropTypes.number.isRequired,
+  learnMore: PropTypes.string,
   subtitle: PropTypes.node.isRequired,
   title: PropTypes.node.isRequired,
   type: PropTypes.string.isRequired,
