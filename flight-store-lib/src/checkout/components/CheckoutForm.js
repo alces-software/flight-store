@@ -15,6 +15,8 @@ import {
   reduxForm,
 } from 'redux-form';
 
+import constants from '../../constants';
+
 import * as actions from '../actions';
 import ErrorMessage from './ErrorMessage';
 import CardElement from './CardElement';
@@ -30,64 +32,82 @@ const CheckoutForm = ({
   product,
   submitFailed,
   submitting,
-}) => (
-  <Form onSubmit={handleSubmit}>
-    { 
-      error ? <ErrorMessage error={error} /> : null
-    }
-    { 
-      submitFailed && !error ? (
-        <p className='text-warning'>
-          Please correct the errors below and try again.
-        </p>
-      ) : null
-    }
+  vatRate,
+}) => {
+  const quantity = 1;
+  const vatPercentage = vatRate / 100;
+  const vatCharged = product.cost.amount * quantity * vatPercentage;
+  const totalAmount = product.cost.amount * quantity + vatCharged;
 
-    <FormText>
-      Enter your credit card details below and click <em>Purchase</em> to
-      continue.
-    </FormText>
+  return (
+    <Form onSubmit={handleSubmit}>
+      { 
+        error ? <ErrorMessage error={error} /> : null
+      }
+      { 
+        submitFailed && !error ? (
+          <p className='text-warning'>
+            Please correct the errors below and try again.
+          </p>
+        ) : null
+      }
 
-    <Table
-      borderless
-      size="sm"
-    >
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Quantity</th>
-          <th>Cost</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{product.name}</td>
-          <td>1</td>
-          <td>{product.cost.unit}{product.cost.amount}</td>
-        </tr>
-      </tbody>
-    </Table>
+      <FormText>
+        Enter your credit card details below and click <em>Purchase</em> to
+        continue.
+      </FormText>
 
-    <CardElement reduxFormChangeHandler={change} />
+      <Table
+        borderless
+        size="sm"
+      >
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Unit cost</th>
+            { product.cost.includesVAT ? null : <th>VAT</th> }
+            <th>Total cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{product.name}</td>
+            <td>{quantity}</td>
+            <td>{product.cost.unit}{product.cost.amount}</td>
+            {
+              product.cost.includesVAT ?
+                null :
+                <td>
+                  {product.cost.unit}{vatCharged}
+                </td>
+            }
+            <td>{product.cost.unit}{totalAmount}</td>
+          </tr>
+        </tbody>
+      </Table>
 
-    <FormGroup>
-      <Field
-        component={FormInput}
-        id="nameOnCard"
-        label="Name on card"
-        name="nameOnCard"
-        type="text"
-      />
-    </FormGroup>
+      <CardElement reduxFormChangeHandler={change} />
 
-    <HiddenButton
-      disabled={submitting || invalid || pristine}
-      type='submit'
-    >
-      Purchase
-    </HiddenButton>
-  </Form>
-);
+      <FormGroup>
+        <Field
+          component={FormInput}
+          id="nameOnCard"
+          label="Name on card"
+          name="nameOnCard"
+          type="text"
+        />
+      </FormGroup>
+
+      <HiddenButton
+        disabled={submitting || invalid || pristine}
+        type='submit'
+      >
+        Purchase
+      </HiddenButton>
+    </Form>
+  );
+};
 
 CheckoutForm.propTypes = {
   ...formPropTypes,
@@ -98,6 +118,7 @@ const enhance = compose(
 
   connect(createStructuredSelector({
     authToken: auth.selectors.ssoToken,
+    vatRate: (state) => constants.selectors.get(state, { name: 'VAT_RATE' }),
   })),
 
   reduxForm({

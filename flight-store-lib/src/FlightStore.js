@@ -32,10 +32,12 @@ const FlightStore = ({
   productType,
   productsUrlPrefix,
   stripeApiKey,
+  vatRate,
 }) => {
   reduxStore.dispatch(constants.actions.set('API_BASE_URL', apiBaseUrl));
   reduxStore.dispatch(constants.actions.set('PRODUCTS_URL_PREFIX', productsUrlPrefix));
   reduxStore.dispatch(constants.actions.set('DEFAULT_PRODUCTS_FILE', defaultProductsFile));
+  reduxStore.dispatch(constants.actions.set('VAT_RATE', vatRate));
   return (
     <Provider store={reduxStore}>
       <StripeProvider apiKey={stripeApiKey}>

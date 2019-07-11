@@ -6,6 +6,7 @@
   cost:
     unit: £
     amount: 1200
+    includesVAT: false
   features:
     - tick: true
       text: 5 Alces Flight Center credits
@@ -42,6 +43,7 @@
   cost:
     unit: £
     amount: 2300
+    includesVAT: false
   features:
     - tick: true
       text: 10 Alces Flight credits
@@ -78,6 +80,7 @@
   cost:
     unit: £
     amount: 3400
+    includesVAT: false
   features:
     - tick: true
       text: 15 Alces Flight credits

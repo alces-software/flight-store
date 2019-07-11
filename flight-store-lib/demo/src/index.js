@@ -21,6 +21,8 @@ class Store extends Component {
         // The name of the product definition file to use by default. E.g.,
         // default.json
         defaultProductsFile={process.env.REACT_APP_DEFAULT_PRODUCTS_FILE}
+        // The VAT rate to charge.
+        vatRate={20}
       />
     );
   }

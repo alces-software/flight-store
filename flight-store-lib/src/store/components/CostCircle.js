@@ -8,9 +8,12 @@ const CostCircle = ({ containerHeight, cost }) => {
 
   return (
     <CardHeaderCircle containerHeight={containerHeight} >
-      <span>
+      <div>
         <small>{cost.unit}</small><big>{cost.amount}</big>{per}
-      </span>
+      </div>
+      <small>
+        ({ cost.includesVAT ? 'inc' : 'excl' } VAT)
+      </small>
     </CardHeaderCircle>
   );
 };
