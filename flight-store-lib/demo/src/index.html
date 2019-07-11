@@ -4,13 +4,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--
+        Integrating the FlightStore component requires inclusion of the Stripe
+        script tag below.
+    -->
     <script src="https://js.stripe.com/v3/"></script>
 
     <!--
-        To integrate this component, a real app will need to provide React and
-        ReactDom.  One way would be by providing the script tags below.
+        React and ReactDom also need to be globally available.  One way would
+        be by using the script tags below.
         
-        This demo doesn't need to do this, as it includes both react and
+        This demo doesn't need to do this part, as it includes both react and
         react-dom as development dependencies.
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.2/react.min.js"></script> 
