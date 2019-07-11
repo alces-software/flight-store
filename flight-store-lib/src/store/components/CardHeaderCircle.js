@@ -12,10 +12,12 @@ const CircleInner = styled.div`
   border-radius: 50%;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
   color: white;
+  display: flex;
+  flex-direction: column;
   font-size: ${fontSize};
   font-weight: 700;
   height: ${size};
-  line-height: ${(props) => props.lineHeight};
+  justify-content: center;
   margin: 0 auto;
   padding: ${padding} 0;
   position: relative;
@@ -31,9 +33,9 @@ const CircleWrapper = styled.div`
   width: 100%;
 `;
 
-const CardHeaderCircle = ({ containerHeight, children, lineHeight }) => (
+const CardHeaderCircle = ({ containerHeight, children }) => (
   <CircleWrapper containerHeight={containerHeight}>
-    <CircleInner lineHeight={lineHeight}>
+    <CircleInner>
       {children}
     </CircleInner>
   </CircleWrapper>
@@ -42,7 +44,6 @@ const CardHeaderCircle = ({ containerHeight, children, lineHeight }) => (
 CardHeaderCircle.propTypes = {
   children: PropTypes.node.isRequired,
   containerHeight: PropTypes.string.isRequired,
-  lineHeight: PropTypes.string.isRequired,
 };
 
 export default CardHeaderCircle;

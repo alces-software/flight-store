@@ -5,13 +5,9 @@ import CardHeaderCircle, { size, padding, fontSize } from './CardHeaderCircle';
 
 const CostCircle = ({ containerHeight, cost }) => {
   const per = cost.per ? <small>{cost.per}</small> : null;
-  const lineHeight = `calc( ${size} - ( ${padding} * 2 ) - ( ${fontSize} / 2 ) )`;
 
   return (
-    <CardHeaderCircle
-      containerHeight={containerHeight}
-      lineHeight={lineHeight}
-    >
+    <CardHeaderCircle containerHeight={containerHeight} >
       <span>
         <small>{cost.unit}</small><big>{cost.amount}</big>{per}
       </span>
