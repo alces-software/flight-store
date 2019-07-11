@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "dompurify": "^1.0.8",
+    "dotenv": "^8.0.0",
     "flight-reactware": "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.1.59/flight-reactware.tgz",
     "marked": "^0.5.0",
     "object.values": "^1.0.4",

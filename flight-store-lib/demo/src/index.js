@@ -1,15 +1,20 @@
 import React, {Component} from 'react'
 import {render} from 'react-dom'
 
-import Example from '../../src'
+import FlightStore from '../../src'
 
-class Demo extends Component {
+class Store extends Component {
   render() {
-    return <div>
-      <h1>flight-store-lib Demo</h1>
-      <Example/>
-    </div>
+    return (
+      <FlightStore
+        // The stripe API key to use
+        stripeApiKey={process.env.REACT_APP_STRIPE_API_KEY}
+        // Optionally pass the product type to use.  Skipping this presents
+        // all product types for the user to select from.
+        productType="creditPacks"
+      />
+    );
   }
 }
 
-render(<Demo/>, document.querySelector('#demo'))
+render(<Store/>, document.querySelector('#demo'))
