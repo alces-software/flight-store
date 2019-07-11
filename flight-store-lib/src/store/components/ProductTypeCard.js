@@ -1,12 +1,17 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Button, CardSubtitle, CardText, CardTitle } from 'reactstrap';
-import { LinkContainer } from 'flight-reactware';
+// import { LinkContainer } from 'flight-reactware';
 
 import utils from '../../utils';
 
 import IconCircle from './IconCircle';
 import { ProductCard, ProductHead, ProductBody, productHeadHeight } from './ProductCard';
+
+// XXX Figure out how this is going to work.
+const LinkContainer = ({ children, to }) => (
+  children
+);
 
 const ProductTypeCard = ({
   description,
