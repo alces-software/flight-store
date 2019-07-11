@@ -4,7 +4,7 @@ require 'yaml'
 require 'json'
 
 def data_dir
-  Pathname.new(__FILE__).join('../../src/modules/store/data/')
+  Pathname.new(__FILE__).join('../../')
 end
 
 def load_products
@@ -19,11 +19,12 @@ def load_products
 end
 
 def write(products)
-  path = data_dir.join('products.example.json')
+  path = data_dir.join('products.json')
   File.write(path, products.to_json)
 end
 
 def main
+  data_dir
   products = load_products
   write(products)
 end

@@ -35,8 +35,10 @@ usage() {
     echo
     echo "Upload products json to cloud storage"
     echo
-    echo -e "      --s3-file NAME\t\tUpload to NAME"
-    echo -e "      --local-file PATH\t\tThe path to JSON products file to upload"
+    echo -e "      --s3-file NAME\t\tUpload to NAME."
+    echo -e "      --local-file PATH\t\tThe path to JSON products file to upload."
+    echo -e "      --production PATH\t\tUpload to the production bucket."
+    echo -e "      --staging PATH\t\tUpload to the staging bucket."
     echo -e "      --help\t\t\tShow this help message"
     echo
     echo "Examples:"
@@ -56,7 +58,7 @@ usage() {
 
 S3_PREFIX=s3://alces-flight/FlightStore/development-products/
 S3_FILE_NAME=default.json
-LOCAL_FILE="${REPO_ROOT}/client/src/modules/store/data/products.example.json"
+LOCAL_FILE="${REPO_ROOT}/data/products.json"
 
 parse_arguments() {
     while [[ $# > 0 ]] ; do
@@ -77,6 +79,11 @@ parse_arguments() {
 
             --production)
                 S3_PREFIX=S3_PREFIX=s3://alces-flight/FlightStore/products/
+                shift
+                ;;
+
+            --staging)
+                S3_PREFIX=S3_PREFIX=s3://alces-flight/FlightStore/staging-products/
                 shift
                 ;;
 
