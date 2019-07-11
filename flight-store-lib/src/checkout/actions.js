@@ -43,9 +43,11 @@ export function purchase(values, props) {
         },
         body: JSON.stringify({
           token: token.id,
-          product_file: store.selectors.filename(getState()), // eslint-disable-line camelcase
-          product_identifier: product.identifier, // eslint-disable-line camelcase
-          product: product,
+          product: {
+            filename: store.selectors.filename(getState()),
+            identifier: product.identifier,
+            type: product.type,
+          },
         }),
       });
 
