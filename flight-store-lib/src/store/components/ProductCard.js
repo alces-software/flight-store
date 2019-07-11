@@ -5,7 +5,9 @@ import { Theme } from 'flight-reactware';
 import { size as costCircleSize } from './CardHeaderCircle';
 
 export const ProductCard = styled(Card)`
-  border-radius: 1rem;
+  &.card {
+    border-radius: 1rem;
+  }
 `;
 
 export const productHeadHeight = '140px';
@@ -19,5 +21,7 @@ export const ProductHead = styled(CardBody)`
 `;
 
 export const ProductBody = styled(CardBody)`
-  padding-top: calc( ( ${costCircleSize} / 2 ) + 12px );
+  &.card-body {
+    padding-top: calc( ( ${costCircleSize} / 2 ) + 12px );
+  }
 `;

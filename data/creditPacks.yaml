@@ -1,5 +1,5 @@
 - title: Bronze
-  subtitle: Entry-level Alces Flight Center credit pack
+  subtitle: Entry-level credit pack
   name: Bronze entry-level Alces Flight Center credit pack
   type: creditPacks
   identifier: bronze-credit-pack
@@ -35,7 +35,7 @@
     amount: 5
 
 - title: Silver
-  subtitle: Standard Alces Flight Center credit pack
+  subtitle: Standard credit pack
   name: Silver standard-level Alces Flight Center credit pack
   type: creditPacks
   identifier: silver-credit-pack
@@ -64,7 +64,7 @@
     amount: 10
 
 - title: Gold
-  subtitle: Professional Alces Flight Center credit pack
+  subtitle: Professional credit pack
   name: Gold professional Alces Flight Center credit pack
   type: creditPacks
   identifier: gold-credit-pack
