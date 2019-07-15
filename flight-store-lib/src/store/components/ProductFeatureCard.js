@@ -7,7 +7,13 @@ import utils from '../../utils';
 import CostCircle from './CostCircle';
 import FeatureList from './FeatureList';
 import LearnMoreLink from './LearnMoreLink';
-import { ProductCard, ProductHead, ProductBody, productHeadHeight } from './ProductCard';
+import {
+  ProductBody,
+  ProductCard,
+  ProductFooter,
+  ProductHead,
+  productHeadHeight,
+} from './ProductCard';
 
 const ProductFeatureCard = ({
   ShowCheckoutFormButton,
@@ -54,11 +60,13 @@ const ProductFeatureCard = ({
         {featureList}
         {renderedDetails}
         {learnMoreLink}
+      </ProductBody>
+      <ProductFooter>
         <ShowCheckoutFormButton
           id={id}
           type={type}
         />
-      </ProductBody>
+      </ProductFooter>
     </ProductCard>
   );
 };

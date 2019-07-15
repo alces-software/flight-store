@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import { Container, Row, Col } from 'reactstrap';
+import { CardDeck, Container, Row, Col } from 'reactstrap';
 import { DelaySpinner, PageHeading } from 'flight-reactware';
 import { branch, compose, renderComponent } from 'recompose';
 import { connect } from 'react-redux';
@@ -17,6 +17,15 @@ import { createStructuredSelector } from 'reselect';
 import * as selectors from '../selectors';
 import ProductDetailModal from '../components/ProductDetailModal';
 import ProductFeatureCard from '../components/ProductFeatureCard';
+
+const Deck = styled(CardDeck)`
+  justify-content: center;
+  .card {
+    min-width: 350px;
+    flex-grow: 0;
+    margin-top: 1.5rem;
+  }
+`;
 
 const ProductContainer = styled(Container)`
   padding: 0 30px 15px 30px;
@@ -51,19 +60,18 @@ const ProductsPage = ({
           ) :
           null
       }
-      <Row>
+      <Deck>
         {
           products.map((product, idx) => (
-            <Col key={product.title}>
-              <ProductFeatureCard
-                {...product}
-                ShowCheckoutFormButton={ShowCheckoutFormButton}
-                id={idx}
-              />
-            </Col>
+            <ProductFeatureCard
+              key={product.title}
+              {...product}
+              ShowCheckoutFormButton={ShowCheckoutFormButton}
+              id={idx}
+            />
           ))
         }
-      </Row>
+      </Deck>
     </ProductContainer>
   );
 };
