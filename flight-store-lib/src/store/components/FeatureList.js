@@ -14,7 +14,7 @@ const UL = styled.ul`
 const Tick = styled.i.attrs({
   className: 'fa-li fa fa-check',
 })`
-  color: ${Theme.orange};
+  color: ${Theme.green};
 `;
 
 const Cross = styled.i.attrs({
