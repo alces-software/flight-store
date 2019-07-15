@@ -13,11 +13,14 @@ export const ProductCard = styled(Card)`
 export const productHeadHeight = '140px';
 
 export const ProductHead = styled(CardBody)`
-  background-color: ${Theme.dark};
-  border-radius: 1rem 1rem 0 0;
-  color: white;
-  height: ${productHeadHeight};
-  text-align: center;
+  &.card-body {
+    background-color: ${Theme.dark};
+    border-radius: 1rem 1rem 0 0;
+    color: white;
+    flex: 0 0 auto;
+    height: ${productHeadHeight};
+    text-align: center;
+  }
 `;
 
 export const ProductBody = styled(CardBody)`
