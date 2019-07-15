@@ -14,6 +14,8 @@ const Modal = styled(BaseModal)`
     border-radius: 1rem;
     .card {
       border: none;
+      margin-top: 0;
+      margin-bottom: 0;
     }
   }
 `;
