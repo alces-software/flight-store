@@ -87,6 +87,11 @@ parse_arguments() {
                 shift
                 ;;
 
+            --development)
+                S3_PREFIX=S3_PREFIX=s3://alces-flight/FlightStore/development-products/
+                shift
+                ;;
+
             --help)
                 usage
                 exit 0
