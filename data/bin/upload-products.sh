@@ -78,17 +78,22 @@ parse_arguments() {
                 ;;
 
             --production)
-                S3_PREFIX=S3_PREFIX=s3://alces-flight/FlightStore/products/
+                S3_PREFIX=s3://alces-flight/FlightStore/products/
                 shift
                 ;;
 
             --staging)
-                S3_PREFIX=S3_PREFIX=s3://alces-flight/FlightStore/staging-products/
+                S3_PREFIX=s3://alces-flight/FlightStore/staging-products/
                 shift
                 ;;
 
             --development)
-                S3_PREFIX=S3_PREFIX=s3://alces-flight/FlightStore/development-products/
+                S3_PREFIX=s3://alces-flight/FlightStore/development-products/
+                shift
+                ;;
+
+            --test)
+                S3_PREFIX=s3://alces-flight/FlightStore/test-products/
                 shift
                 ;;
 
