@@ -76,4 +76,9 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.sso_cookie_name = ENV.fetch('SSO_COOKIE_NAME')
+
+  config.store = {
+    products_url_prefix: ENV.fetch('PRODUCTS_URL_PREFIX'),
+    vat_rate: ENV.fetch('VAT_RATE', 20),
+  }
 end
