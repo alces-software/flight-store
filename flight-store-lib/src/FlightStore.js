@@ -31,6 +31,7 @@ const FlightStore = ({
   defaultProductsFile,
   productType,
   productsUrlPrefix,
+  ssoUserRequired,
   stripeApiKey,
   vatRate,
 }) => {
@@ -38,6 +39,7 @@ const FlightStore = ({
   reduxStore.dispatch(constants.actions.set('PRODUCTS_URL_PREFIX', productsUrlPrefix));
   reduxStore.dispatch(constants.actions.set('DEFAULT_PRODUCTS_FILE', defaultProductsFile));
   reduxStore.dispatch(constants.actions.set('VAT_RATE', vatRate));
+  reduxStore.dispatch(constants.actions.set('SSO_USER_REQUIRED', ssoUserRequired != undefined));
   return (
     <Provider store={reduxStore}>
       <StripeProvider apiKey={stripeApiKey}>

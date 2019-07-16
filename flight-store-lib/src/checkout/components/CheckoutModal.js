@@ -6,6 +6,8 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import constants from '../../constants';
+
 import * as actions from '../actions';
 import * as selectors from '../selectors';
 import Form from './CheckoutForm';
@@ -23,8 +25,8 @@ SuccessMessage.propTypes = {
   }).isOpenn
 };
 
-const Content = ({ product, ssoUser, submitSucceeded }) => {
-  if (ssoUser == null) {
+const Content = ({ product, ssoUser, ssoUserRequired, submitSucceeded }) => {
+  if (ssoUserRequired && ssoUser == null) {
     return <MustLoginMessage />;
   } else if (submitSucceeded) {
     return <SuccessMessage product={product} /> ;
@@ -39,6 +41,7 @@ const Content = ({ product, ssoUser, submitSucceeded }) => {
 Content.propTypes = {
   product: PropTypes.object,
   ssoUser: PropTypes.object,
+  ssoUserRequired: PropTypes.bool,
   submitSucceeded: PropTypes.bool,
 };
 
@@ -47,12 +50,13 @@ const CheckoutModal = ({
   isOpen,
   product,
   ssoUser,
+  ssoUserRequired,
   submitSucceeded,
 }) => {
-  const showPurchaseButton = ssoUser != null && !submitSucceeded;
+  const hidePurchaseButton = submitSucceeded || (ssoUserRequired && ssoUser == null);
   return (
     <StandardModal
-      buttons={showPurchaseButton ? <PurchaseButton /> : null}
+      buttons={hidePurchaseButton ? null : <PurchaseButton />}
       isOpen={isOpen}
       size="lg"
       title={`Purchase ${product == null ? null : product.name}`}
@@ -61,6 +65,7 @@ const CheckoutModal = ({
       <Content
         product={product}
         ssoUser={ssoUser}
+        ssoUserRequired={ssoUserRequired}
         submitSucceeded={submitSucceeded}
       />
     </StandardModal>
@@ -72,6 +77,7 @@ CheckoutModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   product: PropTypes.object,
   ssoUser: PropTypes.object,
+  ssoUserRequired: PropTypes.bool,
   submitSucceeded: PropTypes.bool,
 };
 
@@ -81,6 +87,7 @@ const enhance = compose(
       isOpen: selectors.modal.isModalOpen,
       product: selectors.modal.product,
       ssoUser: auth.selectors.currentUserSelector,
+      ssoUserRequired: (state) => constants.selectors.get(state, { name: 'SSO_USER_REQUIRED' }),
       submitSucceeded: selectors.submitSucceeded,
     }),
     {
