@@ -41,7 +41,10 @@ module.exports = {
         new webpack.EnvironmentPlugin({
           ...clientEnv
         }),
-      ]
+      ],
     }
-  }
+  },
+  devServer: {
+    host: 'store.alces-flight.lvh.me',
+  },
 }
