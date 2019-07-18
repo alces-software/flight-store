@@ -1,121 +1,111 @@
 -
   # Used as the title on the product card.
-  title: Bronze
+  title: Single
+
   # Used as the subtitle on the product card.
-  subtitle: Entry-level credit pack
+  subtitle: Pack of 5 service credits
+
   # Used as the product name on the checkout form and email.  It should
   # probably match the entry in `stripe.description`.
-  name: Bronze entry-level Alces Flight Center credit pack
+  name: Single credit pack
+
   # The type of product.  This must match the filename.
   type: creditPacks
+
   # An identifier that must be unique to all products of this type.
-  identifier: bronze-credit-pack
+  identifier: single-credit-pack
+
   # UI configuration for the "cost circle" and checkout form line entry.  Care
   # should be taken to ensure that these values match there corresponding
-  # entries in `strip.*`.
+  # entries in `stripe.*`.
   cost:
     unit: £
     amount: 1200
     includesVAT: false
-  # Optional feature list for the product card.
-  features:
-    - tick: true
-      text: 5 Alces Flight Center credits
-    - tick: true
-      text: |
-        Allocate to your Flight Center site managed through
-        [Alces Flight Center](https://center.alces-flight.com)
-  # Optional markdown for the product card.
-  details: |
-    The Bronze Alces Flight Center credit pack allows you to...
 
-    Lorem ipsum...
+  # Optional feature list for the product card.
+  # features:
+  #   - tick: true
+  #     text: |
+  #       Allocate to your Flight Center site managed through
+  #       [Alces Flight Center](https://center.alces-flight.com)
+  #   - tick: false
+  #     text: |
+  #       ~Includes rainbows and kittens~
+
+  # Optional markdown for the product card.
+  # details: |
+  #   The Bronze Alces Flight Center credit pack allows you to...
+
   # Optional. If learnMore is given, the product card will display a "Learn
   # more" link.  Clicking it will display a modal containing this markdown.
-  learnMore: |
-    Even *more* details about this pack...
-
-    The Bronze Alces Flight Center credit pack allows you to...
-
-    Lorem ipsum...
+  # learnMore: |
+  #   Even *more* details about this pack...
 
   # The configuration for stripe.
   stripe:
+
     # The amount to charge in pence (or cents).  Care should be taken to
     # ensure this and `cost.amount` match.
     amount: 120000
+
     # The currency to use.  Care should be taken to ensure this and
     # `cost.unit` match.
     currency: gbp
+
     # Used as the description by Stripe.  It should probably match the entry
     # in `name`.
-    description: Alces Flight credit pack (Bronze)
+    description: Alces Flight Center credit pack (Single)
+
     # The type of Stripe payment to make.  Either `charge` or `subscription`.
     type: charge
+
   # The action to take after a successful purchase.
   action:
     # The identifier of the action.  Currently, only `deposit_credits` is
     # supported.
     identifier: deposit_credits
+
     # Additional data required by the action.  In this case the number of
     # credits to deposit.
     amount: 5
 
-- title: Silver
-  subtitle: Standard credit pack
-  name: Silver standard-level Alces Flight Center credit pack
+
+
+- title: Double
+  subtitle: Pack of 10 service credits
+  name: Double credit pack
   type: creditPacks
-  identifier: silver-credit-pack
+  identifier: double-credit-pack
   cost:
     unit: £
-    amount: 2300
+    amount: 2350
     includesVAT: false
-  features:
-    - tick: true
-      text: 10 Alces Flight credits
-    - tick: true
-      text: |
-        Allocate to your Flight Center site managed through
-        [Alces Flight Center](https://center.alces-flight.com)
-  details: |
-    The Silver Alces Flight Center credit pack allows you to...
-
-    Lorem ipsum...
   stripe:
-    amount: 230000
+    amount: 235000
     currency: gbp
-    description: Alces Flight credit pack (Silver)
+    description: Alces Flight Center credit pack (Double)
     type: charge
   action:
     identifier: deposit_credits
     amount: 10
 
-- title: Gold
-  subtitle: Professional credit pack
-  name: Gold professional Alces Flight Center credit pack
+
+
+- title: Triple
+  subtitle: Pack of 15 service credits
+  name: Triple credit pack
   type: creditPacks
-  identifier: gold-credit-pack
+  identifier: triple-credit-pack
   cost:
     unit: £
-    amount: 3400
+    amount: 3500
     includesVAT: false
-  features:
-    - tick: true
-      text: 15 Alces Flight credits
-    - tick: true
-      text: |
-        Allocate to your Flight Center site managed through
-        [Alces Flight Center](https://center.alces-flight.com)
-  details: |
-    The Gold Alces Flight credit pack allows you to...
-
-    Lorem ipsum...
   stripe:
-    amount: 340000
+    amount: 350000
     currency: gbp
-    description: Alces Flight credit pack (Gold)
+    description: Alces Flight Center credit pack (Triple)
     type: charge
   action:
     identifier: deposit_credits
     amount: 15
-
