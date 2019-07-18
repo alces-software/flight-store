@@ -14,7 +14,6 @@ import {
   ProductHead,
   productHeadHeight,
 } from './ProductCard';
-import Iconography from './Iconography';
 
 const ProductFeatureCard = ({
   ShowCheckoutFormButton,
@@ -23,7 +22,6 @@ const ProductFeatureCard = ({
   features,
   id,
   learnMore,
-  numIcons,
   subtitle,
   title,
   type,
@@ -62,11 +60,6 @@ const ProductFeatureCard = ({
         {featureList}
         {renderedDetails}
         {learnMoreLink}
-
-        <Iconography
-          faIcon="fa-ticket"
-          numIcons={numIcons}
-        />
 
       </ProductBody>
       <ProductFooter>
