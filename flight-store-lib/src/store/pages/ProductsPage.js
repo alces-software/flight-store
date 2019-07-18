@@ -68,6 +68,7 @@ const ProductsPage = ({
               {...product}
               ShowCheckoutFormButton={ShowCheckoutFormButton}
               id={idx}
+              numIcons={idx + 1}
             />
           ))
         }
