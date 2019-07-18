@@ -9,7 +9,8 @@
    allow do
       origins 'https://alces-flight.com',
         /^.*\.alces-flight.com$/,
-        /^.*\.alces-flight.lvh.me(:[0-9]+)?$/
+        /^.*\.alces-flight.lvh.me(:[0-9]+)?$/,
+        /^http:\/\/localhost(:[0-9]+)?$/
 
      resource '*',
        headers: :any,

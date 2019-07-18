@@ -9,7 +9,7 @@
 source 'http://rubygems.org'
 ruby ENV['ALCES_RUBY_VERSION'] || '2.5.1'
 
-rails_version                  = '~>  5.2.1'
+rails_version                  = '~>  5.2.3'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")

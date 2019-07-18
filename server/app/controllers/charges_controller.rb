@@ -1,21 +1,50 @@
 class ChargesController < ApplicationController
   def create
     authorize nil, policy_class: ChargePolicy
-    with_stripe_error_handling do
-      charge(params[:product][:stripe], params[:token])
+    product_params = params.require(:product).permit(:filename, :type, :identifier)
+    product = Product.load!(
+      product_params[:filename],
+      product_params[:type],
+      product_params[:identifier],
+    )
+    charge = with_stripe_error_handling do
+      charge_card(product, params[:token])
     end
+    begin
+      product.action.call(charge, current_user)
+    rescue
+      # We've charged the customer and not delivered.  We should do something
+      # here.  Perhaps rollback the charge, or simply inform ourselves that we
+      # need to look into this.
+      raise
+    end
+    if product.action.flash.present?
+      flash[:success] = product.action.flash
+      flash[:keep_success] = true
+    end
+    if product.action.redirect_url.present?
+      redirect_to product.action.redirect_url
+    end
+    # We've successfully processed the charge.  We may want to inform the
+    # customer or ourselves.
+  rescue => e
+    backtrace = e.backtrace.map { |line| line.sub(Rails.root.to_s, '') }
+    Rails.logger.error([e.class, e.message, *backtrace].join("\n"))
+    render(status: 500, json: { code: 500, message: e.message })
   end
 
   private
 
-  def charge(alces_product, source)
+  def charge_card(product, source)
+    stripe_params = product.stripe_params
     Stripe::Charge.create(
-      amount: alces_product[:amount],
-      currency: alces_product[:currency],
+      amount: stripe_params.amount_with_vat,
+      currency: stripe_params.currency,
       source: source,
-      description: alces_product[:description],
+      description: stripe_params.description,
       metadata: {
-        flight_id: current_user.flight_id,
+        user_id: current_user.id,
+        action_identifier: product.action.identifier,
       },
       receipt_email: current_user.email,
     )
