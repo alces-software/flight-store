@@ -23,7 +23,7 @@
     "dompurify": "^1.0.8",
     "dotenv": "^8.0.0",
     "flight-reactware": "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.1.59/flight-reactware.tgz",
-    "marked": "^0.5.0",
+    "marked": "^0.7.0",
     "object.values": "^1.0.4",
     "react-fontawesome": "^1.6.1",
     "react-recaptcha": "^2.3.2",
@@ -38,7 +38,7 @@
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
     "styled-components": "^2.0.1",
-    "universal-cookie": "^2.1.0"
+    "universal-cookie": "^4.0.2"
   },
   "peerDependencies": {
     "react": "15.x"
