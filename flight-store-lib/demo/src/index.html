@@ -11,6 +11,11 @@
     -->
     <script src="https://js.stripe.com/v3/"></script>
 
+    <!-- Set this early so that it's ready when Reactware is loaded -->
+    <script>
+        window.__SSO_COOKIE_NAME__ = "flight_sso_dev";
+    </script>
+
     <!--
         React and ReactDom also need to be globally available.  One way would
         be by using the script tags below.
