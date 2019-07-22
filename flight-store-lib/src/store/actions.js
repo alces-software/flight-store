@@ -14,7 +14,7 @@ export const detailModal = utils.modals.buildModalActions(
 
 let devProducts;
 if (process.env.NODE_ENV === 'development') {
-  devProducts = require('./data/products.example.json');
+  devProducts = {};
 }
 
 function buildDefaults(getState) {

@@ -23,8 +23,8 @@ main() {
     build_and_pack
     header "Releasing to s3"
     release_to_s3
-    # header "Merging, tagging, and pushing"
-    # run_merge_script
+    header "Merging, tagging, and pushing"
+    run_merge_script
 }
 
 abort_if_uncommitted_changes_present() {
