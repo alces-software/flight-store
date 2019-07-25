@@ -1,27 +1,47 @@
 import styled, { css } from 'styled-components';
 import { Card, CardBody, CardFooter } from 'reactstrap';
-import { Theme } from 'flight-reactware';
+import { Styles, Theme } from 'flight-reactware';
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import { lighten } from 'polished';
 
-export const ProductCard = styled(Card)`
-  &.card {
-    border-radius: 1rem;
+import constants from '../../constants';
 
-    ${(props) => !props.emphasise ? null : css`
-      transform: scale(1.25, 1.4);
-      z-index: 10;
-    `}
+const enhance = compose(
+  connect(
+    createStructuredSelector({
+      emphasisBreakPoint: (state) => constants.selectors.get(
+        state, { name: 'EMPHASIS_BREAK_POINT' }
+      ),
+    })
+  ),
 
-    background-color: ${(props) => props.backgroundColor == null ?
-      null :
-      lighten(0.4, props.backgroundColor)
-    };
+  Styles.withStyles`
+    &.card {
+      border-radius: 1rem;
 
-    border-color: ${
-      (props) => props.backgroundColor == null ? null : props.backgroundColor
-    };
-  }
-`;
+      background-color: ${(props) => props.backgroundColor == null ?
+        null :
+        lighten(0.4, props.backgroundColor)
+      };
+
+      border-color: ${
+        (props) => props.backgroundColor == null ? null : props.backgroundColor
+      };
+
+      ${(props) => !props.emphasise ? null : css`
+        @media (min-width: ${props.emphasisBreakPoint || '1200px'}) {
+          transform: scale(1.25, 1.4);
+          z-index: 10;
+        `}
+      }
+    }
+  `,
+);
+
+const ProductCard = enhance(Card);
+export { ProductCard };
 
 export const ProductHead = styled(CardBody)`
   &.card-body {
