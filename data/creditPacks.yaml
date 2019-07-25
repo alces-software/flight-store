@@ -5,6 +5,10 @@
   # Used as the subtitle on the product card.
   subtitle: Service Credits
 
+  iconography:
+    name: database
+    count: 1
+
   # Used as the product name on the checkout form and email.  It should
   # probably match the entry in `stripe.description`.
   name: Pack of 5 Alces Flight Center service credits
@@ -77,6 +81,9 @@
 
 - title: 10
   subtitle: Service Credits
+  iconography:
+    name: database
+    count: 2
   name: Pack of 10 Alces Flight Center service credits
   type: creditPacks
   identifier: 10-service-credit-pack
@@ -98,6 +105,9 @@
 
 - title: 15
   subtitle: Service Credits
+  iconography:
+    name: database
+    count: 3
   name: Pack of 15 Alces Flight Center service credits
   type: creditPacks
   identifier: 15-service-credit-pack

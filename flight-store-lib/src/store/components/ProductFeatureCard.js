@@ -4,6 +4,7 @@ import { CardTitle, CardSubtitle } from 'reactstrap';
 
 import utils from '../../utils';
 
+import Iconography from './Iconography';
 import FeatureList from './FeatureList';
 import LearnMoreLink from './LearnMoreLink';
 import ProductCost from './ProductCost';
@@ -19,6 +20,7 @@ const ProductFeatureCard = ({
   cost,
   details,
   features,
+  iconography,
   id,
   learnMore,
   subtitle,
@@ -44,6 +46,7 @@ const ProductFeatureCard = ({
   return (
     <ProductCard>
       <ProductHead>
+        { iconography == null ? null : <Iconography {...iconography} /> }
         <CardTitle tag="h1">
           {title}
         </CardTitle>
@@ -77,6 +80,10 @@ ProductFeatureCard.propTypes = {
   }).isRequired,
   details: PropTypes.string,
   features: PropTypes.array,
+  iconography: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired,
+  }),
   id: PropTypes.number.isRequired,
   learnMore: PropTypes.string,
   subtitle: PropTypes.node.isRequired,
