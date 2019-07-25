@@ -1,13 +1,23 @@
 import FontAwesome from 'react-fontawesome';
 import PropTypes from 'prop-types';
 import React from 'react';
+import styled from 'styled-components';
 import { Button } from 'reactstrap';
 import { connect } from 'react-redux';
 
 import * as actions from '../actions';
 
+const StyledButton = styled(Button)`
+  &.btn {
+    background-color: white;
+    &:hover {
+      background-color: ${({ color }) => `var(--${color})`};
+    }
+  }
+`;
+
 const ShowCheckoutFormButton = ({ showCheckoutForm }) => (
-  <Button
+  <StyledButton
     block
     color="primary"
     onClick={showCheckoutForm}
@@ -19,7 +29,7 @@ const ShowCheckoutFormButton = ({ showCheckoutForm }) => (
       fixedWidth
       name="credit-card"
     />
-  </Button>
+  </StyledButton>
 );
 
 ShowCheckoutFormButton.propTypes = {

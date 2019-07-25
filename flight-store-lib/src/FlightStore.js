@@ -29,6 +29,7 @@ createLogics(reduxStore);
 const FlightStore = ({
   apiBaseUrl,
   defaultProductsFile,
+  emphasisBreakPoint,
   productType,
   productsUrlPrefix,
   ssoUserRequired,
@@ -40,6 +41,7 @@ const FlightStore = ({
   reduxStore.dispatch(constants.actions.set('DEFAULT_PRODUCTS_FILE', defaultProductsFile));
   reduxStore.dispatch(constants.actions.set('VAT_RATE', vatRate));
   reduxStore.dispatch(constants.actions.set('SSO_USER_REQUIRED', ssoUserRequired != undefined));
+  reduxStore.dispatch(constants.actions.set('EMPHASIS_BREAK_POINT', emphasisBreakPoint));
   return (
     <Provider store={reduxStore}>
       <StripeProvider apiKey={stripeApiKey}>

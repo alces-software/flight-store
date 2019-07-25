@@ -1,16 +1,23 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import styled from 'styled-components';
 import { CardSubtitle, CardText, CardTitle } from 'reactstrap';
-import { ProductCard, ProductHead, ProductBody, productHeadHeight } from './ProductCard';
+import { ProductCard, ProductHead, ProductBody } from './ProductCard';
 
 import utils from '../../utils';
 
-import CostCircle from './CostCircle';
+import Iconography from './Iconography';
+import ProductCost from './ProductCost';
+
+const Subtitle = styled(CardSubtitle)`
+  margin-bottom: 0.5rem;
+`;
 
 const ProductDetailCard = ({
   ShowCheckoutFormButton,
   learnMore,
   head,
+  iconography,
   id,
   cost,
   subtitle,
@@ -20,18 +27,16 @@ const ProductDetailCard = ({
   <ProductCard>
     <ProductHead>
       { head == null ? null : head }
+      { iconography == null ? null : <Iconography {...iconography} /> }
       <CardTitle tag="h3">
         {title}
       </CardTitle>
-      <CardSubtitle>
+      <Subtitle>
         {subtitle}
-      </CardSubtitle>
-      <CostCircle
-        containerHeight={productHeadHeight}
-        cost={cost}
-      />
+      </Subtitle>
     </ProductHead>
     <ProductBody>
+      <ProductCost cost={cost} />
       <utils.RenderMarkdown value={learnMore} />
       <ShowCheckoutFormButton
         id={id}
@@ -50,6 +55,10 @@ ProductDetailCard.propTypes = {
   }).isRequired,
   learnMore: PropTypes.string.isRequired,
   head: PropTypes.node,
+  iconography: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired,
+  }),
   id: PropTypes.number.isRequired,
   subtitle: PropTypes.node.isRequired,
   title: PropTypes.node.isRequired,

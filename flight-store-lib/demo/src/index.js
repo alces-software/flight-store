@@ -20,6 +20,8 @@ class Store extends Component {
         defaultProductsFile="default.json"
         // The VAT rate to charge.
         vatRate={20}
+        // The breakpoint above which cards can be emphasised.
+        emphasisBreakPoint="1185px"
       />
     );
   }
