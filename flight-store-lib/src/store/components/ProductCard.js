@@ -8,7 +8,7 @@ import { lighten } from 'polished';
 
 import constants from '../../constants';
 
-const enhance = compose(
+const enhanceCard = compose(
   connect(
     createStructuredSelector({
       emphasisBreakPoint: (state) => constants.selectors.get(
@@ -40,7 +40,7 @@ const enhance = compose(
   `,
 );
 
-const ProductCard = enhance(Card);
+const ProductCard = enhanceCard(Card);
 export { ProductCard };
 
 export const ProductHead = styled(CardBody)`
@@ -58,17 +58,30 @@ export const ProductBody = styled(CardBody)`
   }
 `;
 
-export const ProductFooter = styled(CardFooter)`
-  &.card-footer {
-    background: none;
-    border-radius: 0 0 1rem 1rem;
-    border-top: none;
+const enhanceFooter = compose(
+  connect(
+    createStructuredSelector({
+      emphasisBreakPoint: (state) => constants.selectors.get(
+        state, { name: 'EMPHASIS_BREAK_POINT' }
+      ),
+    })
+  ),
 
-    ${(props) => !props.emphasise ? null : css`
-      @media (min-width: ${props.emphasisBreakPoint || '1200px'}) {
-        transform: scale(0.8, 0.7);
-        z-index: 10;
-      `}
+  Styles.withStyles`
+    &.card-footer {
+      background: none;
+      border-radius: 0 0 1rem 1rem;
+      border-top: none;
+
+      ${(props) => !props.emphasise ? null : css`
+        @media (min-width: ${props.emphasisBreakPoint || '1200px'}) {
+          transform: scale(0.8, 0.7);
+          z-index: 10;
+        `}
+      }
     }
-  }
-`;
+  `,
+);
+
+const ProductFooter = enhanceFooter(CardFooter);
+export { ProductFooter };
