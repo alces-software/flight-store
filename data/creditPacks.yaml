@@ -1,19 +1,19 @@
 -
   # Used as the title on the product card.
-  title: Single
+  title: 5
 
   # Used as the subtitle on the product card.
-  subtitle: Pack of 5 service credits
+  subtitle: Service Credits
 
   # Used as the product name on the checkout form and email.  It should
   # probably match the entry in `stripe.description`.
-  name: Single credit pack
+  name: Pack of 5 Alces Flight Center service credits
 
   # The type of product.  This must match the filename.
   type: creditPacks
 
   # An identifier that must be unique to all products of this type.
-  identifier: single-credit-pack
+  identifier: 5-service-credit-pack
 
   # UI configuration for the "cost circle" and checkout form line entry.  Care
   # should be taken to ensure that these values match there corresponding
@@ -22,6 +22,9 @@
     unit: £
     amount: 1200
     includesVAT: false
+    # Optional.  The saving present for this product.  Useful when buying in
+    # bulk provides a saving.
+    # saving: 100
 
   # Optional feature list for the product card.
   # features:
@@ -55,7 +58,7 @@
 
     # Used as the description by Stripe.  It should probably match the entry
     # in `name`.
-    description: Alces Flight Center credit pack (Single)
+    description: Pack of 5 Alces Flight Center service credits
 
     # The type of Stripe payment to make.  Either `charge` or `subscription`.
     type: charge
@@ -72,19 +75,20 @@
 
 
 
-- title: Double
-  subtitle: Pack of 10 service credits
-  name: Double credit pack
+- title: 10
+  subtitle: Service Credits
+  name: Pack of 10 Alces Flight Center service credits
   type: creditPacks
-  identifier: double-credit-pack
+  identifier: 10-service-credit-pack
   cost:
     unit: £
     amount: 2350
     includesVAT: false
+    saving: 100
   stripe:
     amount: 235000
     currency: gbp
-    description: Alces Flight Center credit pack (Double)
+    description: Pack of 10 Alces Flight Center service credits
     type: charge
   action:
     identifier: deposit_credits
@@ -92,19 +96,20 @@
 
 
 
-- title: Triple
-  subtitle: Pack of 15 service credits
-  name: Triple credit pack
+- title: 15
+  subtitle: Service Credits
+  name: Pack of 15 Alces Flight Center service credits
   type: creditPacks
-  identifier: triple-credit-pack
+  identifier: 15-service-credit-pack
   cost:
     unit: £
     amount: 3500
     includesVAT: false
+    saving: 200
   stripe:
     amount: 350000
     currency: gbp
-    description: Alces Flight Center credit pack (Triple)
+    description: Pack of 15 Alces Flight Center service credits
     type: charge
   action:
     identifier: deposit_credits

@@ -6,7 +6,7 @@ import { Button, CardSubtitle, CardText, CardTitle } from 'reactstrap';
 import utils from '../../utils';
 
 import IconCircle from './IconCircle';
-import { ProductCard, ProductHead, ProductBody, productHeadHeight } from './ProductCard';
+import { ProductCard, ProductHead, ProductBody } from './ProductCard';
 
 // XXX Figure out how this is going to work.
 const LinkContainer = ({ children, to }) => (
@@ -29,7 +29,7 @@ const ProductTypeCard = ({
         {subtitle}
       </CardSubtitle>
       <IconCircle
-        containerHeight={productHeadHeight}
+        containerHeight="140px"
         icon={icon}
       />
     </ProductHead>

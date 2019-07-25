@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { CardSubtitle, CardText, CardTitle } from 'reactstrap';
-import { ProductCard, ProductHead, ProductBody, productHeadHeight } from './ProductCard';
+import { ProductCard, ProductHead, ProductBody } from './ProductCard';
 
 import utils from '../../utils';
 
-import CostCircle from './CostCircle';
+import ProductCost from './ProductCost';
 
 const ProductDetailCard = ({
   ShowCheckoutFormButton,
@@ -26,12 +26,9 @@ const ProductDetailCard = ({
       <CardSubtitle>
         {subtitle}
       </CardSubtitle>
-      <CostCircle
-        containerHeight={productHeadHeight}
-        cost={cost}
-      />
     </ProductHead>
     <ProductBody>
+      <ProductCost cost={cost} />
       <utils.RenderMarkdown value={learnMore} />
       <ShowCheckoutFormButton
         id={id}

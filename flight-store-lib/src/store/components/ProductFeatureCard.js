@@ -4,15 +4,14 @@ import { CardTitle, CardSubtitle } from 'reactstrap';
 
 import utils from '../../utils';
 
-import CostCircle from './CostCircle';
 import FeatureList from './FeatureList';
 import LearnMoreLink from './LearnMoreLink';
+import ProductCost from './ProductCost';
 import {
   ProductBody,
   ProductCard,
   ProductFooter,
   ProductHead,
-  productHeadHeight,
 } from './ProductCard';
 
 const ProductFeatureCard = ({
@@ -45,18 +44,15 @@ const ProductFeatureCard = ({
   return (
     <ProductCard>
       <ProductHead>
-        <CardTitle tag="h3">
+        <CardTitle tag="h1">
           {title}
         </CardTitle>
         <CardSubtitle>
           {subtitle}
         </CardSubtitle>
-        <CostCircle
-          containerHeight={productHeadHeight}
-          cost={cost}
-        />
       </ProductHead>
       <ProductBody className="position-relative">
+        <ProductCost cost={cost} />
         {featureList}
         {renderedDetails}
         {learnMoreLink}
