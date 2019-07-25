@@ -19,11 +19,13 @@ import ProductDetailModal from '../components/ProductDetailModal';
 import ProductFeatureCard from '../components/ProductFeatureCard';
 
 const Deck = styled(CardDeck)`
-  justify-content: center;
-  .card {
-    min-width: 350px;
-    flex-grow: 0;
-    margin-top: 1.5rem;
+  &.card-deck {
+    justify-content: center;
+    .card {
+      min-width: 350px;
+      flex-grow: 0;
+      margin-top: 1.5rem;
+    }
   }
 `;
 

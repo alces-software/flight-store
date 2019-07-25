@@ -8,9 +8,11 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 const StyledButton = styled(Button)`
-  background-color: white;
-  &:hover {
-    background-color: ${({ color }) => `var(--${color})`};
+  &.btn {
+    background-color: white;
+    &:hover {
+      background-color: ${({ color }) => `var(--${color})`};
+    }
   }
 `;
 
