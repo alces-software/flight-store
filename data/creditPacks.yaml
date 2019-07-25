@@ -12,6 +12,9 @@
   # Optional. Defaults to false. Should this product by emphasised.
   emphasise: false
 
+  # backgroundColor: var(--indigo)
+  backgroundColor: '#6610f2'
+
   # Used as the product name on the checkout form and email.  It should
   # probably match the entry in `stripe.description`.
   name: Pack of 5 Alces Flight Center service credits
@@ -88,6 +91,8 @@
     name: database
     count: 2
   emphasise: true
+  # backgroundColor: var(--teal)
+  backgroundColor: '#20c997'
   name: Pack of 10 Alces Flight Center service credits
   type: creditPacks
   identifier: 10-service-credit-pack
@@ -113,6 +118,8 @@
     name: database
     count: 3
   emphasise: false
+  # backgroundColor: var(--info)
+  backgroundColor: '#3498DB'
   name: Pack of 15 Alces Flight Center service credits
   type: creditPacks
   identifier: 15-service-credit-pack

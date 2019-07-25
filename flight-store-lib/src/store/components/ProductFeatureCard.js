@@ -17,6 +17,7 @@ import {
 
 const ProductFeatureCard = ({
   ShowCheckoutFormButton,
+  backgroundColor,
   cost,
   details,
   features,
@@ -45,8 +46,11 @@ const ProductFeatureCard = ({
     );
 
   return (
-    <ProductCard emphasise={emphasise}>
-      <ProductHead>
+    <ProductCard
+      backgroundColor={backgroundColor}
+      emphasise={emphasise}
+    >
+      <ProductHead backgroundColor={backgroundColor}>
         { iconography == null ? null : <Iconography {...iconography} /> }
         <CardTitle tag="h1">
           {title}
@@ -74,6 +78,7 @@ const ProductFeatureCard = ({
 
 ProductFeatureCard.propTypes = {
   ShowCheckoutFormButton: PropTypes.func.isRequired,
+  backgroundColor: PropTypes.string,
   cost: PropTypes.shape({
     unit: PropTypes.string.isRequired,
     amount: PropTypes.number.isRequired,
