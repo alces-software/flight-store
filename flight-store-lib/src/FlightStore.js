@@ -1,5 +1,6 @@
 import React from 'react';
 import Cookies from 'universal-cookie';
+import { createBrowserHistory as createHistory } from 'history';
 import { createCookieMiddleware } from 'redux-cookie';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
@@ -12,9 +13,10 @@ import { checkout, constants, store } from './modules';
 
 const cookies = new Cookies();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const history = createHistory();
 
 const reduxStore = createStore(
-  createReducers(cookies),
+  createReducers(cookies, history),
   composeEnhancers(
     applyMiddleware(
       ...middleware,

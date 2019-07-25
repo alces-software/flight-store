@@ -22,32 +22,37 @@
   "dependencies": {
     "dompurify": "^1.0.8",
     "dotenv": "^8.0.0",
-    "flight-reactware": "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.1.59/flight-reactware.tgz",
+    "flight-reactware": "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.3.1/flight-reactware.tgz",
+    "history": "^4.9.0",
     "marked": "^0.7.0",
     "object.values": "^1.0.4",
     "polished": "^3.4.1",
     "react-fontawesome": "^1.6.1",
     "react-recaptcha": "^2.3.2",
-    "react-redux": "^5.0.5",
+    "react-redux": "^7.1.0",
     "react-stripe-elements": "^2.0.1",
-    "reactstrap": "5.0.0-beta",
-    "recompose": "^0.24.0",
-    "redux": "^3.6.0",
+    "reactstrap": "^8.0.1",
+    "recompose": "^0.30.0",
+    "redux": "^4.0.4",
     "redux-cookie": "^0.5.9",
-    "redux-form": "^6.8.0",
+    "redux-form": "^8.2.4",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
-    "reselect": "^3.0.1",
-    "styled-components": "^2.0.1",
+    "reselect": "^4.0.0",
+    "styled-components": "^4.3.2",
     "universal-cookie": "^4.0.2"
   },
   "peerDependencies": {
-    "react": "15.x"
+    "react": "16.x",
+    "react-dom": "16.x"
   },
   "devDependencies": {
+    "connected-react-router": "^6.5.2",
     "nwb": "0.23.x",
-    "react": "^15.6.2",
-    "react-dom": "^15.6.2"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1"
   },
   "author": "",
   "homepage": "",
