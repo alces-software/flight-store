@@ -25,6 +25,7 @@
     "flight-reactware": "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.1.59/flight-reactware.tgz",
     "marked": "^0.7.0",
     "object.values": "^1.0.4",
+    "polished": "^3.4.1",
     "react-fontawesome": "^1.6.1",
     "react-recaptcha": "^2.3.2",
     "react-redux": "^5.0.5",

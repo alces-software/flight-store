@@ -4,22 +4,25 @@ import { CardTitle, CardSubtitle } from 'reactstrap';
 
 import utils from '../../utils';
 
-import CostCircle from './CostCircle';
+import Iconography from './Iconography';
 import FeatureList from './FeatureList';
 import LearnMoreLink from './LearnMoreLink';
+import ProductCost from './ProductCost';
 import {
   ProductBody,
   ProductCard,
   ProductFooter,
   ProductHead,
-  productHeadHeight,
 } from './ProductCard';
 
 const ProductFeatureCard = ({
   ShowCheckoutFormButton,
+  backgroundColor,
   cost,
   details,
   features,
+  emphasise,
+  iconography,
   id,
   learnMore,
   subtitle,
@@ -43,26 +46,27 @@ const ProductFeatureCard = ({
     );
 
   return (
-    <ProductCard>
-      <ProductHead>
-        <CardTitle tag="h3">
+    <ProductCard
+      backgroundColor={backgroundColor}
+      emphasise={emphasise}
+    >
+      <ProductHead backgroundColor={backgroundColor}>
+        { iconography == null ? null : <Iconography {...iconography} /> }
+        <CardTitle tag="h1">
           {title}
         </CardTitle>
         <CardSubtitle>
           {subtitle}
         </CardSubtitle>
-        <CostCircle
-          containerHeight={productHeadHeight}
-          cost={cost}
-        />
       </ProductHead>
       <ProductBody className="position-relative">
+        <ProductCost cost={cost} />
         {featureList}
         {renderedDetails}
         {learnMoreLink}
 
       </ProductBody>
-      <ProductFooter>
+      <ProductFooter emphasise={emphasise}>
         <ShowCheckoutFormButton
           id={id}
           type={type}
@@ -74,6 +78,7 @@ const ProductFeatureCard = ({
 
 ProductFeatureCard.propTypes = {
   ShowCheckoutFormButton: PropTypes.func.isRequired,
+  backgroundColor: PropTypes.string,
   cost: PropTypes.shape({
     unit: PropTypes.string.isRequired,
     amount: PropTypes.number.isRequired,
@@ -81,6 +86,11 @@ ProductFeatureCard.propTypes = {
   }).isRequired,
   details: PropTypes.string,
   features: PropTypes.array,
+  emphasise: PropTypes.bool,
+  iconography: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired,
+  }),
   id: PropTypes.number.isRequired,
   learnMore: PropTypes.string,
   subtitle: PropTypes.node.isRequired,
