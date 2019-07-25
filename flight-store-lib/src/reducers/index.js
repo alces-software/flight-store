@@ -7,7 +7,6 @@ import {
   reducerUtils,
 } from 'flight-reactware';
 import { reducer as formReducer } from 'redux-form';
-import { routerReducer } from 'react-router-redux';
 import { combineReducers } from 'redux';
 
 import * as modules from '../modules';
@@ -39,19 +38,18 @@ const moduleReducers = Object.keys(modules).reduce(
   {},
 );
 
-const createAppReducers = (cookies) => ({
-  ...createFlightReducers(cookies),
+const createAppReducers = (cookies, history) => ({
+  ...createFlightReducers(cookies, history),
   ...moduleReducers,
   entities: compose(
     jsonApi.withIndexes(entityIndexes),
     loadingStates.withLoadingStates(loadingStatesConfig),
   )(jsonApi.reducer),
   form: formReducer,
-  router: routerReducer,
 });
 
-export default (cookies) => {
-  const appReducers = combineReducers(createAppReducers(cookies));
+export default (cookies, history) => {
+  const appReducers = combineReducers(createAppReducers(cookies, history));
   return reducerUtils.withStateResetting({
     keepStateSlices: [ 'router' ],
     resetOn: [ auth.actionTypes.LOGOUT ]

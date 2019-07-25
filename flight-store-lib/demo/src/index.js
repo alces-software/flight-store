@@ -1,7 +1,11 @@
 import React, {Component} from 'react'
 import {render} from 'react-dom'
+import 'url-search-params-polyfill';
 
 import FlightStore from '../../src'
+
+const urlParams = new URLSearchParams(window.location.search);
+const defaultProductsFile = urlParams.get('products-file') || 'default.json';
 
 class Store extends Component {
   render() {
@@ -17,7 +21,7 @@ class Store extends Component {
         // The URL prefix for the product definition file.
         productsUrlPrefix="https://alces-flight.s3.amazonaws.com/FlightStore/development-products/"
         // The name of the product definition file to use by default.
-        defaultProductsFile="default.json"
+        defaultProductsFile={defaultProductsFile}
         // The VAT rate to charge.
         vatRate={20}
         // The breakpoint above which cards can be emphasised.
