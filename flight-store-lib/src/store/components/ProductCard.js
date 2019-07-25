@@ -63,5 +63,12 @@ export const ProductFooter = styled(CardFooter)`
     background: none;
     border-radius: 0 0 1rem 1rem;
     border-top: none;
+
+    ${(props) => !props.emphasise ? null : css`
+      @media (min-width: ${props.emphasisBreakPoint || '1200px'}) {
+        transform: scale(0.8, 0.7);
+        z-index: 10;
+      `}
+    }
   }
 `;

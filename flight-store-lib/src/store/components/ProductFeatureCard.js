@@ -66,7 +66,7 @@ const ProductFeatureCard = ({
         {learnMoreLink}
 
       </ProductBody>
-      <ProductFooter>
+      <ProductFooter emphasise={emphasise}>
         <ShowCheckoutFormButton
           id={id}
           type={type}
