@@ -9,6 +9,9 @@
     name: database
     count: 1
 
+  # Optional. Defaults to false. Should this product by emphasised.
+  emphasise: false
+
   # Used as the product name on the checkout form and email.  It should
   # probably match the entry in `stripe.description`.
   name: Pack of 5 Alces Flight Center service credits
@@ -84,6 +87,7 @@
   iconography:
     name: database
     count: 2
+  emphasise: true
   name: Pack of 10 Alces Flight Center service credits
   type: creditPacks
   identifier: 10-service-credit-pack
@@ -108,6 +112,7 @@
   iconography:
     name: database
     count: 3
+  emphasise: false
   name: Pack of 15 Alces Flight Center service credits
   type: creditPacks
   identifier: 15-service-credit-pack

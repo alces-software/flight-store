@@ -20,6 +20,7 @@ const ProductFeatureCard = ({
   cost,
   details,
   features,
+  emphasise,
   iconography,
   id,
   learnMore,
@@ -44,7 +45,7 @@ const ProductFeatureCard = ({
     );
 
   return (
-    <ProductCard>
+    <ProductCard emphasise={emphasise}>
       <ProductHead>
         { iconography == null ? null : <Iconography {...iconography} /> }
         <CardTitle tag="h1">
@@ -80,6 +81,7 @@ ProductFeatureCard.propTypes = {
   }).isRequired,
   details: PropTypes.string,
   features: PropTypes.array,
+  emphasise: PropTypes.bool,
   iconography: PropTypes.shape({
     name: PropTypes.string.isRequired,
     count: PropTypes.number.isRequired,

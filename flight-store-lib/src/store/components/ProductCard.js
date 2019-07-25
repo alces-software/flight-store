@@ -1,10 +1,15 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Card, CardBody, CardFooter } from 'reactstrap';
 import { Theme } from 'flight-reactware';
 
 export const ProductCard = styled(Card)`
   &.card {
     border-radius: 1rem;
+
+    ${(props) => !props.emphasise ? null : css`
+      transform: scale(1.25, 1.4);
+      z-index: 10;
+    `}
   }
 `;
 
