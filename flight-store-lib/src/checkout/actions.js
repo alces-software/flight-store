@@ -57,7 +57,7 @@ export function purchase(values, props) {
         }),
       });
 
-      return await handleServerResponse(stripe, product, url, authToken, getState)(response);
+      return await handleServerResponse(stripe, url, authToken)(response);
 
     } catch (e) {
       if (e.constructor === SubmissionError) {
@@ -71,7 +71,7 @@ export function purchase(values, props) {
   };
 }
 
-function handleServerResponse(stripe, product, url, authToken, getState) {
+function handleServerResponse(stripe, url, authToken) {
   return async function doHandleServerResponse(response) {
     if (response.redirected) {
       // We've redirected, we must be all done.
@@ -106,14 +106,7 @@ function handleServerResponse(stripe, product, url, authToken, getState) {
               "Content-Type": "application/json",
               "Authorization": `Bearer ${authToken}`,
             },
-            body: JSON.stringify({
-              payment_intent_id: paymentIntent.id,
-              product: {
-                filename: store.selectors.filename(getState()),
-                identifier: product.identifier,
-                type: product.type,
-              },
-            }),
+            body: JSON.stringify({ payment_intent_id: paymentIntent.id }),
           });
           return await doHandleServerResponse(serverResponse);
         }

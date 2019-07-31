@@ -1,14 +1,8 @@
 class ChargesController < ApplicationController
   def create
     authorize nil, policy_class: ChargePolicy
-    product_params = params.require(:product).permit(:filename, :type, :identifier)
-    product = Product.load!(
-      product_params[:filename],
-      product_params[:type],
-      product_params[:identifier],
-    )
     intent = with_stripe_error_handling do
-      create_payment_intent(product)
+      create_payment_intent
     end
 
     if intent.status == 'requires_source_action' && intent.next_action.type == 'use_stripe_sdk'
@@ -17,13 +11,10 @@ class ChargesController < ApplicationController
         payment_intent_client_secret: intent.client_secret
       })
     elsif intent.status == 'succeeded'
-      handle_fullfillment(product, intent)
+      handle_fullfillment(intent)
     else
       raise "Invalid PaymentIntent status: #{intent.status.inspect}"
     end
-
-    # We've successfully processed the charge.  We may want to inform the
-    # customer or ourselves.
   rescue Stripe::StripeError => e
     unless performed?
       render(status: 500, json: { code: 500, message: e.message })
@@ -38,8 +29,9 @@ class ChargesController < ApplicationController
 
   private
 
-  def create_payment_intent(product)
+  def create_payment_intent
     if params[:payment_method_id]
+      product = product_from_params
       stripe_params = product.stripe_params
       Stripe::PaymentIntent.create(
         payment_method: params[:payment_method_id],
@@ -47,11 +39,13 @@ class ChargesController < ApplicationController
         currency: stripe_params.currency,
         confirmation_method: 'manual',
         confirm: true,
-
         description: stripe_params.description,
         metadata: {
-          user_id: current_user.id,
           action_identifier: product.action.identifier,
+          product_filename: product_params[:filename],
+          product_identifier: product_params[:identifier],
+          product_type: product_params[:type],
+          user_id: current_user.id,
         },
         receipt_email: current_user.email,
       )
@@ -60,8 +54,9 @@ class ChargesController < ApplicationController
     end
   end
 
-  def handle_fullfillment(product, intent)
+  def handle_fullfillment(intent)
     begin
+      product = product_from_payment_intent(intent)
       product.action.call(intent.charges.data.first, current_user)
     rescue
       # We've charged the customer and not delivered.  We should do something
@@ -76,6 +71,8 @@ class ChargesController < ApplicationController
     if product.action.redirect_url.present?
       redirect_to product.action.redirect_url
     end
+    # We've successfully processed the charge.  We may want to inform the
+    # customer or ourselves.
   end
 
   # For `CardError`s such as a card being declined and produce a sensible JSON
@@ -110,7 +107,6 @@ class ChargesController < ApplicationController
         }
       )
       raise e
-
     rescue Stripe::RateLimitError => e
       # Too many requests made to the API too quickly
       Rails.logger.error(e)
@@ -138,5 +134,30 @@ class ChargesController < ApplicationController
       Rails.logger.error(e)
       raise e
     end
+  end
+
+  def product_params
+    params.require(:product).permit(:filename, :type, :identifier)
+  end
+
+  def product_from_params
+    load_product(product_params)
+  end
+
+  def product_from_payment_intent(intent)
+    product_params = intent.metadata
+      .select { |key, _| key.to_s.start_with?('product_') }
+      .to_h
+      .transform_keys { |key| key.to_s.sub(/^product_/, '') }
+      .symbolize_keys
+    load_product(product_params)
+  end
+
+  def load_product(product_params)
+    Product.load!(
+      product_params[:filename],
+      product_params[:type],
+      product_params[:identifier],
+    )
   end
 end
