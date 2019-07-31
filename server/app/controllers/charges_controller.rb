@@ -1,17 +1,63 @@
 class ChargesController < ApplicationController
   def create
     authorize nil, policy_class: ChargePolicy
-    product_params = params.require(:product).permit(:filename, :type, :identifier)
-    product = Product.load!(
-      product_params[:filename],
-      product_params[:type],
-      product_params[:identifier],
-    )
-    charge = with_stripe_error_handling do
-      charge_card(product, params[:token])
+    intent = with_stripe_error_handling do
+      create_payment_intent
     end
+
+    if intent.status == 'requires_source_action' && intent.next_action.type == 'use_stripe_sdk'
+      render(status: :ok, json: {
+        requires_action: true,
+        payment_intent_client_secret: intent.client_secret
+      })
+    elsif intent.status == 'succeeded'
+      handle_fullfillment(intent)
+    else
+      raise "Invalid PaymentIntent status: #{intent.status.inspect}"
+    end
+  rescue Stripe::StripeError => e
+    unless performed?
+      render(status: 500, json: { code: 500, message: e.message })
+    end
+  rescue => e
+    backtrace = e.backtrace.map { |line| line.sub(Rails.root.to_s, '') }
+    Rails.logger.error([e.class, e.message, *backtrace].join("\n"))
+    unless performed?
+      render(status: 500, json: { code: 500, message: e.message })
+    end
+  end
+
+  private
+
+  def create_payment_intent
+    if params[:payment_method_id]
+      product = product_from_params
+      stripe_params = product.stripe_params
+      Stripe::PaymentIntent.create(
+        payment_method: params[:payment_method_id],
+        amount: stripe_params.amount_with_vat,
+        currency: stripe_params.currency,
+        confirmation_method: 'manual',
+        confirm: true,
+        description: stripe_params.description,
+        metadata: {
+          action_identifier: product.action.identifier,
+          product_filename: product_params[:filename],
+          product_identifier: product_params[:identifier],
+          product_type: product_params[:type],
+          user_id: current_user.id,
+        },
+        receipt_email: current_user.email,
+      )
+    elsif params[:payment_intent_id]
+      Stripe::PaymentIntent.confirm(params[:payment_intent_id])
+    end
+  end
+
+  def handle_fullfillment(intent)
     begin
-      product.action.call(charge, current_user)
+      product = product_from_payment_intent(intent)
+      product.action.call(intent.charges.data.first, current_user)
     rescue
       # We've charged the customer and not delivered.  We should do something
       # here.  Perhaps rollback the charge, or simply inform ourselves that we
@@ -27,27 +73,6 @@ class ChargesController < ApplicationController
     end
     # We've successfully processed the charge.  We may want to inform the
     # customer or ourselves.
-  rescue => e
-    backtrace = e.backtrace.map { |line| line.sub(Rails.root.to_s, '') }
-    Rails.logger.error([e.class, e.message, *backtrace].join("\n"))
-    render(status: 500, json: { code: 500, message: e.message })
-  end
-
-  private
-
-  def charge_card(product, source)
-    stripe_params = product.stripe_params
-    Stripe::Charge.create(
-      amount: stripe_params.amount_with_vat,
-      currency: stripe_params.currency,
-      source: source,
-      description: stripe_params.description,
-      metadata: {
-        user_id: current_user.id,
-        action_identifier: product.action.identifier,
-      },
-      receipt_email: current_user.email,
-    )
   end
 
   # For `CardError`s such as a card being declined and produce a sensible JSON
@@ -81,7 +106,7 @@ class ChargesController < ApplicationController
           message: err[:message],
         }
       )
-
+      raise e
     rescue Stripe::RateLimitError => e
       # Too many requests made to the API too quickly
       Rails.logger.error(e)
@@ -109,5 +134,30 @@ class ChargesController < ApplicationController
       Rails.logger.error(e)
       raise e
     end
+  end
+
+  def product_params
+    params.require(:product).permit(:filename, :type, :identifier)
+  end
+
+  def product_from_params
+    load_product(product_params)
+  end
+
+  def product_from_payment_intent(intent)
+    product_params = intent.metadata
+      .select { |key, _| key.to_s.start_with?('product_') }
+      .to_h
+      .transform_keys { |key| key.to_s.sub(/^product_/, '') }
+      .symbolize_keys
+    load_product(product_params)
+  end
+
+  def load_product(product_params)
+    Product.load!(
+      product_params[:filename],
+      product_params[:type],
+      product_params[:identifier],
+    )
   end
 end
