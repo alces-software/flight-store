@@ -7,11 +7,56 @@ class ChargesController < ApplicationController
       product_params[:type],
       product_params[:identifier],
     )
-    charge = with_stripe_error_handling do
-      charge_card(product, params[:token])
+    intent = with_stripe_error_handling do
+      create_payment_intent(product)
     end
+
+    if intent.status == 'requires_source_action' && intent.next_action.type == 'use_stripe_sdk'
+      render(status: :ok, json: {
+        requires_action: true,
+        payment_intent_client_secret: intent.client_secret
+      })
+    elsif intent.status == 'succeeded'
+      handle_fullfillment(product, intent)
+    else
+      raise "Invalid PaymentIntent status: #{intent.status.inspect}"
+    end
+
+    # We've successfully processed the charge.  We may want to inform the
+    # customer or ourselves.
+  rescue => e
+    backtrace = e.backtrace.map { |line| line.sub(Rails.root.to_s, '') }
+    Rails.logger.error([e.class, e.message, *backtrace].join("\n"))
+    render(status: 500, json: { code: 500, message: e.message })
+  end
+
+  private
+
+  def create_payment_intent(product)
+    if params[:payment_method_id]
+      stripe_params = product.stripe_params
+      Stripe::PaymentIntent.create(
+        payment_method: params[:payment_method_id],
+        amount: stripe_params.amount_with_vat,
+        currency: stripe_params.currency,
+        confirmation_method: 'manual',
+        confirm: true,
+
+        description: stripe_params.description,
+        metadata: {
+          user_id: current_user.id,
+          action_identifier: product.action.identifier,
+        },
+        receipt_email: current_user.email,
+      )
+    elsif params[:payment_intent_id]
+      Stripe::PaymentIntent.confirm(params[:payment_intent_id])
+    end
+  end
+
+  def handle_fullfillment(product, intent)
     begin
-      product.action.call(charge, current_user)
+      product.action.call(intent.charges.data.first, current_user)
     rescue
       # We've charged the customer and not delivered.  We should do something
       # here.  Perhaps rollback the charge, or simply inform ourselves that we
@@ -25,29 +70,6 @@ class ChargesController < ApplicationController
     if product.action.redirect_url.present?
       redirect_to product.action.redirect_url
     end
-    # We've successfully processed the charge.  We may want to inform the
-    # customer or ourselves.
-  rescue => e
-    backtrace = e.backtrace.map { |line| line.sub(Rails.root.to_s, '') }
-    Rails.logger.error([e.class, e.message, *backtrace].join("\n"))
-    render(status: 500, json: { code: 500, message: e.message })
-  end
-
-  private
-
-  def charge_card(product, source)
-    stripe_params = product.stripe_params
-    Stripe::Charge.create(
-      amount: stripe_params.amount_with_vat,
-      currency: stripe_params.currency,
-      source: source,
-      description: stripe_params.description,
-      metadata: {
-        user_id: current_user.id,
-        action_identifier: product.action.identifier,
-      },
-      receipt_email: current_user.email,
-    )
   end
 
   # For `CardError`s such as a card being declined and produce a sensible JSON
