@@ -24,10 +24,16 @@ class ChargesController < ApplicationController
 
     # We've successfully processed the charge.  We may want to inform the
     # customer or ourselves.
+  rescue Stripe::StripeError => e
+    unless performed?
+      render(status: 500, json: { code: 500, message: e.message })
+    end
   rescue => e
     backtrace = e.backtrace.map { |line| line.sub(Rails.root.to_s, '') }
     Rails.logger.error([e.class, e.message, *backtrace].join("\n"))
-    render(status: 500, json: { code: 500, message: e.message })
+    unless performed?
+      render(status: 500, json: { code: 500, message: e.message })
+    end
   end
 
   private
@@ -103,6 +109,7 @@ class ChargesController < ApplicationController
           message: err[:message],
         }
       )
+      raise e
 
     rescue Stripe::RateLimitError => e
       # Too many requests made to the API too quickly
