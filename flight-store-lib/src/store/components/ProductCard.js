@@ -32,7 +32,7 @@ const enhanceCard = compose(
 
       ${(props) => !props.emphasise ? null : css`
         @media (min-width: ${props.emphasisBreakPoint || '1200px'}) {
-          transform: scale(1.25, 1.4);
+          transform: scale(1.27, 1.27) translateY(-7px);
           z-index: 10;
         `}
       }
@@ -76,7 +76,7 @@ const enhanceFooter = compose(
 
       ${(props) => !props.emphasise ? null : css`
         @media (min-width: ${props.emphasisBreakPoint || '1200px'}) {
-          transform: scale(0.8, 0.7);
+          transform: scale(0.78, 0.78);
           z-index: 10;
         `}
       }
