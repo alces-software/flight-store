@@ -87,7 +87,13 @@ const enhanceFooter = compose(
 const ProductFooter = enhanceFooter(CardFooter);
 export { ProductFooter };
 
+// We multiply `props.size` by 0.866 for the top border width to get an
+// equilateral triangle.
+// `position: relative` and `top: -1px` prevents a possible 1px uncoloured
+// line above the triangle for the emphasised card.
 const ArrowDown = styled.div`
+  position: relative;
+  top: -1px;
   width: 0; 
   height: 0; 
   margin: auto;
