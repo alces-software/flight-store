@@ -62,7 +62,7 @@ const ProductFeatureCard = ({
       </ProductHead>
       <ArrowDown
         backgroundColor={backgroundColor}
-        size="40px"
+        size={40}
       />
       <ProductBody className="position-relative">
         <ProductCost cost={cost} />

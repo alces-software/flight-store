@@ -91,10 +91,10 @@ const ArrowDown = styled.div`
   width: 0; 
   height: 0; 
   margin: auto;
-  border-left: ${(props) => props.size} solid transparent;
-  border-right: ${(props) => props.size} solid transparent;
+  border-left: ${(props) => props.size}px solid transparent;
+  border-right: ${(props) => props.size}px solid transparent;
   
-  border-top-width: ${(props) => props.size};
+  border-top-width: ${(props) => props.size * 0.866}px;
   border-top-style: solid;
   border-top-color: ${(props) => props.backgroundColor == null ?
     null :
