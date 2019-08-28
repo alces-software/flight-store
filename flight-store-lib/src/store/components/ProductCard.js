@@ -55,6 +55,7 @@ export const ProductHead = styled(CardBody)`
 
 export const ProductBody = styled(CardBody)`
   &.card-body {
+    margin-top: -20px;
   }
 `;
 
@@ -85,3 +86,19 @@ const enhanceFooter = compose(
 
 const ProductFooter = enhanceFooter(CardFooter);
 export { ProductFooter };
+
+const ArrowDown = styled.div`
+  width: 0; 
+  height: 0; 
+  margin: auto;
+  border-left: ${(props) => props.size} solid transparent;
+  border-right: ${(props) => props.size} solid transparent;
+  
+  border-top-width: ${(props) => props.size};
+  border-top-style: solid;
+  border-top-color: ${(props) => props.backgroundColor == null ?
+    null :
+    props.backgroundColor
+  };
+`;
+export { ArrowDown };
