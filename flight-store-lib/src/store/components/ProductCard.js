@@ -55,7 +55,7 @@ export const ProductHead = styled(CardBody)`
 
 export const ProductBody = styled(CardBody)`
   &.card-body {
-    margin-top: -20px;
+    margin-top: -10px;
   }
 `;
 
