@@ -7,6 +7,10 @@ const Spacer = styled.span`
   width: 2px;
 `;
 
+const Amount = styled.span`
+  font-size: 150%;
+`;
+
 const ProductCost = ({ cost }) => {
   const per = cost.per ? <small>{cost.per}</small> : null;
 
@@ -14,7 +18,7 @@ const ProductCost = ({ cost }) => {
     <div>
       <div className="d-flex align-items-baseline justify-content-center">
         <div>
-          <small>{cost.unit}</small><big>{cost.amount}</big>{per}
+          <small>{cost.unit}</small><Amount>{cost.amount}</Amount>{per}
         </div>
         <Spacer/>
         <small>

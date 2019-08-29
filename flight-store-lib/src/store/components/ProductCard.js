@@ -32,7 +32,7 @@ const enhanceCard = compose(
 
       ${(props) => !props.emphasise ? null : css`
         @media (min-width: ${props.emphasisBreakPoint || '1200px'}) {
-          transform: scale(1.25, 1.4);
+          transform: scale(1.27, 1.27) translateY(-7px);
           z-index: 10;
         `}
       }
@@ -55,6 +55,7 @@ export const ProductHead = styled(CardBody)`
 
 export const ProductBody = styled(CardBody)`
   &.card-body {
+    margin-top: -10px;
   }
 `;
 
@@ -75,7 +76,7 @@ const enhanceFooter = compose(
 
       ${(props) => !props.emphasise ? null : css`
         @media (min-width: ${props.emphasisBreakPoint || '1200px'}) {
-          transform: scale(0.8, 0.7);
+          transform: scale(0.78, 0.78);
           z-index: 10;
         `}
       }
@@ -85,3 +86,25 @@ const enhanceFooter = compose(
 
 const ProductFooter = enhanceFooter(CardFooter);
 export { ProductFooter };
+
+// We multiply `props.size` by 0.866 for the top border width to get an
+// equilateral triangle.
+// `position: relative` and `top: -1px` prevents a possible 1px uncoloured
+// line above the triangle for the emphasised card.
+const ArrowDown = styled.div`
+  position: relative;
+  top: -1px;
+  width: 0; 
+  height: 0; 
+  margin: auto;
+  border-left: ${(props) => props.size}px solid transparent;
+  border-right: ${(props) => props.size}px solid transparent;
+  
+  border-top-width: ${(props) => props.size * 0.866}px;
+  border-top-style: solid;
+  border-top-color: ${(props) => props.backgroundColor == null ?
+    null :
+    props.backgroundColor
+  };
+`;
+export { ArrowDown };

@@ -9,6 +9,7 @@ import FeatureList from './FeatureList';
 import LearnMoreLink from './LearnMoreLink';
 import ProductCost from './ProductCost';
 import {
+  ArrowDown,
   ProductBody,
   ProductCard,
   ProductFooter,
@@ -59,6 +60,10 @@ const ProductFeatureCard = ({
           {subtitle}
         </CardSubtitle>
       </ProductHead>
+      <ArrowDown
+        backgroundColor={backgroundColor}
+        size={40}
+      />
       <ProductBody className="position-relative">
         <ProductCost cost={cost} />
         {featureList}

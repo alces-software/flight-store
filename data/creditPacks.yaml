@@ -100,7 +100,7 @@
     unit: £
     amount: 2350
     includesVAT: false
-    saving: 100
+    saving: 50
   stripe:
     amount: 235000
     currency: gbp
@@ -127,7 +127,7 @@
     unit: £
     amount: 3500
     includesVAT: false
-    saving: 200
+    saving: 100
   stripe:
     amount: 350000
     currency: gbp
