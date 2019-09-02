@@ -22,7 +22,6 @@
   "dependencies": {
     "dompurify": "^1.0.8",
     "dotenv": "^8.0.0",
-    "flight-reactware": "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.3.1/flight-reactware.tgz",
     "history": "^4.9.0",
     "marked": "^0.7.0",
     "object.values": "^1.0.4",
@@ -43,11 +42,13 @@
     "universal-cookie": "^4.0.2"
   },
   "peerDependencies": {
+    "flight-reactware": "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.3.4/flight-reactware.tgz",
     "react": "16.x",
     "react-dom": "16.x"
   },
   "devDependencies": {
     "connected-react-router": "^6.5.2",
+    "flight-reactware": "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.3.4/flight-reactware.tgz",
     "nwb": "0.23.x",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

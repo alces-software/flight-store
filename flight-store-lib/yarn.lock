@@ -3901,9 +3901,9 @@ find-up@^2.1.0:
   dependencies:
     locate-path "^2.0.0"
 
-"flight-reactware@https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.3.1/flight-reactware.tgz":
-  version "0.3.1"
-  resolved "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.3.1/flight-reactware.tgz#073d594fafaf8c18e0ad420bc26a4c3286727650"
+"flight-reactware@https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.3.4/flight-reactware.tgz":
+  version "0.3.4"
+  resolved "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.3.4/flight-reactware.tgz#38b37121e26f59a71ad35191b20529cd7071ae78"
   dependencies:
     array-includes "^3.0.3"
     axios "^0.16.2"
