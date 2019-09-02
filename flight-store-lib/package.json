@@ -1,6 +1,6 @@
 {
   "name": "flight-store-lib",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "flight-store-lib React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -22,7 +22,6 @@
   "dependencies": {
     "dompurify": "^1.0.8",
     "dotenv": "^8.0.0",
-    "flight-reactware": "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.3.1/flight-reactware.tgz",
     "history": "^4.9.0",
     "marked": "^0.7.0",
     "object.values": "^1.0.4",
@@ -39,20 +38,23 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "reselect": "^4.0.0",
-    "styled-components": "^4.3.2",
     "universal-cookie": "^4.0.2"
   },
   "peerDependencies": {
+    "flight-reactware": "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.3.4/flight-reactware.tgz",
     "react": "16.x",
-    "react-dom": "16.x"
+    "react-dom": "16.x",
+    "styled-components": "4.3.x"
   },
   "devDependencies": {
     "connected-react-router": "^6.5.2",
+    "flight-reactware": "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.3.4/flight-reactware.tgz",
     "nwb": "0.23.x",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
+    "styled-components": "^4.3.2",
     "url-search-params-polyfill": "^7.0.0"
   },
   "author": "",
