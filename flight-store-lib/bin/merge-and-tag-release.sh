@@ -53,14 +53,9 @@ merge_and_tag() {
     git checkout master
     abort_if_not_uptodate_with_remote
     git merge --no-ff "$release_branch"
+    git push origin master
     git tag -a "$release_tag" -m "Tag for release as $release_tag"
-
-    git checkout develop
-    abort_if_not_uptodate_with_remote
-    git merge --no-ff "$release_branch"
-
     git push --follow-tags origin master
-    git push origin develop
 
     git branch -d "$release_branch"
 }

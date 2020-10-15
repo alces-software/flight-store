@@ -37,7 +37,6 @@ abort_if_uncommitted_changes_present() {
 abort_if_not_uptodate_with_remotes() {
     git fetch origin
     abort_if_not_uptodate_with_remote master
-    abort_if_not_uptodate_with_remote develop
 }
 
 abort_if_not_uptodate_with_remote() {
