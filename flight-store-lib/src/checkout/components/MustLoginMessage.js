@@ -1,14 +1,21 @@
 import React from 'react';
-import { auth } from 'flight-reactware';
+import { Button } from 'reactstrap';
 
-const MustLoginMessage = () => {
+const MustLoginMessage = ({ showLoginForm }) => {
+  showLoginForm = showLoginForm == null ? () => {} : showLoginForm;
   return (
     <p>
       You must be signed in to your Alces Flight account in order to purchase
       any products from Alces Flight Store. Please{' '}
-      <auth.SignInLink>
+      <a
+        className="btn btn-link"
+        href="/sign-in"
+        onClick={(evt) => { showLoginForm(); evt.preventDefault(); }}
+        size="md"
+        style={{ verticalAlign: 'baseline', padding: 0 }}
+      >
         sign in
-      </auth.SignInLink>
+      </a>
       {' '}and try again.
     </p>
   );

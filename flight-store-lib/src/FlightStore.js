@@ -5,6 +5,7 @@ import { createCookieMiddleware } from 'redux-cookie';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import { StripeProvider } from 'react-stripe-elements';
+import { withProps } from 'recompose';
 
 import createReducers from './reducers';
 import middleware from './middleware';
@@ -34,6 +35,7 @@ const FlightStore = ({
   emphasisBreakPoint,
   productType,
   productsUrlPrefix,
+  showLoginForm,
   ssoUserRequired,
   stripeApiKey,
   vatRate,
@@ -44,12 +46,14 @@ const FlightStore = ({
   reduxStore.dispatch(constants.actions.set('VAT_RATE', vatRate));
   reduxStore.dispatch(constants.actions.set('SSO_USER_REQUIRED', ssoUserRequired != undefined));
   reduxStore.dispatch(constants.actions.set('EMPHASIS_BREAK_POINT', emphasisBreakPoint));
+  const CheckoutModal = withProps({showLoginForm: showLoginForm })(checkout.CheckoutModal);
+
   return (
     <Provider store={reduxStore}>
       <StripeProvider apiKey={stripeApiKey}>
         <store.Context>
           <store.pages.Products
-            CheckoutModal={checkout.CheckoutModal}
+            CheckoutModal={CheckoutModal}
             ShowCheckoutFormButton={checkout.ShowCheckoutFormButton}
             productType={productType}
           />

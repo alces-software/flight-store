@@ -25,9 +25,15 @@ SuccessMessage.propTypes = {
   }).isOpenn
 };
 
-const Content = ({ product, ssoUser, ssoUserRequired, submitSucceeded }) => {
+const Content = ({
+  product,
+  showLoginForm,
+  ssoUser,
+  ssoUserRequired,
+  submitSucceeded,
+}) => {
   if (ssoUserRequired && ssoUser == null) {
-    return <MustLoginMessage />;
+    return <MustLoginMessage showLoginForm={showLoginForm} />;
   } else if (submitSucceeded) {
     return <SuccessMessage product={product} /> ;
   } else {
@@ -49,6 +55,7 @@ const CheckoutModal = ({
   closeModal,
   isOpen,
   product,
+  showLoginForm,
   ssoUser,
   ssoUserRequired,
   submitSucceeded,
@@ -64,6 +71,7 @@ const CheckoutModal = ({
     >
       <Content
         product={product}
+        showLoginForm={showLoginForm}
         ssoUser={ssoUser}
         ssoUserRequired={ssoUserRequired}
         submitSucceeded={submitSucceeded}
