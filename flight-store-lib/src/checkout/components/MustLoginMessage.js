@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button } from 'reactstrap';
 
-const MustLoginMessage = ({ showLoginForm }) => {
-  showLoginForm = showLoginForm == null ? () => {} : showLoginForm;
+import * as Auth from '../../AuthContext';
+
+const MustLoginMessage = () => {
+  const showLoginForm = useContext(Auth.Context).showLoginForm || function() {};
+
   return (
     <p>
       You must be signed in to your Alces Flight account in order to purchase

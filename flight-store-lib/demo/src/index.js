@@ -2,10 +2,22 @@ import React, {Component} from 'react'
 import {render} from 'react-dom'
 import 'url-search-params-polyfill';
 
-import FlightStore from '../../src'
+// Here we depend on flight-reactware for authentication.  When embedded into
+// other applications you might want to depend on something else.
+import { auth as reactwareAuth } from 'flight-reactware';
+
+import FlightStore, { reduxStore } from '../../src'
 
 const urlParams = new URLSearchParams(window.location.search);
 const defaultProductsFile = urlParams.get('products-file') || 'default.json';
+
+function getAuthToken() {
+  return reactwareAuth.selectors.ssoToken(reduxStore.getState());
+}
+
+function getCurrentUser() {
+  return reactwareAuth.selectors.currentUserSelector(reduxStore.getState());
+}
 
 class Store extends Component {
   render() {
@@ -26,6 +38,12 @@ class Store extends Component {
         vatRate={20}
         // The breakpoint above which cards can be emphasised.
         emphasisBreakPoint="1185px"
+
+        // Authentication dependencies.
+        getAuthToken={ getAuthToken }
+        getCurrentUser={ getCurrentUser }
+        showLoginForm={ function() { console.log('showing login form'); } }
+        ssoUserRequired={ false }
       />
     );
   }

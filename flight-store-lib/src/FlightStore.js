@@ -11,12 +11,13 @@ import createReducers from './reducers';
 import middleware from './middleware';
 import createLogics from './logics';
 import { checkout, constants, store } from './modules';
+import * as Auth from './AuthContext';
 
 const cookies = new Cookies();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const history = createHistory();
 
-const reduxStore = createStore(
+export const reduxStore = createStore(
   createReducers(cookies, history),
   composeEnhancers(
     applyMiddleware(
@@ -33,6 +34,8 @@ const FlightStore = ({
   apiBaseUrl,
   defaultProductsFile,
   emphasisBreakPoint,
+  getAuthToken,
+  getCurrentUser,
   productType,
   productsUrlPrefix,
   showLoginForm,
@@ -44,21 +47,28 @@ const FlightStore = ({
   reduxStore.dispatch(constants.actions.set('PRODUCTS_URL_PREFIX', productsUrlPrefix));
   reduxStore.dispatch(constants.actions.set('DEFAULT_PRODUCTS_FILE', defaultProductsFile));
   reduxStore.dispatch(constants.actions.set('VAT_RATE', vatRate));
-  reduxStore.dispatch(constants.actions.set('SSO_USER_REQUIRED', ssoUserRequired != undefined));
   reduxStore.dispatch(constants.actions.set('EMPHASIS_BREAK_POINT', emphasisBreakPoint));
-  const CheckoutModal = withProps({showLoginForm: showLoginForm })(checkout.CheckoutModal);
+
+  const auth = {
+    getAuthToken,
+    getCurrentUser,
+    showLoginForm,
+    ssoUserRequired,
+  };
 
   return (
     <Provider store={reduxStore}>
-      <StripeProvider apiKey={stripeApiKey}>
-        <store.Context>
-          <store.pages.Products
-            CheckoutModal={CheckoutModal}
-            ShowCheckoutFormButton={checkout.ShowCheckoutFormButton}
-            productType={productType}
-          />
-        </store.Context>
-      </StripeProvider>
+      <Auth.Provider value={auth}>
+        <StripeProvider apiKey={stripeApiKey}>
+          <store.Context>
+            <store.pages.Products
+              CheckoutModal={checkout.CheckoutModal}
+              ShowCheckoutFormButton={checkout.ShowCheckoutFormButton}
+              productType={productType}
+            />
+          </store.Context>
+        </StripeProvider>
+      </Auth.Provider>
     </Provider>
   );
 };

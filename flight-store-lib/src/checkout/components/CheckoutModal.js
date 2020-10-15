@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Elements } from 'react-stripe-elements';
-import { auth, StandardModal } from 'flight-reactware';
+import { StandardModal } from 'flight-reactware';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import constants from '../../constants';
+import * as Auth from '../../AuthContext';
 
 import * as actions from '../actions';
 import * as selectors from '../selectors';
@@ -27,13 +28,12 @@ SuccessMessage.propTypes = {
 
 const Content = ({
   product,
-  showLoginForm,
   ssoUser,
   ssoUserRequired,
   submitSucceeded,
 }) => {
   if (ssoUserRequired && ssoUser == null) {
-    return <MustLoginMessage showLoginForm={showLoginForm} />;
+    return <MustLoginMessage />;
   } else if (submitSucceeded) {
     return <SuccessMessage product={product} /> ;
   } else {
@@ -55,12 +55,13 @@ const CheckoutModal = ({
   closeModal,
   isOpen,
   product,
-  showLoginForm,
-  ssoUser,
-  ssoUserRequired,
   submitSucceeded,
 }) => {
+  const auth = useContext(Auth.Context)
+  const ssoUser = auth.getCurrentUser();
+  const ssoUserRequired = auth.ssoUserRequired;
   const hidePurchaseButton = submitSucceeded || (ssoUserRequired && ssoUser == null);
+
   return (
     <StandardModal
       buttons={hidePurchaseButton ? null : <PurchaseButton />}
@@ -71,7 +72,6 @@ const CheckoutModal = ({
     >
       <Content
         product={product}
-        showLoginForm={showLoginForm}
         ssoUser={ssoUser}
         ssoUserRequired={ssoUserRequired}
         submitSucceeded={submitSucceeded}
@@ -84,8 +84,6 @@ CheckoutModal.propTypes = {
   closeModal: PropTypes.func,
   isOpen: PropTypes.bool.isRequired,
   product: PropTypes.object,
-  ssoUser: PropTypes.object,
-  ssoUserRequired: PropTypes.bool,
   submitSucceeded: PropTypes.bool,
 };
 
@@ -94,8 +92,6 @@ const enhance = compose(
     createStructuredSelector({
       isOpen: selectors.modal.isModalOpen,
       product: selectors.modal.product,
-      ssoUser: auth.selectors.currentUserSelector,
-      ssoUserRequired: (state) => constants.selectors.get(state, { name: 'SSO_USER_REQUIRED' }),
       submitSucceeded: selectors.submitSucceeded,
     }),
     {

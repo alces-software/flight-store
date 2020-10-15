@@ -1,6 +1,6 @@
 import React from 'react';
 import { injectStripe } from 'react-stripe-elements';
-import { compose } from 'recompose';
+import { compose, fromRenderProps } from 'recompose';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import {
@@ -8,7 +8,7 @@ import {
   FormGroup,
   FormText,
 } from 'reactstrap';
-import { auth, FormInput, HiddenButton } from 'flight-reactware';
+import { FormInput, HiddenButton } from 'flight-reactware';
 import {
   Field,
   propTypes as formPropTypes,
@@ -16,6 +16,7 @@ import {
 } from 'redux-form';
 
 import constants from '../../constants';
+import * as Auth from '../../AuthContext';
 
 import * as actions from '../actions';
 import ErrorMessage from './ErrorMessage';
@@ -117,9 +118,12 @@ const enhance = compose(
   (component) => injectStripe(component),
 
   connect(createStructuredSelector({
-    authToken: auth.selectors.ssoToken,
     vatRate: (state) => constants.selectors.get(state, { name: 'VAT_RATE' }),
   })),
+
+  // Provide the authToken as a regular prop.  It is required by the
+  // `purchase` action.
+  fromRenderProps(Auth.Consumer, ({ getAuthToken }) => ({ authToken: getAuthToken() })),
 
   reduxForm({
     destroyOnUnmount: false,
