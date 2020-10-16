@@ -22,7 +22,6 @@
   "dependencies": {
     "dompurify": "^2.0.7",
     "dotenv": "^8.0.0",
-    "history": "^4.9.0",
     "marked": "^0.7.0",
     "object.values": "^1.0.4",
     "polished": "^3.4.1",
@@ -33,29 +32,22 @@
     "reactstrap": "^8.0.1",
     "recompose": "^0.30.0",
     "redux": "^4.0.4",
-    "redux-cookie": "^0.5.9",
     "redux-form": "^8.2.4",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
-    "reselect": "^4.0.0",
-    "universal-cookie": "^4.0.2"
+    "reselect": "^4.0.0"
   },
   "peerDependencies": {
-    "flight-account-menu": "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightAccountMenu/0.3.2/flight-account-menu-v0.3.2.tgz",
-    "flight-reactware": "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.4.4/flight-reactware.tgz",
     "react": "16.x",
     "react-dom": "16.x",
     "styled-components": "4.3.x"
   },
   "devDependencies": {
-    "connected-react-router": "^6.5.2",
     "flight-account-menu": "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightAccountMenu/0.3.2/flight-account-menu-v0.3.2.tgz",
-    "flight-reactware": "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.4.4/flight-reactware.tgz",
+    "flight-reactware": "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.5.1/flight-reactware.tgz",
     "nwb": "0.23.x",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-router": "^5.0.1",
-    "react-router-dom": "^5.0.1",
     "styled-components": "^4.3.2",
     "url-search-params-polyfill": "^7.0.0"
   },

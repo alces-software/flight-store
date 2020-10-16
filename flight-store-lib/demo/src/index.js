@@ -2,6 +2,10 @@ import React, {Component} from 'react'
 import {render} from 'react-dom'
 import 'url-search-params-polyfill';
 
+import 'flight-reactware/styles/bootstrap-theme.css';
+import 'flight-reactware/styles/flight.css';
+import 'flight-reactware/styles/fonts.css';
+
 // Here we depend on flight-account-menu for authentication.  When embedded
 // into other applications you might want to depend on something else.
 import {

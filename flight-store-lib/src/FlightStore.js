@@ -1,7 +1,4 @@
 import React from 'react';
-import Cookies from 'universal-cookie';
-import { createBrowserHistory as createHistory } from 'history';
-import { createCookieMiddleware } from 'redux-cookie';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import { StripeProvider } from 'react-stripe-elements';
@@ -13,16 +10,13 @@ import createLogics from './logics';
 import { checkout, constants, store } from './modules';
 import * as Auth from './AuthContext';
 
-const cookies = new Cookies();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const history = createHistory();
 
 export const reduxStore = createStore(
-  createReducers(cookies, history),
+  createReducers(),
   composeEnhancers(
     applyMiddleware(
       ...middleware,
-      createCookieMiddleware(cookies),
     )
   )
 );

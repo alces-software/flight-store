@@ -1,10 +1,5 @@
 import { compose } from 'redux';
-import {
-  createReducers as createFlightReducers,
-  jsonApi,
-  loadingStates,
-  reducerUtils,
-} from 'flight-reactware';
+import { jsonApi, loadingStates, reducerUtils } from 'flight-reactware';
 import { reducer as formReducer } from 'redux-form';
 import { combineReducers } from 'redux';
 
@@ -37,8 +32,7 @@ const moduleReducers = Object.keys(modules).reduce(
   {},
 );
 
-const createAppReducers = (cookies, history) => ({
-  ...createFlightReducers(cookies, history),
+const createAppReducers = () => ({
   ...moduleReducers,
   entities: compose(
     jsonApi.withIndexes(entityIndexes),
@@ -47,8 +41,8 @@ const createAppReducers = (cookies, history) => ({
   form: formReducer,
 });
 
-export default (cookies, history) => {
-  const appReducers = combineReducers(createAppReducers(cookies, history));
+export default () => {
+  const appReducers = combineReducers(createAppReducers());
   return reducerUtils.withStateResetting({
     keepStateSlices: [ 'router' ],
     // This needs to be consistent with the redux action type used to log a

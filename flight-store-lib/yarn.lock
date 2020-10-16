@@ -264,8 +264,8 @@
   resolved "https://registry.yarnpkg.com/@babel/helper-validator-option/-/helper-validator-option-7.12.1.tgz#175567380c3e77d60ff98a54bb015fe78f2178d9"
 
 "@babel/helper-wrap-function@^7.10.4":
-  version "7.10.4"
-  resolved "https://registry.yarnpkg.com/@babel/helper-wrap-function/-/helper-wrap-function-7.10.4.tgz#8a6f701eab0ff39f765b5a1cfef409990e624b87"
+  version "7.12.3"
+  resolved "https://registry.yarnpkg.com/@babel/helper-wrap-function/-/helper-wrap-function-7.12.3.tgz#3332339fc4d1fbbf1c27d7958c27d34708e990d9"
   dependencies:
     "@babel/helper-function-name" "^7.10.4"
     "@babel/template" "^7.10.4"
@@ -297,8 +297,8 @@
     js-tokens "^4.0.0"
 
 "@babel/parser@^7.10.4", "@babel/parser@^7.12.1", "@babel/parser@^7.9.0":
-  version "7.12.2"
-  resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.12.2.tgz#9d2fcf24cafe85333ab0aff9f26b81bba356004d"
+  version "7.12.3"
+  resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.12.3.tgz#a305415ebe7a6c7023b40b5122a0662d928334cd"
 
 "@babel/parser@^7.4.4", "@babel/parser@^7.5.5":
   version "7.5.5"
@@ -860,7 +860,7 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.2.0", "@babel/runtime@^7.4.0", "@babel/runtime@^7.4.5":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.2.0", "@babel/runtime@^7.4.5":
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.5.5.tgz#74fba56d35efbeca444091c7850ccd494fd2f132"
   dependencies:
@@ -973,10 +973,6 @@
   version "8.10.50"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.50.tgz#f3d68482b1f54b5f4fba8daaac385db12bb6a706"
 
-"@types/object-assign@^4.0.30":
-  version "4.0.30"
-  resolved "https://registry.yarnpkg.com/@types/object-assign/-/object-assign-4.0.30.tgz#8949371d5a99f4381ee0f1df0a9b7a187e07e652"
-
 "@types/parse-json@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
@@ -986,8 +982,8 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
 
 "@types/react@*":
-  version "16.9.52"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.52.tgz#c46c72d1a1d8d9d666f4dd2066c0e22600ccfde1"
+  version "16.9.53"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.53.tgz#40cd4f8b8d6b9528aedd1fff8fcffe7a112a3d23"
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
@@ -2975,14 +2971,6 @@ connect@^3.6.0:
     parseurl "~1.3.3"
     utils-merge "1.0.1"
 
-connected-react-router@^6.5.2:
-  version "6.5.2"
-  resolved "https://registry.yarnpkg.com/connected-react-router/-/connected-react-router-6.5.2.tgz#422af70f86cb276681e20ab4295cf27dd9b6c7e3"
-  dependencies:
-    immutable "^3.8.1"
-    prop-types "^15.7.2"
-    seamless-immutable "^7.1.3"
-
 console-browserify@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/console-browserify/-/console-browserify-1.1.0.tgz#f0241c45730a9fc6323b206dbf38edc741d0bb10"
@@ -4230,9 +4218,9 @@ find-up@^2.1.0:
     universal-cookie "^4.0.3"
     validator "^13.1.1"
 
-"flight-reactware@https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.4.4/flight-reactware.tgz":
-  version "0.4.4"
-  resolved "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.4.4/flight-reactware.tgz#f8baf1e2f25151daa55ef491070104c79e37fa79"
+"flight-reactware@https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.5.1/flight-reactware.tgz":
+  version "0.5.1"
+  resolved "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.5.1/flight-reactware.tgz#465813e5d2ca524efda098960a321b88fb02fe69"
   dependencies:
     array-includes "^3.0.3"
     axios "^0.16.2"
@@ -4750,17 +4738,6 @@ hipchat-notifier@^1.1.0:
     lodash "^4.0.0"
     request "^2.0.0"
 
-history@^4.9.0:
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/history/-/history-4.9.0.tgz#84587c2068039ead8af769e9d6a6860a14fa1bca"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    loose-envify "^1.2.0"
-    resolve-pathname "^2.2.0"
-    tiny-invariant "^1.0.2"
-    tiny-warning "^1.0.0"
-    value-equal "^0.4.0"
-
 hmac-drbg@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/hmac-drbg/-/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"
@@ -4777,7 +4754,7 @@ hoist-non-react-statics@^2.3.1:
   version "2.5.5"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
 
-hoist-non-react-statics@^3.1.0, hoist-non-react-statics@^3.2.1, hoist-non-react-statics@^3.3.0:
+hoist-non-react-statics@^3.2.1, hoist-non-react-statics@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.0.tgz#b09178f0122184fb95acf525daaecb4d8f45958b"
   dependencies:
@@ -5000,7 +4977,7 @@ ignore@^3.3.5:
   version "3.3.10"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.3.10.tgz#0a97fb876986e8081c631160f8f9f389157f0043"
 
-immutable@3.8.2, immutable@^3.8.1:
+immutable@3.8.2:
   version "3.8.2"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
 
@@ -5936,7 +5913,7 @@ long@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/long/-/long-3.2.0.tgz#d821b7138ca1cb581c172990ef14db200b5c474b"
 
-loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.2.0, loose-envify@^1.3.1, loose-envify@^1.4.0:
+loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
   dependencies:
@@ -6170,14 +6147,6 @@ min-document@^2.19.0:
   resolved "https://registry.yarnpkg.com/min-document/-/min-document-2.19.0.tgz#7bd282e3f5842ed295bb748cdd9f1ffa2c824685"
   dependencies:
     dom-walk "^0.1.0"
-
-mini-create-react-context@^0.3.0:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/mini-create-react-context/-/mini-create-react-context-0.3.2.tgz#79fc598f283dd623da8e088b05db8cddab250189"
-  dependencies:
-    "@babel/runtime" "^7.4.0"
-    gud "^1.0.0"
-    tiny-warning "^1.0.2"
 
 mini-css-extract-plugin@0.4.1:
   version "0.4.1"
@@ -7054,12 +7023,6 @@ path-to-regexp@0.1.7:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-0.1.7.tgz#df604178005f522f15eb4490e7247a1bfaa67f8c"
 
-path-to-regexp@^1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-1.7.0.tgz#59fde0f435badacba103a84e9d3bc64e96b9937d"
-  dependencies:
-    isarray "0.0.1"
-
 path-type@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-1.1.0.tgz#59c44f7ee491da704da415da5a4070ba4f8fe441"
@@ -7390,8 +7353,8 @@ qs@~6.5.2:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
 
 query-string@^6.8.1:
-  version "6.13.5"
-  resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.13.5.tgz#99e95e2fb7021db90a6f373f990c0c814b3812d8"
+  version "6.13.6"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.13.6.tgz#e5ac7c74f2a5da43fbca0b883b4f0bafba439966"
   dependencies:
     decode-uri-component "^0.2.0"
     split-on-first "^1.0.0"
@@ -7688,33 +7651,6 @@ react-remove-scroll@^2.4.0:
     tslib "^1.0.0"
     use-callback-ref "^1.2.3"
     use-sidecar "^1.0.1"
-
-react-router-dom@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-5.0.1.tgz#ee66f4a5d18b6089c361958e443489d6bab714be"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    history "^4.9.0"
-    loose-envify "^1.3.1"
-    prop-types "^15.6.2"
-    react-router "5.0.1"
-    tiny-invariant "^1.0.2"
-    tiny-warning "^1.0.0"
-
-react-router@5.0.1, react-router@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/react-router/-/react-router-5.0.1.tgz#04ee77df1d1ab6cb8939f9f01ad5702dbadb8b0f"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    history "^4.9.0"
-    hoist-non-react-statics "^3.1.0"
-    loose-envify "^1.3.1"
-    mini-create-react-context "^0.3.0"
-    path-to-regexp "^1.7.0"
-    prop-types "^15.6.2"
-    react-is "^16.6.0"
-    tiny-invariant "^1.0.2"
-    tiny-warning "^1.0.0"
 
 react-scroll@^1.7.12:
   version "1.8.1"
@@ -8212,10 +8148,6 @@ resolve-from@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-4.0.0.tgz#4abcd852ad32dd7baabfe9b40e00a36db5f392e6"
 
-resolve-pathname@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/resolve-pathname/-/resolve-pathname-2.2.0.tgz#7e9ae21ed815fd63ab189adeee64dc831eefa879"
-
 resolve-url@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/resolve-url/-/resolve-url-0.2.1.tgz#2c637fe77c893afd2a663fe21aa9080068e2052a"
@@ -8328,7 +8260,7 @@ schema-utils@^0.4.0, schema-utils@^0.4.3, schema-utils@^0.4.4, schema-utils@^0.4
     ajv "^6.1.0"
     ajv-keywords "^3.1.0"
 
-seamless-immutable@^7.1.2, seamless-immutable@^7.1.3, seamless-immutable@^7.1.4:
+seamless-immutable@^7.1.2, seamless-immutable@^7.1.4:
   version "7.1.4"
   resolved "https://registry.yarnpkg.com/seamless-immutable/-/seamless-immutable-7.1.4.tgz#6e9536def083ddc4dea0207d722e0e80d0f372f8"
 
@@ -9001,14 +8933,6 @@ timespan@2.3.x:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/timespan/-/timespan-2.3.0.tgz#4902ce040bd13d845c8f59b27e9d59bad6f39929"
 
-tiny-invariant@^1.0.2:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/tiny-invariant/-/tiny-invariant-1.0.6.tgz#b3f9b38835e36a41c843a3b0907a5a7b3755de73"
-
-tiny-warning@^1.0.0, tiny-warning@^1.0.2:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/tiny-warning/-/tiny-warning-1.0.3.tgz#94a30db453df4c643d0fd566060d60a875d84754"
-
 tmatch@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/tmatch/-/tmatch-2.0.1.tgz#0c56246f33f30da1b8d3d72895abaf16660f38cf"
@@ -9244,15 +9168,6 @@ universal-cookie@^2.2.0:
     cookie "^0.3.1"
     object-assign "^4.1.0"
 
-universal-cookie@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/universal-cookie/-/universal-cookie-4.0.2.tgz#c3398a64c72ff0c31fecb1ac4966c424e8669c6d"
-  dependencies:
-    "@types/cookie" "^0.3.3"
-    "@types/object-assign" "^4.0.30"
-    cookie "^0.4.0"
-    object-assign "^4.1.1"
-
 universal-cookie@^4.0.3:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/universal-cookie/-/universal-cookie-4.0.4.tgz#06e8b3625bf9af049569ef97109b4bb226ad798d"
@@ -9412,10 +9327,6 @@ validator@^11.1.0:
 validator@^13.1.1:
   version "13.1.17"
   resolved "https://registry.yarnpkg.com/validator/-/validator-13.1.17.tgz#ad677736950adddd3c37209484a6b2e0966579ad"
-
-value-equal@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/value-equal/-/value-equal-0.4.0.tgz#c5bdd2f54ee093c04839d71ce2e4758a6890abc7"
 
 vary@~1.1.2:
   version "1.1.2"
