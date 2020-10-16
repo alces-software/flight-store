@@ -41,6 +41,7 @@
     "universal-cookie": "^4.0.2"
   },
   "peerDependencies": {
+    "flight-account-menu": "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightAccountMenu/0.3.2/flight-account-menu-v0.3.2.tgz",
     "flight-reactware": "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.4.4/flight-reactware.tgz",
     "react": "16.x",
     "react-dom": "16.x",
@@ -48,6 +49,7 @@
   },
   "devDependencies": {
     "connected-react-router": "^6.5.2",
+    "flight-account-menu": "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightAccountMenu/0.3.2/flight-account-menu-v0.3.2.tgz",
     "flight-reactware": "https://s3-eu-west-1.amazonaws.com/alces-flight/FlightReactware/0.4.4/flight-reactware.tgz",
     "nwb": "0.23.x",
     "react": "^16.8.6",

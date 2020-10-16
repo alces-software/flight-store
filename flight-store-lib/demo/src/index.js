@@ -2,21 +2,27 @@ import React, {Component} from 'react'
 import {render} from 'react-dom'
 import 'url-search-params-polyfill';
 
-// Here we depend on flight-reactware for authentication.  When embedded into
-// other applications you might want to depend on something else.
-import { auth as reactwareAuth } from 'flight-reactware';
+// Here we depend on flight-account-menu for authentication.  When embedded
+// into other applications you might want to depend on something else.
+import {
+  AccountMenu,
+  ModalContainer,
+  auth,
+  showLoginForm,
+  store as authStore,
+} from 'flight-account-menu';
 
-import FlightStore, { reduxStore } from '../../src'
+import FlightStore from '../../src'
 
 const urlParams = new URLSearchParams(window.location.search);
 const defaultProductsFile = urlParams.get('products-file') || 'default.json';
 
 function getAuthToken() {
-  return reactwareAuth.selectors.ssoToken(reduxStore.getState());
+  return auth.selectors.ssoToken(authStore.getState());
 }
 
 function getCurrentUser() {
-  return reactwareAuth.selectors.currentUserSelector(reduxStore.getState());
+  return auth.selectors.currentUserSelector(authStore.getState());
 }
 
 class Store extends Component {
@@ -42,11 +48,13 @@ class Store extends Component {
         // Authentication dependencies.
         getAuthToken={ getAuthToken }
         getCurrentUser={ getCurrentUser }
-        showLoginForm={ function() { console.log('showing login form'); } }
-        ssoUserRequired={ false }
+        showLoginForm={ showLoginForm }
+        ssoUserRequired={ true }
       />
     );
   }
 }
 
 render(<Store/>, document.querySelector('#demo'))
+render(<AccountMenu />, document.getElementById('flight-account-menu'));
+render(<ModalContainer />, document.getElementById('flight-account-modal-container'));
