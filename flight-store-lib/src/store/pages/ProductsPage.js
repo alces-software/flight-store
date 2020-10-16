@@ -79,8 +79,14 @@ const ProductsPage = ({
 };
 
 ProductsPage.propTypes = {
-  CheckoutModal: PropTypes.func.isRequired,
-  ShowCheckoutFormButton: PropTypes.func.isRequired,
+  CheckoutModal: PropTypes.oneOfType([
+    PropTypes.func.isRequired,
+    PropTypes.object.isRequired,
+  ]),
+  ShowCheckoutFormButton: PropTypes.oneOfType([
+    PropTypes.func.isRequired,
+    PropTypes.object.isRequired,
+  ]),
   productTypeDef: PropTypes.shape({
     productsPage: PropTypes.shape({
       overview: PropTypes.string.isRequired,

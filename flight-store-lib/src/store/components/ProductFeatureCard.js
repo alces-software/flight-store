@@ -82,7 +82,10 @@ const ProductFeatureCard = ({
 };
 
 ProductFeatureCard.propTypes = {
-  ShowCheckoutFormButton: PropTypes.func.isRequired,
+  ShowCheckoutFormButton: PropTypes.oneOfType([
+    PropTypes.func.isRequired,
+    PropTypes.object.isRequired,
+  ]),
   backgroundColor: PropTypes.string,
   cost: PropTypes.shape({
     unit: PropTypes.string.isRequired,

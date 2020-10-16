@@ -68,7 +68,10 @@ const ProductDetailModal = ({
 );
 
 ProductDetailModal.propTypes = {
-  ShowCheckoutFormButton: PropTypes.func.isRequired,
+  ShowCheckoutFormButton: PropTypes.oneOfType([
+    PropTypes.func.isRequired,
+    PropTypes.object.isRequired,
+  ]),
   closeModal: PropTypes.func,
   id: PropTypes.number,
   isOpen: PropTypes.bool.isRequired,

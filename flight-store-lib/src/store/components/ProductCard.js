@@ -1,12 +1,17 @@
 import styled, { css } from 'styled-components';
 import { Card, CardBody, CardFooter } from 'reactstrap';
 import { Styles, Theme } from 'flight-reactware';
-import { compose } from 'recompose';
+import { compose, mapProps } from 'recompose';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { lighten } from 'polished';
+import { omit } from 'lodash';
 
 import constants from '../../constants';
+
+function omitProps(keys) {
+  return mapProps(props => omit(props, keys));
+}
 
 const enhanceCard = compose(
   connect(
@@ -38,20 +43,32 @@ const enhanceCard = compose(
       }
     }
   `,
+
+  // Stop React from complaining about these props.  They've done their job
+  // already.
+  omitProps(['backgroundColor', 'dispatch', 'emphasise', 'emphasisBreakPoint']),
 );
 
 const ProductCard = enhanceCard(Card);
 export { ProductCard };
 
-export const ProductHead = styled(CardBody)`
-  &.card-body {
-    background-color: ${(props) => props.backgroundColor || Theme.dark};
-    border-radius: 1rem 1rem 0 0;
-    color: white;
-    flex: 0 0 auto;
-    text-align: center;
-  }
-`;
+const enhanceHeader = compose(
+  Styles.withStyles`
+    &.card-body {
+      background-color: ${(props) => props.backgroundColor || Theme.dark};
+      border-radius: 1rem 1rem 0 0;
+      color: white;
+      flex: 0 0 auto;
+      text-align: center;
+    }
+  `,
+
+  // Stop React from complaining about these props.  They've done their job
+  // already.
+  omitProps(['backgroundColor']),
+);
+const ProductHead = enhanceHeader(CardBody);
+export { ProductHead };
 
 export const ProductBody = styled(CardBody)`
   &.card-body {
@@ -82,6 +99,10 @@ const enhanceFooter = compose(
       }
     }
   `,
+
+  // Stop React from complaining about these props.  They've done their job
+  // already.
+  omitProps(['dispatch', 'emphasise', 'emphasisBreakPoint']),
 );
 
 const ProductFooter = enhanceFooter(CardFooter);
