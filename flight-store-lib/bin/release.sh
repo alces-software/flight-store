@@ -8,7 +8,7 @@ PACKAGE_NAME=$(cat "${REPO_ROOT}/flight-store-lib/package.json" | jq -r .name )
 BUCKET_PREFIX="alces-flight/FlightStore"
 
 main() {
-    parse_arguments
+    parse_arguments "$@"
     header "Checking repo is clean"
     abort_if_uncommitted_changes_present
     abort_if_not_uptodate_with_remotes
@@ -16,9 +16,11 @@ main() {
     abort_if_new_version_exists
     subheader "Creating release branch"
     checkout_release_branch
-    header "Bumping version"
-    bump_version
-    commit_version_bump
+    if $BUMP_VERSION ; then
+        header "Bumping version"
+        bump_version
+        commit_version_bump
+    fi
     header "Building"
     build_and_pack
     header "Releasing to s3"
@@ -85,8 +87,12 @@ get_current_version() {
 }
 
 get_new_version() {
-    get_current_version \
-      | awk 'BEGIN { FS="." } { print $1 "." $2 "." $3 + 1 }'
+    if $BUMP_VERSION ; then
+        get_current_version \
+            | awk 'BEGIN { FS="." } { print $1 "." $2 "." $3 + 1 }'
+    else
+        get_current_version
+    fi
 }
 
 checkout_release_branch() {
@@ -135,10 +141,11 @@ usage() {
     echo
     echo "Build, tag and release a new version of ${PACKAGE_NAME}"
     echo
-    echo -e "      --help\t\tShow this help message"
+    echo -e "      --skip-version-bump\tDon't bump the version number"
+    echo -e "      --help\t\t\tShow this help message"
 }
 
-REMOTE=dokku-staging
+BUMP_VERSION=true
 
 parse_arguments() {
     while [[ $# > 0 ]] ; do
@@ -148,6 +155,11 @@ parse_arguments() {
             --help)
                 usage
                 exit 0
+                ;;
+
+            --skip-version-bump)
+                BUMP_VERSION=false
+                shift
                 ;;
 
             *)
@@ -160,4 +172,3 @@ parse_arguments() {
 }
 
 main "$@"
-
