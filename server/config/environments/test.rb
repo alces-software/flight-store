@@ -41,7 +41,7 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  config.sso_cookie_name = ENV.fetch("SSO_COOKIE_NAME", "concertim_test")
+  config.sso_cookie_name = ENV.fetch("SSO_COOKIE_NAME", "concertim_sso_test")
 
   config.store = {
     products_url_prefix: ENV.fetch("PRODUCTS_URL_PREFIX", "https://alces-flight.s3.amazonaws.com/FlightStore/test-products/"),
