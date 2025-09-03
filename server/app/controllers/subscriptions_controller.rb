@@ -26,18 +26,18 @@ class SubscriptionsController < ApplicationController
   def find_stripe_plan(product)
     plans = Stripe::Plan.list(
       active: true,
-      product: product.id,
+      product: product.id
     )
     plans.data.first
   end
 
   def subscribe(customer, plan)
     Stripe::Subscription.create(
-      :customer => customer.id,
-      :items => [
+      customer: customer.id,
+      items: [
         {
-          :plan => plan.id,
-        },
+          plan: plan.id
+        }
       ]
     )
   end
@@ -48,7 +48,7 @@ class SubscriptionsController < ApplicationController
         email: current_user.email,
         source: params[:token],
         metadata: {
-          flight_id: current_user.flight_id,
+          flight_id: current_user.flight_id
         }
       ).tap do |customer|
         current_user.stripe_id = customer.id
@@ -64,7 +64,7 @@ class SubscriptionsController < ApplicationController
       #
       # Solution:
       #
-      # Have the UI check if the flight account is associated with a stripe
+      # Have the UI check if the ConcertIM account is associated with a stripe
       # customer and if that customer has any cards.  If so, ask user to
       # select one of their existing cards.  If not, use the current UI.
       #

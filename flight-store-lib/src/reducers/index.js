@@ -46,7 +46,7 @@ export default () => {
   return reducerUtils.withStateResetting({
     keepStateSlices: [ 'router' ],
     // This needs to be consistent with the redux action type used to log a
-    // user out of Flight SSO.  Currently, this has been copied from
+    // user out of ConcertIM SSO.  Currently, this has been copied from
     // FlightAccountMenu.
     // XXX Take this as a dependency somehow.  Preferably without adding a
     // dependency on FlightAccountMenu.
