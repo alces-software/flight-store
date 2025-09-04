@@ -3,7 +3,7 @@
   title: HPC cluster pack
   subtitle: Fully managed ConcertIM HPC cluster with ConcertIM support
   description: |
-    An ConcertIM HPC cluster built by our experienced engineering team in
+    A ConcertIM HPC cluster built by our experienced engineering team in
     a Virtual Private Cluster (VPC) environment for security, with SSH and
     graphical-desktop connectivity for users.  Data management tools for POSIX
     and S3 object storage are also included to help users transfer files and

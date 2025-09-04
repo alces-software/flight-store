@@ -18,7 +18,7 @@
   details: |
     A cluster comprising an entry-level login node and general-level compute
     nodes (3.75 GiB, 2 CPUs) provided for familiarization and experimentation
-    with ConcertIM Compute. By default, the compute estate runs on two
+    with Alces Flight Compute. By default, the compute estate runs on two
     general economy nodes (7.5 GiB, 4 CPUs), with an option to select durable
     nodes instead. Autoscaling is enabled to shut down idle nodes (a minimum
     of one compute node will be retained at all times). The cluster operates
