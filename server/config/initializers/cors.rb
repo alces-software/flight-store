@@ -9,7 +9,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins "https://alces-flight.com",
       /^.*\.concertim.com$/,
-      /^.*\.alces-flight.lvh.me(:[0-9]+)?$/,
+      /^.*\.concertim.lvh.me(:[0-9]+)?$/,
       /^http:\/\/localhost(:[0-9]+)?$/
 
     resource "*",
