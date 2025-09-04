@@ -8,8 +8,8 @@ const MustLoginMessage = () => {
 
   return (
     <p>
-      You must be signed in to your Alces Flight account in order to purchase
-      any products from Alces Flight Store. Please{' '}
+      You must be signed in to your ConcertIM account in order to purchase
+      any products from ConcertIM Store. Please{' '}
       <a
         className="btn btn-link"
         href="/sign-in"

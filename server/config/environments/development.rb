@@ -14,12 +14,12 @@ Rails.application.configure do
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
-  if Rails.root.join('tmp', 'caching-dev.txt').exist?
+  if Rails.root.join("tmp", "caching-dev.txt").exist?
     config.action_controller.perform_caching = true
 
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-      'Cache-Control' => "public, max-age=#{2.days.to_i}"
+      "Cache-Control" => "public, max-age=#{2.days.to_i}"
     }
   else
     config.action_controller.perform_caching = false
@@ -42,9 +42,9 @@ Rails.application.configure do
   config.active_record.verbose_query_logs = true
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
-    logger           = ActiveSupport::Logger.new(STDOUT)
+    logger = ActiveSupport::Logger.new(STDOUT)
     # logger.formatter = config.log_formatter
-    config.logger    = ActiveSupport::TaggedLogging.new(logger)
+    config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
 
   # Raises error for missing translations
@@ -54,10 +54,10 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  config.sso_cookie_name = ENV.fetch('SSO_COOKIE_NAME', 'flight_sso_dev')
+  config.sso_cookie_name = ENV.fetch("SSO_COOKIE_NAME", "concertim_sso_dev")
 
   config.store = {
-    products_url_prefix: ENV.fetch('PRODUCTS_URL_PREFIX', 'https://alces-flight.s3.amazonaws.com/FlightStore/development-products/'),
-    vat_rate: ENV.fetch('VAT_RATE', 20),
+    products_url_prefix: ENV.fetch("PRODUCTS_URL_PREFIX", "https://alces-flight.s3.amazonaws.com/FlightStore/development-products/"),
+    vat_rate: ENV.fetch("VAT_RATE", 20)
   }
 end

@@ -17,7 +17,7 @@
 
   # Used as the product name on the checkout form and email.  It should
   # probably match the entry in `stripe.description`.
-  name: Pack of 5 Alces Flight Center service credits
+  name: Pack of 5 ConcertIM service credits
 
   # The type of product.  This must match the filename.
   type: creditPacks
@@ -40,15 +40,15 @@
   # features:
   #   - tick: true
   #     text: |
-  #       Allocate to your Flight Center site managed through
-  #       [Alces Flight Center](https://center.alces-flight.com)
+  #       Allocate to your ConcertIM site managed through
+  #       [ConcertIM](https://portal.concertim.com)
   #   - tick: false
   #     text: |
   #       ~Includes rainbows and kittens~
 
   # Optional markdown for the product card.
   # details: |
-  #   The Bronze Alces Flight Center credit pack allows you to...
+  #   The Bronze ConcertIM credit pack allows you to...
 
   # Optional. If learnMore is given, the product card will display a "Learn
   # more" link.  Clicking it will display a modal containing this markdown.
@@ -68,7 +68,7 @@
 
     # Used as the description by Stripe.  It should probably match the entry
     # in `name`.
-    description: Pack of 5 Alces Flight Center service credits
+    description: Pack of 5 ConcertIM service credits
 
     # The type of Stripe payment to make.  Either `charge` or `subscription`.
     type: charge
@@ -93,7 +93,7 @@
   emphasise: true
   # backgroundColor: var(--teal)
   backgroundColor: '#20c997'
-  name: Pack of 10 Alces Flight Center service credits
+  name: Pack of 10 ConcertIM service credits
   type: creditPacks
   identifier: 10-service-credit-pack
   cost:
@@ -104,7 +104,7 @@
   stripe:
     amount: 235000
     currency: gbp
-    description: Pack of 10 Alces Flight Center service credits
+    description: Pack of 10 ConcertIM service credits
     type: charge
   action:
     identifier: deposit_credits
@@ -120,7 +120,7 @@
   emphasise: false
   # backgroundColor: var(--info)
   backgroundColor: '#3498DB'
-  name: Pack of 15 Alces Flight Center service credits
+  name: Pack of 15 ConcertIM service credits
   type: creditPacks
   identifier: 15-service-credit-pack
   cost:
@@ -131,7 +131,7 @@
   stripe:
     amount: 350000
     currency: gbp
-    description: Pack of 15 Alces Flight Center service credits
+    description: Pack of 15 ConcertIM service credits
     type: charge
   action:
     identifier: deposit_credits
